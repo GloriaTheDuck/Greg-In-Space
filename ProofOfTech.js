@@ -35,6 +35,7 @@ function tileObject(x,y,sprite){
     this.x = x;
     this.y = y;
     this.foreground = sprite;
+    this.background = null;
     
     this.getTileAbove =  function(){
         return inBounds(this.x,this.y-1) ? gameMatrix[this.x][this.y-1] : null;
@@ -106,39 +107,32 @@ var game = new Phaser.Game(config);
 function preload ()
 {
     this.load.spritesheet('greg',"Sprint1/Character_Up.png",{frameWidth: 32, frameHeight:32});
-<<<<<<< HEAD
+    this.load.image('water', "Sprint1/Water.png");
     this.load.image('exec', "Sprint1/EyeBall Monster-Sheet.png");
     this.load.image('rock', "Sprint1/addwork.png");
     this.load.spritesheet('wall', 'Sprint1/tileset.png',{frameWidth: 32, frameHeight:32});
     this.load.image('exit', "Sprint1/exit.png");
-=======
     this.load.image('executive', "Sprint1/EyeBall Monster-Sheet.png");
     
     //loading music
     this.load.audio('lab_music', "Sprint1/lab_gameplay_music.mp3");
-
->>>>>>> c87390e5d1d3c9ef01254e114d66189d53615077
 }
 
 function create ()
 {
-    player = addObject(this,1,3,'greg',"player");
-    player.execsCollected = 0;
-<<<<<<< HEAD
+    
+    this.physics.add.sprite(96,96,"water")
     
     addObject(this,1,2,'rock',"rock");
-    addObject(this,1,4,'rock',"rock");
-    addObject(this,2,1,'rock',"rock");
+    addObject(this,2,2,'rock',"rock");
     addObject(this,2,3,'rock',"rock");
-    addObject(this,3,3,'rock',"rock");
-    addObject(this,4,1,'rock',"rock");
-    addObject(this,4,2,'rock',"rock");
+    addObject(this,3,2,'rock',"rock");
+    addObject(this,4,3,'rock',"rock");
     addObject(this,4,4,'rock',"rock");
-    addObject(this,4,5,'rock',"rock");
-    addObject(this,6,5,'rock',"rock");
+    addObject(this,6,4,'rock',"rock");
     
     addObject(this,3,1,'exec',"exec");
-    addObject(this,6,4,'exec',"exec");
+    addObject(this,6,3,'exec',"exec");
 
     addObject(this,0,0,'wall',"wall");
     addObject(this,1,0,'wall',"wall");
@@ -153,30 +147,28 @@ function create ()
     addObject(this,5,1,'wall',"wall");
     addObject(this,0,2,'wall',"wall");
     addObject(this,5,2,'wall',"wall");
+    addObject(this,6,2,'wall',"wall");
     addObject(this,0,3,'exit',"exit");
-    addObject(this,5,3,'wall',"wall");
-    addObject(this,6,3,'wall',"wall");
+    addObject(this,7,3,'wall',"wall");
     addObject(this,0,4,'wall',"wall");
     addObject(this,7,4,'wall',"wall");
     addObject(this,0,5,'wall',"wall");
+    addObject(this,1,5,'wall',"wall");
     addObject(this,2,5,'wall',"wall");
+    addObject(this,3,5,'wall',"wall");
+    addObject(this,4,5,'wall',"wall");
+    addObject(this,5,5,'wall',"wall");
+    addObject(this,6,5,'wall',"wall");
     addObject(this,7,5,'wall',"wall");
-    addObject(this,0,6,'wall',"wall");
-    addObject(this,1,6,'wall',"wall");
-    addObject(this,2,6,'wall',"wall");
-    addObject(this,3,6,'wall',"wall");
-    addObject(this,4,6,'wall',"wall");
-    addObject(this,5,6,'wall',"wall");
-    addObject(this,6,6,'wall',"wall");
-    addObject(this,7,6,'wall',"wall");
-    addObject(this,8,6,'wall',"wall");
-=======
-    player.name = "player";
-    executive = this.physics.add.sprite(64,64,'executive');
-    executive.name = "exec";
-    gameMatrix[2][2] = new tileObject(2,2,executive);
+    addObject(this,8,5,'wall',"wall");
     
-    var music = this.sound.add(lab_music, musicConfig);
+    player = addObject(this,1,3,'greg',"player");
+    player.execsCollected = 0;
+    
+    gameMatrix[3][3].background = "water";
+    console.log(gameMatrix[3][3]);
+    
+    var music = this.sound.add("lab_music", musicConfig);
     
     var musicConfig = {
         
@@ -191,8 +183,6 @@ function create ()
     }
 
     music.play(musicConfig);
-
->>>>>>> c87390e5d1d3c9ef01254e114d66189d53615077
 }
 
 function update ()
@@ -211,7 +201,7 @@ function update ()
             }
             else if(tileRight.foreground.name == "rock"){
                 if(tileRight.getTileRight() != null){
-                    if(tileRight.getTileRight().foreground == null){
+                    if(tileRight.getTileRight().foreground == null && tileRight.getTileRight().background != "water"){
                         tileRight.moveRight();
                     }
                 }
@@ -239,7 +229,7 @@ function update ()
             }
             else if(tileLeft.foreground.name == "rock"){
                 if(tileLeft.getTileLeft() != null){
-                    if(tileLeft.getTileLeft().foreground == null){
+                    if(tileLeft.getTileLeft().foreground == null && tileLeft.getTileLeft().background != "water"){
                         tileLeft.moveLeft();
                     }
                 }
@@ -267,7 +257,7 @@ function update ()
             }
             else if(tileAbove.foreground.name == "rock"){
                 if(tileAbove.getTileAbove() != null){
-                    if(tileAbove.getTileAbove().foreground == null){
+                    if(tileAbove.getTileAbove().foreground == null && tileAbove.getTileAbove().background != "water"){
                         tileAbove.moveUp();
                     }
                 }
@@ -295,7 +285,7 @@ function update ()
             }
             else if(tileBelow.foreground.name == "rock"){
                 if(tileBelow.getTileBelow() != null){
-                    if(tileBelow.getTileBelow().foreground == null){
+                    if(tileBelow.getTileBelow().foreground == null  && tileBelow.getTileBelow().background != "water"){
                         tileBelow.moveDown();
                     }
                 }
