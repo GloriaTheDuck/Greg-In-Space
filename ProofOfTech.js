@@ -99,7 +99,7 @@ var game = new Phaser.Game(config);
 
 function preload ()
 {
-    this.load.image('greg',"Sprint1/Character_Up.png");
+    this.load.spritesheet('greg',"Sprint1/Character_Up.png",{frameWidth: 32, frameHeight:32});
     this.load.image('executive', "Sprint1/EyeBall Monster-Sheet.png")
 }
 
