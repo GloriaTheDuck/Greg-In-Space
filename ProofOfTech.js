@@ -94,24 +94,73 @@ var config = {
     }
 };
 
+function addObject(b,x,y,image,nam){
+    var a = b.physics.add.sprite(tileSize * x, tileSize*y, image);
+    a.name = nam;
+    gameMatrix[x][y] = new tileObject(x,y,a);
+    return a;
+}
 
 var game = new Phaser.Game(config);
 
 function preload ()
 {
     this.load.spritesheet('greg',"Sprint1/Character_Up.png",{frameWidth: 32, frameHeight:32});
-    this.load.image('executive', "Sprint1/EyeBall Monster-Sheet.png")
+    this.load.image('exec', "Sprint1/EyeBall Monster-Sheet.png");
+    this.load.image('rock', "Sprint1/addwork.png");
+    this.load.spritesheet('wall', 'Sprint1/tileset.png',{frameWidth: 32, frameHeight:32});
+    this.load.image('exit', "Sprint1/exit.png");
 }
 
 function create ()
 {
-    player = this.physics.add.sprite(32,32,'greg');
-    gameMatrix[1][1] = new tileObject(1,1,player);
+    player = addObject(this,1,3,'greg',"player");
     player.execsCollected = 0;
-    player.name = "player";
-    executive = this.physics.add.sprite(64,64,'executive');
-    executive.name = "exec";
-    gameMatrix[2][2] = new tileObject(2,2,executive);
+    
+    addObject(this,1,2,'rock',"rock");
+    addObject(this,1,4,'rock',"rock");
+    addObject(this,2,1,'rock',"rock");
+    addObject(this,2,3,'rock',"rock");
+    addObject(this,3,3,'rock',"rock");
+    addObject(this,4,1,'rock',"rock");
+    addObject(this,4,2,'rock',"rock");
+    addObject(this,4,4,'rock',"rock");
+    addObject(this,4,5,'rock',"rock");
+    addObject(this,6,5,'rock',"rock");
+    
+    addObject(this,3,1,'exec',"exec");
+    addObject(this,6,4,'exec',"exec");
+
+    addObject(this,0,0,'wall',"wall");
+    addObject(this,1,0,'wall',"wall");
+    addObject(this,2,0,'wall',"wall");
+    addObject(this,3,0,'wall',"wall");
+    addObject(this,4,0,'wall',"wall");
+    addObject(this,5,0,'wall',"wall");
+    addObject(this,6,0,'wall',"wall");
+    addObject(this,7,0,'wall',"wall");
+    addObject(this,8,0,'wall',"wall");
+    addObject(this,0,1,'wall',"wall");
+    addObject(this,5,1,'wall',"wall");
+    addObject(this,0,2,'wall',"wall");
+    addObject(this,5,2,'wall',"wall");
+    addObject(this,0,3,'exit',"exit");
+    addObject(this,5,3,'wall',"wall");
+    addObject(this,6,3,'wall',"wall");
+    addObject(this,0,4,'wall',"wall");
+    addObject(this,7,4,'wall',"wall");
+    addObject(this,0,5,'wall',"wall");
+    addObject(this,2,5,'wall',"wall");
+    addObject(this,7,5,'wall',"wall");
+    addObject(this,0,6,'wall',"wall");
+    addObject(this,1,6,'wall',"wall");
+    addObject(this,2,6,'wall',"wall");
+    addObject(this,3,6,'wall',"wall");
+    addObject(this,4,6,'wall',"wall");
+    addObject(this,5,6,'wall',"wall");
+    addObject(this,6,6,'wall',"wall");
+    addObject(this,7,6,'wall',"wall");
+    addObject(this,8,6,'wall',"wall");
 }
 
 function update ()
@@ -165,7 +214,7 @@ function update ()
             } else if(tileLeft.foreground.name == "exec"){
                 collectExec(player,tileLeft.foreground);
                 playerObject.moveLeft();
-            } else if(tileRight.foreground.name == "exit"){
+            } else if(tileLeft.foreground.name == "exit"){
                 if(player.execsCollected == 2){
                     this.add.text(0, 0, 'You Won', { font: '"Press Start 2P"' });
                 }

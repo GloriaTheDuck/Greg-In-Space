@@ -46,7 +46,8 @@
           // Parameters: layer name (or index) from Tiled, tileset, x, y
           const blocksLayer = map.createStaticLayer("Black Blocks", tileset, 0, 0);
           const backgroundLayer = map.createStaticLayer("Background", tileset, 0, 0);
-          const collectLayer = map.getObjectLayer("Object Layer")['objects']
+          console.log(map);
+          const collectLayer = map.getObjectLayer("Collecatble")['objects']
 
           backgroundLayer.setCollisionByProperty( {collides : true} );
 
