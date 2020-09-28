@@ -10,6 +10,14 @@ var lastFrameDown = {
     down:false
 };
 
+function pixelToGrid(x){
+    return Math.floor(x/tileSize);
+}
+
+function gridToPixel(x){
+    return x*tileSize + Math.floor(tileSize/2);
+}
+
 var gameMatrix = new Array(stageWidth);
 
 for(var i = 0; i<stageWidth; i++){
@@ -49,6 +57,32 @@ function tileObject(x,y,sprite){
     this.getTileLeft =  function(){
         return inBounds(this.x-1,this.y) ? gameMatrix[this.x-1][this.y] : null;
     };
+    
+    this.getTile = function(direction){
+        if(direction == "up"){
+            return this.getTileAbove()
+        }
+        if(direction == "down"){
+            return this.getTileBelow()
+        }
+        if(direction == "left"){
+            return this.getTileLeft()
+        }
+        if(direction == "right"){
+            return this.getTileRight()
+        }
+    }
+    
+    this.moveDirection = function(direction){
+        
+        if(direction == "up"){ this.foreground.y += -tileSize;}
+        if(direction == "down"){ this.foreground.y += tileSize;}
+        if(direction == "right"){ this.foreground.x += tileSize;}
+        if(direction == "left"){ this.foreground.x += -tileSize;}
+        
+        
+        this.foreground = null;
+    }
     
     this.moveUp = function(){
         this.foreground.y += -tileSize;
@@ -184,6 +218,7 @@ function create ()
 
     music.play(musicConfig);
 }
+
 
 function update ()
 {
