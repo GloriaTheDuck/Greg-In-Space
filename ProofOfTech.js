@@ -249,7 +249,6 @@ function rockPush(rockTile,direction){
 function update ()
 {
     var cursors = this.input.keyboard.createCursorKeys();
-    hasMoved = false;
 
     playerObject = gameMatrix[Math.floor(player.x/32)][Math.floor(player.y/32)];
     
