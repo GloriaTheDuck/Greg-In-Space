@@ -106,16 +106,25 @@ var game = new Phaser.Game(config);
 function preload ()
 {
     this.load.spritesheet('greg',"Sprint1/Character_Up.png",{frameWidth: 32, frameHeight:32});
+<<<<<<< HEAD
     this.load.image('exec', "Sprint1/EyeBall Monster-Sheet.png");
     this.load.image('rock', "Sprint1/addwork.png");
     this.load.spritesheet('wall', 'Sprint1/tileset.png',{frameWidth: 32, frameHeight:32});
     this.load.image('exit', "Sprint1/exit.png");
+=======
+    this.load.image('executive', "Sprint1/EyeBall Monster-Sheet.png");
+    
+    //loading music
+    this.load.audio('lab_music', "Sprint1/lab_gameplay_music.mp3");
+
+>>>>>>> c87390e5d1d3c9ef01254e114d66189d53615077
 }
 
 function create ()
 {
     player = addObject(this,1,3,'greg',"player");
     player.execsCollected = 0;
+<<<<<<< HEAD
     
     addObject(this,1,2,'rock',"rock");
     addObject(this,1,4,'rock',"rock");
@@ -161,6 +170,29 @@ function create ()
     addObject(this,6,6,'wall',"wall");
     addObject(this,7,6,'wall',"wall");
     addObject(this,8,6,'wall',"wall");
+=======
+    player.name = "player";
+    executive = this.physics.add.sprite(64,64,'executive');
+    executive.name = "exec";
+    gameMatrix[2][2] = new tileObject(2,2,executive);
+    
+    var music = this.sound.add(lab_music, musicConfig);
+    
+    var musicConfig = {
+        
+        mute: false,
+        volume: 1,
+        rate: 1,
+        detune: 0,
+        seek: 0,
+        loop: true,
+        delay: 0
+
+    }
+
+    music.play(musicConfig);
+
+>>>>>>> c87390e5d1d3c9ef01254e114d66189d53615077
 }
 
 function update ()
