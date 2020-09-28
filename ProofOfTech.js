@@ -100,7 +100,11 @@ var game = new Phaser.Game(config);
 function preload ()
 {
     this.load.spritesheet('greg',"Sprint1/Character_Up.png",{frameWidth: 32, frameHeight:32});
-    this.load.image('executive', "Sprint1/EyeBall Monster-Sheet.png")
+    this.load.image('executive', "Sprint1/EyeBall Monster-Sheet.png");
+    
+    //loading music
+    this.load.audio('lab_music', "Sprint1/lab_gameplay_music.mp3");
+
 }
 
 function create ()
@@ -112,6 +116,23 @@ function create ()
     executive = this.physics.add.sprite(64,64,'executive');
     executive.name = "exec";
     gameMatrix[2][2] = new tileObject(2,2,executive);
+    
+    var music = this.sound.add(lab_music, musicConfig);
+    
+    var musicConfig = {
+        
+        mute: false,
+        volume: 1,
+        rate: 1,
+        detune: 0,
+        seek: 0,
+        loop: true,
+        delay: 0
+
+    }
+
+    music.play(musicConfig);
+
 }
 
 function update ()
