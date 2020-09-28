@@ -1,71 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="8" height="7" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="66">
- <tileset firstgid="1" source="Flooring.tsx"/>
- <tileset firstgid="64" source="Rocks.tsx"/>
- <tileset firstgid="832" source="Executives.tsx"/>
- <tileset firstgid="835" source="Character.tsx"/>
- <layer id="1" name="Background" width="8" height="7" locked="1">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="8" height="7" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="111">
+ <editorsettings>
+  <export target="Level6JSON.json" format="json"/>
+ </editorsettings>
+ <tileset firstgid="1" name="Flooring" tilewidth="32" tileheight="32" tilecount="63" columns="7">
+  <image source="tileset.png" width="224" height="288"/>
+ </tileset>
+ <tileset firstgid="64" name="Rocks" tilewidth="32" tileheight="32" tilecount="768" columns="12">
+  <image source="addwork.png" width="384" height="2048"/>
+ </tileset>
+ <tileset firstgid="832" name="Character" tilewidth="32" tileheight="32" tilecount="4" columns="4">
+  <image source="Character_Right.png" width="128" height="32"/>
+ </tileset>
+ <tileset firstgid="836" name="Executives" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="EyeBall Monster-Sheet.png" width="32" height="32"/>
+ </tileset>
+ <layer id="5" name="Black Blocks" width="8" height="7" tintcolor="#000000">
   <data encoding="csv">
-0,0,0,0,0,0,0,0,
-0,9,9,9,9,0,0,0,
-0,9,9,9,9,0,0,0,
-0,9,36,9,9,0,0,0,
-0,9,9,9,9,9,9,0,
-0,9,0,9,36,9,9,0,
-0,0,0,0,0,0,0,0
+344,344,344,344,344,344,344,344,
+344,344,344,344,344,344,344,344,
+344,344,344,344,344,344,344,344,
+344,344,344,344,344,344,344,344,
+344,344,344,344,344,344,344,344,
+344,344,344,344,344,344,344,344,
+344,344,344,344,344,344,344,344
 </data>
  </layer>
- <layer id="5" name="Black Blocks" width="8" height="7" locked="1" tintcolor="#000000">
+ <layer id="1" name="Background" width="8" height="7" locked="1">
+  <properties>
+   <property name="collides" type="bool" value="true"/>
+  </properties>
   <data encoding="csv">
-0,0,0,0,0,0,9,9,
-0,0,0,0,0,0,9,9,
-0,0,0,0,0,0,9,9,
-0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0
+22,2,2,2,2,6,0,0,
+8,9,9,9,9,8,0,0,
+8,9,9,9,9,8,0,0,
+0,9,9,9,9,13,2,6,
+8,9,9,9,9,9,9,8,
+8,9,8,9,9,9,9,8,
+13,2,10,2,2,2,2,11
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer">
-  <object id="8" name="Rock" type="block" gid="313" x="32.8189" y="158.52" width="32" height="32"/>
-  <object id="25" name="Executive" type="item" gid="832" x="96.4183" y="60.4444" width="32" height="32"/>
-  <object id="27" name="Executive" type="item" gid="832" x="191.843" y="157.83" width="32" height="32"/>
-  <object id="28" name="Rock" type="block" gid="313" x="63.845" y="125.84" width="32" height="32"/>
-  <object id="29" name="Rock" type="block" gid="313" x="96.2176" y="125.84" width="32" height="32"/>
-  <object id="30" name="Rock" type="block" gid="313" x="128.244" y="93.8138" width="32" height="32"/>
-  <object id="31" name="Rock" type="block" gid="313" x="128.205" y="62.4413" width="32" height="32"/>
-  <object id="32" name="Rock" type="block" gid="313" x="63.5379" y="63.0948" width="32" height="32"/>
-  <object id="33" name="Rock" type="block" gid="313" x="32.1653" y="92.853" width="32" height="32"/>
-  <object id="34" name="Rock" type="block" gid="313" x="128.59" y="157.212" width="32" height="32"/>
-  <object id="35" name="Rock" type="block" gid="313" x="128.244" y="188.585" width="32" height="32"/>
-  <object id="36" name="Rock" type="block" gid="313" x="192.989" y="190.239" width="32" height="32"/>
-  <object id="37" name="Character" type="playerStart" gid="837" x="30.1538" y="127.111" width="32" height="32"/>
-  <object id="38" name="wallHorizontal" type="block" gid="2" x="96" y="32" width="32" height="32"/>
-  <object id="39" name="wallHorizontal" type="block" gid="2" x="64" y="32" width="32" height="32"/>
-  <object id="40" name="wallHorizontal" type="block" gid="2" x="128" y="32" width="32" height="32"/>
-  <object id="41" name="wallHorizontal" type="block" gid="2" x="32" y="32" width="32" height="32"/>
-  <object id="42" name="wallHorizontal" type="block" gid="2" x="32" y="224" width="32" height="32"/>
-  <object id="43" name="wallHorizontal" type="block" gid="2" x="96" y="224" width="32" height="32"/>
-  <object id="44" name="wallHorizontal" type="block" gid="2" x="128" y="224" width="32" height="32"/>
-  <object id="45" name="wallHorizontal" type="block" gid="2" x="160" y="224" width="32" height="32"/>
-  <object id="46" name="wallHorizontal" type="block" gid="2" x="192" y="224" width="32" height="32"/>
-  <object id="47" name="wallHorizontal" type="block" gid="2" x="192" y="128" width="32" height="32"/>
-  <object id="48" name="wallVertical" type="block" gid="8" x="224" y="160" width="32" height="32"/>
-  <object id="49" name="wallVertical" type="block" gid="8" x="224" y="192" width="32" height="32"/>
-  <object id="50" name="wallVertical" type="block" gid="8" x="160" y="96" width="32" height="32"/>
-  <object id="51" name="wallVertical" type="block" gid="8" x="160" y="64" width="32" height="32"/>
-  <object id="52" name="wallVertical" type="block" gid="8" x="0" y="64" width="32" height="32"/>
-  <object id="53" name="wallVertical" type="block" gid="8" x="0" y="96" width="32" height="32"/>
-  <object id="54" name="wallVertical" type="block" gid="8" x="0" y="128" width="32" height="32"/>
-  <object id="55" name="wallVertical" type="block" gid="8" x="0" y="160" width="32" height="32"/>
-  <object id="56" name="wallVertical" type="block" gid="8" x="0" y="192" width="32" height="32"/>
-  <object id="57" name="wallVertical" type="block" gid="8" x="64" y="192" width="32" height="32"/>
-  <object id="58" name="connectorAll" type="block" gid="10" x="64" y="224" width="32" height="32"/>
-  <object id="59" name="cornerTR" type="block" gid="6" x="160" y="32" width="32" height="32"/>
-  <object id="60" name="cornerTL" type="block" gid="22" x="0" y="32" width="32" height="32"/>
-  <object id="62" name="cornerBL" type="block" gid="13" x="0" y="224" width="32" height="32"/>
-  <object id="63" name="cornerBL" type="block" gid="13" x="160" y="128" width="32" height="32"/>
-  <object id="64" name="cornerBR" type="block" gid="11" x="224" y="224" width="32" height="32"/>
-  <object id="65" name="cornerTR" type="block" gid="6" x="224" y="128" width="32" height="32"/>
+  <object id="93" name="exit" type="levelOver" gid="42" x="0" y="128" width="32" height="32"/>
+  <object id="94" name="rock" type="block" gid="313" x="32" y="96" width="32" height="32"/>
+  <object id="95" name="rock" type="move" gid="313" x="32" y="96" width="32" height="32"/>
+  <object id="96" name="rock" type="move" gid="313" x="32" y="160" width="32" height="32"/>
+  <object id="97" name="rock" type="move" gid="313" x="64" y="128" width="32" height="32"/>
+  <object id="98" name="rock" type="move" gid="313" x="96" y="128" width="32" height="32"/>
+  <object id="99" name="rock" type="move" gid="313" x="128" y="160" width="32" height="32"/>
+  <object id="100" name="rock" type="move" gid="313" x="128" y="192" width="32" height="32"/>
+  <object id="101" name="rock" type="move" gid="313" x="192" y="192" width="32" height="32"/>
+  <object id="102" name="rock" type="move" gid="313" x="64" y="64" width="32" height="32"/>
+  <object id="103" name="rock" type="move" gid="313" x="128" y="64" width="32" height="32"/>
+  <object id="104" name="rock" type="move" gid="313" x="128" y="96" width="32" height="32"/>
+  <object id="106" name="executive" type="collect" gid="836" x="96" y="64" width="32" height="32"/>
+  <object id="108" name="spawnPoint" x="48.053" y="111.181">
+   <point/>
+  </object>
+  <object id="109" name="executive" type="collect" gid="836" x="192" y="160" width="32" height="32"/>
  </objectgroup>
 </map>
