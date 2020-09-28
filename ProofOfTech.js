@@ -74,13 +74,12 @@ function tileObject(x,y,sprite){
     }
     
     this.moveDirection = function(direction){
-        
         if(direction == "up"){ this.foreground.y += -tileSize;}
         if(direction == "down"){ this.foreground.y += tileSize;}
         if(direction == "right"){ this.foreground.x += tileSize;}
         if(direction == "left"){ this.foreground.x += -tileSize;}
-        
-        
+        console.log(direction,this.getTile(direction));
+        this.getTile(direction).foreground = this.foreground;
         this.foreground = null;
     }
     
@@ -200,7 +199,6 @@ function create ()
     player.execsCollected = 0;
     
     gameMatrix[3][3].background = "water";
-    console.log(gameMatrix[3][3]);
     
     var music = this.sound.add("lab_music", musicConfig);
     
@@ -219,6 +217,34 @@ function create ()
     music.play(musicConfig);
 }
 
+function playerMoveTo(playerTile,direction){
+    var toTile = playerObject.getTile(direction);
+    if( toTile != null){
+        if(toTile.foreground == null){
+            playerTile.moveDirection(direction);
+        } else if(toTile.foreground.name == "rock"){
+            rockPush(toTile,direction);
+        } else if(toTile.foreground.name == "exec"){
+            collectExec(playerObject.foreground,toTile.foreground);
+            playerObject.moveDirection(direction);
+        } else if(toTile.foreground == "exit"){
+            if(player.execsCollected == 2){
+                this.add.text(0, 0, 'You Won', { font: '"Press Start 2P"' });
+                playerTile.moveDirection(direction);
+            }
+        }
+        
+    }
+}
+
+function rockPush(rockTile,direction){
+    var toTile = rockTile.getTile(direction);
+    if(toTile != null){
+        if(toTile.foreground == null && toTile.getTile(direction).background != "water"){
+            rockTile.moveDirection(direction);
+        }
+    }
+}
 
 function update ()
 {
@@ -229,26 +255,7 @@ function update ()
     
     //move Right
     if (cursors.right.isDown && !lastFrameDown.right){
-        var tileRight = playerObject.getTileRight();
-        if( tileRight != null){
-            if(tileRight.foreground == null){
-                playerObject.moveRight();
-            }
-            else if(tileRight.foreground.name == "rock"){
-                if(tileRight.getTileRight() != null){
-                    if(tileRight.getTileRight().foreground == null && tileRight.getTileRight().background != "water"){
-                        tileRight.moveRight();
-                    }
-                }
-            } else if(tileRight.foreground.name == "exec"){
-                collectExec(player,tileRight.foreground);
-                playerObject.moveRight();
-            } else if(tileRight.foreground.name == "exit"){
-                if(player.execsCollected == 2){
-                    this.add.text(0, 0, 'You Won', { font: '"Press Start 2P"' });
-                }
-            }
-        }
+        playerMoveTo(playerObject,"right");
         lastFrameDown.right = true;
     } else if(cursors.right.isDown == false){
         lastFrameDown.right = false;
@@ -256,55 +263,15 @@ function update ()
     
     //move Left
     if (cursors.left.isDown && !lastFrameDown.left){
-        var tileLeft = playerObject.getTileLeft();
-        
-        if(tileLeft != null){
-            if(tileLeft.foreground == null){
-                playerObject.moveLeft();
-            }
-            else if(tileLeft.foreground.name == "rock"){
-                if(tileLeft.getTileLeft() != null){
-                    if(tileLeft.getTileLeft().foreground == null && tileLeft.getTileLeft().background != "water"){
-                        tileLeft.moveLeft();
-                    }
-                }
-            } else if(tileLeft.foreground.name == "exec"){
-                collectExec(player,tileLeft.foreground);
-                playerObject.moveLeft();
-            } else if(tileLeft.foreground.name == "exit"){
-                if(player.execsCollected == 2){
-                    this.add.text(0, 0, 'You Won', { font: '"Press Start 2P"' });
-                }
-            }
-            lastFrameDown.left = true;
-        }
-        
+        playerMoveTo(playerObject,"left");
+        lastFrameDown.left = true;
     } else if(cursors.left.isDown == false){
         lastFrameDown.left = false;
     }
     
     //move Up
     if (cursors.up.isDown && !lastFrameDown.up){
-        var tileAbove = playerObject.getTileAbove();
-        if(tileAbove != null){
-            if(tileAbove.foreground == null){
-                playerObject.moveUp();
-            }
-            else if(tileAbove.foreground.name == "rock"){
-                if(tileAbove.getTileAbove() != null){
-                    if(tileAbove.getTileAbove().foreground == null && tileAbove.getTileAbove().background != "water"){
-                        tileAbove.moveUp();
-                    }
-                }
-            } else if(tileAbove.foreground.name == "exec"){
-                collectExec(player,tileAbove.foreground);
-                playerObject.moveUp();
-            } else if(tileRight.foreground.name == "exit"){
-                if(player.execsCollected == 2){
-                    this.add.text(0, 0, 'You Won', { font: '"Press Start 2P"' });
-                }
-            }
-        }
+        playerMoveTo(playerObject,'up');
         lastFrameDown.up = true;
     } else if(cursors.up.isDown == false){
         lastFrameDown.up = false;
@@ -312,27 +279,7 @@ function update ()
     
     //move Down    
     if (cursors.down.isDown && !lastFrameDown.down){
-        var tileBelow = playerObject.getTileBelow();
-        
-        if(tileBelow != null){
-            if(tileBelow.foreground == null){
-                playerObject.moveDown();
-            }
-            else if(tileBelow.foreground.name == "rock"){
-                if(tileBelow.getTileBelow() != null){
-                    if(tileBelow.getTileBelow().foreground == null  && tileBelow.getTileBelow().background != "water"){
-                        tileBelow.moveDown();
-                    }
-                }
-            } else if(tileBelow.foreground.name == "exec"){
-                collectExec(player,tileBelow.foreground);
-                playerObject.moveDown();
-            } else if(tileRight.foreground.name == "exit"){
-                if(player.execsCollected == 2){
-                    this.add.text(0, 0, 'You Won', { font: '"Press Start 2P"' });
-                }
-            }
-        }
+        playerMoveTo(playerObject,"down");
         lastFrameDown.down = true;
     } else if(cursors.down.isDown == false){
         lastFrameDown.down = false;
