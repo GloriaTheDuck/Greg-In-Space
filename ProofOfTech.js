@@ -99,7 +99,7 @@ var game = new Phaser.Game(config);
 
 function preload ()
 {
-    this.load.image('greg',"Sprint1/Character/Character_Up.png");
+    this.load.image('greg',"Sprint1/Character_Up.png");
     this.load.image('executive', "Sprint1/EyeBall Monster-Sheet.png")
 }
 
@@ -128,7 +128,7 @@ function update ()
             if(tileRight.foreground == null){
                 playerObject.moveRight();
             }
-            if(tileRight.foreground.name == "rock"){
+            else if(tileRight.foreground.name == "rock"){
                 if(tileRight.getTileRight() != null){
                     if(tileRight.getTileRight().foreground == null){
                         tileRight.moveRight();
@@ -137,6 +137,10 @@ function update ()
             } else if(tileRight.foreground.name == "exec"){
                 collectExec(player,tileRight.foreground);
                 playerObject.moveRight();
+            } else if(tileRight.foreground.name == "exit"){
+                if(player.execsCollected == 2){
+                    this.add.text(0, 0, 'You Won', { font: '"Press Start 2P"' });
+                }
             }
         }
         lastFrameDown.right = true;
@@ -152,7 +156,7 @@ function update ()
             if(tileLeft.foreground == null){
                 playerObject.moveLeft();
             }
-            if(tileLeft.foreground.name == "rock"){
+            else if(tileLeft.foreground.name == "rock"){
                 if(tileLeft.getTileLeft() != null){
                     if(tileLeft.getTileLeft().foreground == null){
                         tileLeft.moveLeft();
@@ -161,6 +165,10 @@ function update ()
             } else if(tileLeft.foreground.name == "exec"){
                 collectExec(player,tileLeft.foreground);
                 playerObject.moveLeft();
+            } else if(tileRight.foreground.name == "exit"){
+                if(player.execsCollected == 2){
+                    this.add.text(0, 0, 'You Won', { font: '"Press Start 2P"' });
+                }
             }
             lastFrameDown.left = true;
         }
@@ -176,7 +184,7 @@ function update ()
             if(tileAbove.foreground == null){
                 playerObject.moveUp();
             }
-            if(tileAbove.foreground.name == "rock"){
+            else if(tileAbove.foreground.name == "rock"){
                 if(tileAbove.getTileAbove() != null){
                     if(tileAbove.getTileAbove().foreground == null){
                         tileAbove.moveUp();
@@ -185,6 +193,10 @@ function update ()
             } else if(tileAbove.foreground.name == "exec"){
                 collectExec(player,tileAbove.foreground);
                 playerObject.moveUp();
+            } else if(tileRight.foreground.name == "exit"){
+                if(player.execsCollected == 2){
+                    this.add.text(0, 0, 'You Won', { font: '"Press Start 2P"' });
+                }
             }
         }
         lastFrameDown.up = true;
@@ -200,7 +212,7 @@ function update ()
             if(tileBelow.foreground == null){
                 playerObject.moveDown();
             }
-            if(tileBelow.foreground.name == "rock"){
+            else if(tileBelow.foreground.name == "rock"){
                 if(tileBelow.getTileBelow() != null){
                     if(tileBelow.getTileBelow().foreground == null){
                         tileBelow.moveDown();
@@ -209,6 +221,10 @@ function update ()
             } else if(tileBelow.foreground.name == "exec"){
                 collectExec(player,tileBelow.foreground);
                 playerObject.moveDown();
+            } else if(tileRight.foreground.name == "exit"){
+                if(player.execsCollected == 2){
+                    this.add.text(0, 0, 'You Won', { font: '"Press Start 2P"' });
+                }
             }
         }
         lastFrameDown.down = true;
