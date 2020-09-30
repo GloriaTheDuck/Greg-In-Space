@@ -3,6 +3,9 @@ var stageHeight = 6;
 var tileSize = 32;
 var playerObject;
 var player;
+
+// Variable used to keep track of what keys were pressed last frame
+// Used to make it so holding down buttons doesn't work.
 var lastFrameDown = {
     right:false,
     left:false,
@@ -10,14 +13,17 @@ var lastFrameDown = {
     down:false
 };
 
+// Converts pixel coords to grid coords
 function pixelToGrid(x){
     return Math.floor(x/tileSize);
 }
 
+// Converts grid coords to pixel coords
 function gridToPixel(x){
     return x*tileSize + Math.floor(tileSize/2);
 }
 
+// Creates the game matrix which stores the tile objects.
 var gameMatrix = new Array(stageWidth);
 
 for(var i = 0; i<stageWidth; i++){
@@ -30,19 +36,31 @@ for(i = 0; i<stageWidth; i++){
     }
 }
 
+// Checks if coordinates are in bounds.
 function inBounds(x,y){
     return (0<= x) && (x < stageWidth) && (0<= y) && (y <stageHeight);
 }
 
+// Collects the executive
 function collectExec(player, executive){
     executive.disableBody(true,true);
     player.execsCollected += 1
 }
 
-function tileObject(x,y,sprite){
+// Object with 4 attributes:
+// x and y keep track of tileObject's location in gameMatrix
+// foreground is sprite object used to indicate foreground object at x,y. null if no object in foregorund.
+// background is string used to indicate background. "water" if water tile and null otherwise.
+
+// Important methods:
+// getTile(direction) returns tile in direction of "up", "down", "left", or "right". Also getTileAbove(), getTileBelow(), getTileRight(), and getTileLeft().
+// moveDirection(direction) sets foreground of getTile(direction) to this.foreground, and this.foreground to null. Does not check for collision.
+// moveUp(), moveDown(), moveLeft(), and moveRight() does similar thing.
+
+function tileObject(x,y,foreground){
     this.x = x;
     this.y = y;
-    this.foreground = sprite;
+    this.foreground = foreground;
     this.background = null;
     
     this.getTileAbove =  function(){
@@ -57,6 +75,7 @@ function tileObject(x,y,sprite){
     this.getTileLeft =  function(){
         return inBounds(this.x-1,this.y) ? gameMatrix[this.x-1][this.y] : null;
     };
+    
     
     this.getTile = function(direction){
         if(direction == "up"){
@@ -78,7 +97,6 @@ function tileObject(x,y,sprite){
         if(direction == "down"){ this.foreground.y += tileSize;}
         if(direction == "right"){ this.foreground.x += tileSize;}
         if(direction == "left"){ this.foreground.x += -tileSize;}
-        console.log(direction,this.getTile(direction));
         this.getTile(direction).foreground = this.foreground;
         this.foreground = null;
     }
@@ -128,9 +146,11 @@ var config = {
     }
 };
 
-function addObject(b,x,y,image,nam){
-    var a = b.physics.add.sprite(tileSize * x, tileSize*y, image);
-    a.name = nam;
+//  here.adds a sprite with image image and name name at grid coords x and y.
+//  Puts the sprite at gameMatrix[x][y]
+function addObject(here,x,y,image,name){
+    var a = here.physics.add.sprite(gridToPixel(x), gridToPixel(y), image);
+    a.name = name;
     gameMatrix[x][y] = new tileObject(x,y,a);
     return a;
 }
@@ -154,7 +174,7 @@ function preload ()
 function create ()
 {
     
-    this.physics.add.sprite(96,96,"water")
+    this.physics.add.sprite(gridToPixel(3),gridToPixel(3),"water")
     
     addObject(this,1,2,'rock',"rock");
     addObject(this,2,2,'rock',"rock");
@@ -217,6 +237,9 @@ function create ()
     music.play(musicConfig);
 }
 
+// Tries to move playerTile in direction direction.
+// Does check for collision.
+// Where win condition contained.
 function playerMoveTo(playerTile,direction){
     var toTile = playerObject.getTile(direction);
     if( toTile != null){
@@ -237,10 +260,12 @@ function playerMoveTo(playerTile,direction){
     }
 }
 
+// Tries to move the Rock to tile Rock. Does check for collision.
 function rockPush(rockTile,direction){
     var toTile = rockTile.getTile(direction);
     if(toTile != null){
-        if(toTile.foreground == null && toTile.getTile(direction).background != "water"){
+        if(toTile.foreground == null && toTile.background != "water"){
+            console.log(toTile.getTile(direction));
             rockTile.moveDirection(direction);
         }
     }
@@ -249,7 +274,6 @@ function rockPush(rockTile,direction){
 function update ()
 {
     var cursors = this.input.keyboard.createCursorKeys();
-
     playerObject = gameMatrix[Math.floor(player.x/32)][Math.floor(player.y/32)];
     
     //move Right
