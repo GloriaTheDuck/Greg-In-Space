@@ -3,7 +3,9 @@ var stageHeight = 6;
 var tileSize = 32;
 var playerObject;
 var player;
-var lastTime;
+var framesBetweenMoves = 30;
+var framesSinceMove = framesBetweenMoves;
+var inputQueue = new queue()
 
 // Variable used to keep track of what keys were pressed last frame
 // Used to make it so holding down buttons doesn't work.
@@ -56,6 +58,9 @@ function queue(){
     }
     this.dequeue = function(){
         return this.list.shift();
+    }
+    this.length = function(){
+        return this.list.length();
     }
 }
 
@@ -287,6 +292,7 @@ function update ()
 {
     var cursors = this.input.keyboard.createCursorKeys();
     playerObject = gameMatrix[Math.floor(player.x/32)][Math.floor(player.y/32)];
+    
     
     //move Right
     if (cursors.right.isDown && !lastFrameDown.right){
