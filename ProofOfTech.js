@@ -6,6 +6,7 @@ var player;
 var framesBetweenMoves = 30;
 var framesSinceMove = framesBetweenMoves;
 var inputQueue = new queue()
+var assetsFile = "Sprint1/"
 
 // Variable used to keep track of what keys were pressed last frame
 // Used to make it so holding down buttons doesn't work.
@@ -176,21 +177,21 @@ var game = new Phaser.Game(config);
 
 function preload ()
 {
+    this.load.image('flooring', assetsFile + 'tileset.png');
+    this.load.image('rock', assetsFile + 'addwork.png');
+    this.load.image('executive', assetsFile + 'EyeBall Monster-Sheet.png');
+    this.load.spritesheet('character_right', assetsFile + 'Character_Right.png', { frameWidth: 32, frameHeight: 32 } );
+    this.load.spritesheet('character_left', assetsFile + 'Character_Left.png', { frameWidth: 32, frameHeight: 32 });
+    this.load.spritesheet('character_up', assetsFile + 'Character_Up.png', { frameWidth: 32, frameHeight: 32 });
+    this.load.spritesheet('character_down', assetsFile + 'Character_Down.png', { frameWidth: 32, frameHeight: 32 });
+    this.load.tilemapTiledJSON('tilemap', assetsFile + 'Level6JSON.json');
     this.load.spritesheet('greg',"Sprint1/Character_Up.png",{frameWidth: 32, frameHeight:32});
     this.load.image('water', "Sprint1/Water.png");
-    this.load.image('exec', "Sprint1/EyeBall Monster-Sheet.png");
-    this.load.image('rock', "Sprint1/addwork.png");
     this.load.spritesheet('wall', 'Sprint1/tileset.png',{frameWidth: 32, frameHeight:32});
     this.load.image('exit', "Sprint1/exit.png");
-    this.load.image('executive', "Sprint1/EyeBall Monster-Sheet.png");
     
     //loading music
     this.load.audio('lab_music', "Sprint1/lab_gameplay_music.mp3");
-}
-
-function create ()
-{
-    
     this.physics.add.sprite(gridToPixel(3),gridToPixel(3),"water")
     
     addObject(this,1,2,'rock',"rock");
@@ -231,6 +232,55 @@ function create ()
     addObject(this,6,5,'wall',"wall");
     addObject(this,7,5,'wall',"wall");
     addObject(this,8,5,'wall',"wall");
+}
+
+function create ()
+{
+    const map = this.make.tilemap({ key: "tilemap" });
+
+    const floorTileSet = map.addTilesetImage("Flooring", "flooring");
+    
+
+    // Parameters: layer name (or index) from Tiled, tileset, x, y
+    const blocksLayer = map.createStaticLayer("Black Blocks", floorTileSet, 0, 0);
+    const backgroundLayer = map.createStaticLayer("Background", floorTileSet, 0, 0);
+    console.log(map);
+    const movableLayer = map.createDynamicLayer("Movable", tileset, 0, 0);
+    const collectLayer = map.createDynamicLayer("Collectable", tileset, 0 , 0);
+    
+
+    backgroundLayer.setCollisionByProperty( {collides : true} );
+
+    const spawnPoint = map.findObject("Movable", obj => obj.name === "spawnPoint");
+    player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "character_right");
+    player.setCollideWorldBounds(true);
+
+    this.anims.create({
+        key: 'left',
+        frames: this.anims.generateFrameNumbers('character_left', { start: 0, end: 3 }),
+        frameRate: 10,
+        repeat: -1
+    });
+
+    this.anims.create({
+        key: 'up',
+        frames: this.anims.generateFrameNumbers("character_up", { start: 0, end: 3 } ),
+        frameRate: 10
+    });
+
+    this.anims.create({
+        key: 'right',
+        frames: this.anims.generateFrameNumbers('character_right', { start: 0, end: 3 } ),
+        frameRate: 10,
+        repeat: -1
+    });
+
+    this.anims.create({
+        key: 'down',
+        frames: this.anims.generateFrameNumbers('character_down', { start: 0, end: 3 }),
+        frameRate: 10,
+        repeat: -1
+    });
     
     player = addObject(this,1,3,'greg',"player");
     player.execsCollected = 0;
