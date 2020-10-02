@@ -3,6 +3,7 @@ var stageHeight = 6;
 var tileSize = 32;
 var playerObject;
 var player;
+var lastTime;
 
 // Variable used to keep track of what keys were pressed last frame
 // Used to make it so holding down buttons doesn't work.
@@ -45,6 +46,17 @@ function inBounds(x,y){
 function collectExec(player, executive){
     executive.disableBody(true,true);
     player.execsCollected += 1
+}
+
+// Queue used for button inputs
+function queue(){
+    this.list = [];
+    this.enqueue = function(e){
+        this.list.push(e);
+    }
+    this.dequeue = function(){
+        return this.list.shift();
+    }
 }
 
 // Object with 4 attributes:
