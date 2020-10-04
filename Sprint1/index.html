@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Sprint 1 - Level 6</title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <style type="text/css">
+      body {
+        padding: 0px;
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+  <script type="text/javascript">
+
+
+      var player;
+      var rocks;
+      var executives;
+      var walls;
+      var exit;
+      var gameOver = false;
+
+      var scene = new Phaser.Scene("Scene")
+
+      scene.preload = function ()
+      {
+          this.load.image('flooring', 'tileset.png');
+          this.load.image('rocks', 'addwork.png');
+          this.load.image('executives', 'EyeBall Monster-Sheet.png');
+          this.load.spritesheet('character_right', 'Character_Right.png', { frameWidth: 32, frameHeight: 32 } );
+          this.load.spritesheet('character_left', 'Character_Left.png', { frameWidth: 32, frameHeight: 32 });
+          this.load.spritesheet('character_up', 'Character_Up.png', { frameWidth: 32, frameHeight: 32 });
+          this.load.spritesheet('character_down', 'Character_Down.png', { frameWidth: 32, frameHeight: 32 });
+          this.load.tilemapTiledJSON('tilemap', 'Level6JSON.json');
+
+      }
+
+      scene.create = function ()
+      {
+          const map = this.make.tilemap({ key: "tilemap" });
+
+          const tileset = map.addTilesetImage("Flooring", "flooring");
+
+          // Parameters: layer name (or index) from Tiled, tileset, x, y
+          const blocksLayer = map.createStaticLayer("Black Blocks", tileset, 0, 0);
+          const backgroundLayer = map.createStaticLayer("Background", tileset, 0, 0);
+          console.log(map);
+          const collectLayer = map.getObjectLayer("Collecatble")['objects']
+
+          backgroundLayer.setCollisionByProperty( {collides : true} );
+
+          const spawnPoint = map.findObject("Object Layer", obj => obj.name === "spawnPoint");
+          player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "character_right");
+          player.setCollideWorldBounds(true);
+
+          this.anims.create({
+              key: 'left',
+              frames: this.anims.generateFrameNumbers('character_left', { start: 0, end: 3 }),
+              frameRate: 10,
+              repeat: -1
+          });
+
+          this.anims.create({
+              key: 'up',
+              frames: this.anims.generateFrameNumbers("character_up", { start: 0, end: 3 } ),
+              frameRate: 10
+          });
+
+          this.anims.create({
+              key: 'right',
+              frames: this.anims.generateFrameNumbers('character_right', { start: 0, end: 3 } ),
+              frameRate: 10,
+              repeat: -1
+          });
+
+          this.anims.create({
+              key: 'down',
+              frames: this.anims.generateFrameNumbers('character_down', { start: 0, end: 3 }),
+              frameRate: 10,
+              repeat: -1
+          });
+
+          cursors = this.input.keyboard.createCursorKeys();
+
+
+          //coins
+          executives = this.physics.add.staticGroup()
+          //this is how we actually render our coin object with coin asset we loaded into our game in the preload function
+          collectLayer.forEach(object => {
+          let obj = executives.create(object.x, object.y, "executives");
+             obj.setScale(object.width/32, object.height/32);
+             obj.setOrigin(0);
+             obj.body.width = object.width;
+             obj.body.height = object.height;
+          });
+
+      //collisons
+          map.setCollisionBetween(-50, -15, true, 'backgroundLayer');
+          player.setCollideWorldBounds(true);
+          this.physics.add.collider(player, backgroundLayer);
+          this.physics.add.overlap(player, executives, scene.collectExec, null, this);
+
+          executives = this.physics.add.group({
+              key: 'executives',
+              repeat: 0,
+              setXY: { x: 0, y: 0, stepX: 0 }
+          });
+
+          this.physics.add.collider(player, backgroundLayer);
+
+          //this.physics.add.overlap(player, executives, scene.collectExec, null, this);
+      }
+
+      scene.update = function ()
+      {
+        if (gameOver)
+        {
+            return;
+        }
+
+        if (cursors.left.isDown) {
+            player.body.setVelocityX(-100);
+            player.anims.play('left', true);
+          }
+
+        else if (cursors.right.isDown) {
+            player.body.setVelocityX(100);
+            player.anims.play('right', true);
+          }
+
+        else if (cursors.up.isDown) {
+            player.body.setVelocityY(-100);
+            player.anims.play('up', true);
+          }
+
+        else if (cursors.down.isDown) {
+            player.body.setVelocityY(100);
+            player.anims.play('down', true);
+          }
+
+        else
+        {
+            player.setVelocityX(0);
+            player.setVelocityY(0);
+            player.anims.stop()
+        }
+      }
+
+      scene.collectExec = function (player, executives)
+      {
+          executives.disableBody(true, true);
+      }
+
+      scene.leave = function (player)
+      {
+          this.add.text(300, 300, "Level Cleared!", {fontSize: "32px", fill: "#FFF"});
+          gameOver = true;
+      }
+
+
+      var config = {
+          type: Phaser.AUTO,
+          width: 800,
+          height: 600,
+          physics: {
+              default: 'arcade',
+              arcade: {
+                  gravity: { y: 0 },
+              }
+          },
+          scene: [scene]
+      };
+
+      var game = new Phaser.Game(config);
+
+
+  </script>
+  </body>
+
+</html>
