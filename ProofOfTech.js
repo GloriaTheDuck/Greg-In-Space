@@ -343,17 +343,13 @@ function update ()
 {
     var cursors = this.input.keyboard.createCursorKeys();
     playerObject = gameMatrix[Math.floor(player.x/32)][Math.floor(player.y/32)];
-    
-    console.log(inputQueue.length())
-    console.log(framesBetweenMoves);
-    console.log(framesSinceMoved);
+
     if(inputQueue.length() != 0 && framesBetweenMoves <= framesSinceMoved){
-        console.log("queue activated");
         player.setVelocityX(0);
         player.setVelocityY(0);
         player.anims.stop();
         direction = inputQueue.dequeue(); 
-        playerMoveTo(playerObject,direction)
+        playerMoveTo(playerObject,direction);
         framesSinceMoved = 0;
     }
     framesSinceMoved += 1;
@@ -390,6 +386,5 @@ function update ()
     } else if(cursors.down.isDown == false){
         lastFrameDown.down = false;
     }
-
 
 }
