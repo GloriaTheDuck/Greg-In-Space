@@ -111,10 +111,28 @@ function tileObject(x,y,foreground){
     }
     
     this.moveDirection = function(direction){
-        if(direction == "up"){ this.foreground.y += -tileSize;}
-        if(direction == "down"){ this.foreground.y += tileSize;}
-        if(direction == "right"){ this.foreground.x += tileSize;}
-        if(direction == "left"){ this.foreground.x += -tileSize;}
+        if(direction == "up"){ 
+            this.foreground.y += -tileSize;
+            if(this.foreground.name == "player"){
+                this.foreground.anims.play("up",true);
+            }
+        }
+        if(direction == "down"){ 
+            this.foreground.y += tileSize;
+            if(this.foreground.name == "player"){
+                this.foreground.anims.play("down",true);
+            }}
+        if(direction == "right"){
+            this.foreground.x += tileSize;
+            if(this.foreground.name == "player"){
+                this.foreground.anims.play("right",true);
+            }
+        }
+        if(direction == "left"){ 
+            this.foreground.x += -tileSize;
+            if(this.foreground.name == "player"){
+                this.foreground.anims.play("left",true);
+            }}
         this.getTile(direction).foreground = this.foreground;
         this.foreground = null;
     }
@@ -254,7 +272,7 @@ function create ()
 
     const spawnPoint = map.findObject("Movable", obj => obj.name === "spawnPoint");
     player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "character_right");
-    //player.setCollideWorldBounds(true);
+    player.setCollideWorldBounds(true);
 
     this.anims.create({
         key: 'left',
