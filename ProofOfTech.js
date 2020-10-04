@@ -293,11 +293,23 @@ function create ()
         frameRate: 10,
         repeat: -1
     });
+    
+    this.anims.create({
+        key: 'turn_left',
+        frames: this.anims.generateFrameNumbers('character_left', { start: 0, end: 0 }),
+        frameRate: 0,
+    });
 
     this.anims.create({
         key: 'up',
         frames: this.anims.generateFrameNumbers("character_up", { start: 0, end: 3 } ),
         frameRate: 10
+    });
+    
+    this.anims.create({
+        key: 'turn_up',
+        frames: this.anims.generateFrameNumbers('character_up', { start: 0, end: 0 }),
+        frameRate: 0,
     });
 
     this.anims.create({
@@ -306,12 +318,24 @@ function create ()
         frameRate: 10,
         repeat: -1
     });
+    
+    this.anims.create({
+        key: 'turn_right',
+        frames: this.anims.generateFrameNumbers('character_right', { start: 0, end: 0 }),
+        frameRate: 0,
+    });
 
     this.anims.create({
         key: 'down',
         frames: this.anims.generateFrameNumbers('character_down', { start: 0, end: 3 }),
         frameRate: 10,
         repeat: -1
+    });
+    
+    this.anims.create({
+        key: 'turn_down',
+        frames: this.anims.generateFrameNumbers('character_down', { start: 0, end: 0 }),
+        frameRate: 0,
     });
     
     player = addObject(this,1,3,'greg',"player");
@@ -377,8 +401,8 @@ function update ()
     if(inputQueue.length() != 0 && framesBetweenMoves <= framesSinceMoved){
         player.setVelocityX(0);
         player.setVelocityY(0);
-        player.anims.stop();
         direction = inputQueue.dequeue(); 
+        player.anims.play("turn_" + direction);
         playerMoveTo(playerObject,direction);
         framesSinceMoved = 0;
     }
