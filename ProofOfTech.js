@@ -42,7 +42,7 @@ function inBounds(x,y){
 
 // Collects the executive
 function collectExec(player, executive){
-    executive.disableBody(true,true);
+    executive.destroy();
     player.execsCollected += 1
 }
 
@@ -263,16 +263,22 @@ function create ()
     }
 
     const floorTileSet = map.addTilesetImage("Flooring", "flooring");
-    const rockSet = map.addTilesetImage("Rocks", "rock");
-    console.log(rockSet);
 
     
     // Parameters: layer name (or index) from Tiled, tileset, x, y
     const blocksLayer = map.createStaticLayer("Black Blocks", floorTileSet, 0, 0);
+    console.log(blocksLayer);
     const backgroundLayer = map.createStaticLayer("Background", floorTileSet, 0, 0);
     const rocks = map.createFromObjects("Movable", "rock" , {key:"rock"} );
+    for(var i = 0; i<rocks.length; i++){
+        current = rocks[i];
+        gameMatrix[pixelToGrid(current.x)][pixelToGrid(current.y)].foreground = current;
+    }
     const executives = map.createFromObjects("Collectable", "executive" , {key: "executive"});
-    console.log(map);
+    for(var i = 0; i<executives.length; i++){
+        current = executives[i];
+        gameMatrix[pixelToGrid(current.x)][pixelToGrid(current.y)].foreground = current;
+    }
     
 
     //backgroundLayer.setCollisionByProperty( {collides : true} );
@@ -340,7 +346,7 @@ function playerMoveTo(playerTile,direction){
             playerTile.moveDirection(direction);
         } else if(toTile.foreground.name == "rock"){
             rockPush(toTile,direction);
-        } else if(toTile.foreground.name == "exec"){
+        } else if(toTile.foreground.name == "executive"){
             collectExec(playerObject.foreground,toTile.foreground);
             playerObject.moveDirection(direction);
         } else if(toTile.foreground == "exit"){
