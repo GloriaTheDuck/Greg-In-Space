@@ -1,5 +1,5 @@
 var stageWidth = 10;
-var stageHeight = 6;
+var stageHeight = 20;
 var tileSize = 32;
 var playerObject;
 var player;
@@ -199,14 +199,15 @@ function preload ()
     this.load.spritesheet('character_down', assetsFile + 'Character_Down.png', { frameWidth: 32, frameHeight: 32 });
     this.load.tilemapTiledJSON('tilemap', assetsFile + 'FinalLevel6.json');
     this.load.spritesheet('greg',"Sprint1/Character_Up.png",{frameWidth: 32, frameHeight:32});
-    this.load.image('water', "Sprint1/Water.png");
+    //this.load.image('water', "Sprint1/Water.png");
     this.load.spritesheet('wall', 'Sprint1/tileset.png',{frameWidth: 32, frameHeight:32});
-    this.load.image('exit', "Sprint1/exit.png");
+    //this.load.image('exit', "Sprint1/exit.png");
     
     //loading music
     this.load.audio('lab_music', "Sprint1/lab_gameplay_music.mp3");
 
 }
+
 function temporaryLevelCreate(){
         
     this.physics.add.sprite(gridToPixel(3),gridToPixel(3),"water")
@@ -262,12 +263,15 @@ function create ()
     }
 
     const floorTileSet = map.addTilesetImage("Flooring", "flooring");
+    const rockSet = map.addTilesetImage("Rocks", "rock");
+    console.log(rockSet);
 
     
     // Parameters: layer name (or index) from Tiled, tileset, x, y
     const blocksLayer = map.createStaticLayer("Black Blocks", floorTileSet, 0, 0);
-    console.log(blocksLayer);
     const backgroundLayer = map.createStaticLayer("Background", floorTileSet, 0, 0);
+    const rocks = map.createFromObjects("Movable", "rock" , {key:"rock"} );
+    const executives = map.createFromObjects("Collectable", "executive" , {key: "executive"});
     console.log(map);
     
 
