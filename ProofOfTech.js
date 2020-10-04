@@ -4,7 +4,7 @@ var tileSize = 32;
 var playerObject;
 var player;
 var framesBetweenMoves = 30;
-var framesSinceMove = framesBetweenMoves;
+var framesSinceMoved = framesBetweenMoves;
 var inputQueue = new queue()
 var assetsFile = "Sprint1/"
 
@@ -61,7 +61,7 @@ function queue(){
         return this.list.shift();
     }
     this.length = function(){
-        return this.list.length();
+        return this.list.length;
     }
 }
 
@@ -192,6 +192,15 @@ function preload ()
     
     //loading music
     this.load.audio('lab_music', "Sprint1/lab_gameplay_music.mp3");
+
+}
+
+function create ()
+{
+    const map = this.make.tilemap({ key: "tilemap" });
+
+    const floorTileSet = map.addTilesetImage("Flooring", "flooring");
+    
     this.physics.add.sprite(gridToPixel(3),gridToPixel(3),"water")
     
     addObject(this,1,2,'rock',"rock");
@@ -232,28 +241,20 @@ function preload ()
     addObject(this,6,5,'wall',"wall");
     addObject(this,7,5,'wall',"wall");
     addObject(this,8,5,'wall',"wall");
-}
-
-function create ()
-{
-    const map = this.make.tilemap({ key: "tilemap" });
-
-    const floorTileSet = map.addTilesetImage("Flooring", "flooring");
     
-
     // Parameters: layer name (or index) from Tiled, tileset, x, y
-    const blocksLayer = map.createStaticLayer("Black Blocks", floorTileSet, 0, 0);
-    const backgroundLayer = map.createStaticLayer("Background", floorTileSet, 0, 0);
-    console.log(map);
-    const movableLayer = map.createDynamicLayer("Movable", tileset, 0, 0);
-    const collectLayer = map.createDynamicLayer("Collectable", tileset, 0 , 0);
+    //const blocksLayer = map.createStaticLayer("Black Blocks", floorTileSet, 0, 0);
+    //const backgroundLayer = map.createStaticLayer("Background", floorTileSet, 0, 0);
+    //console.log(map);
+    //const movableLayer = map.createDynamicLayer("Movable", tileset, 0, 0);
+    //const collectLayer = map.createDynamicLayer("Collectable", tileset, 0 , 0);
     
 
-    backgroundLayer.setCollisionByProperty( {collides : true} );
+    //backgroundLayer.setCollisionByProperty( {collides : true} );
 
     const spawnPoint = map.findObject("Movable", obj => obj.name === "spawnPoint");
     player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "character_right");
-    player.setCollideWorldBounds(true);
+    //player.setCollideWorldBounds(true);
 
     this.anims.create({
         key: 'left',
@@ -343,10 +344,24 @@ function update ()
     var cursors = this.input.keyboard.createCursorKeys();
     playerObject = gameMatrix[Math.floor(player.x/32)][Math.floor(player.y/32)];
     
+    console.log(inputQueue.length())
+    console.log(framesBetweenMoves);
+    console.log(framesSinceMoved);
+    if(inputQueue.length() != 0 && framesBetweenMoves <= framesSinceMoved){
+        console.log("queue activated");
+        player.setVelocityX(0);
+        player.setVelocityY(0);
+        player.anims.stop();
+        direction = inputQueue.dequeue(); 
+        playerMoveTo(playerObject,direction)
+        framesSinceMoved = 0;
+    }
+    framesSinceMoved += 1;
+    
     
     //move Right
     if (cursors.right.isDown && !lastFrameDown.right){
-        playerMoveTo(playerObject,"right");
+        inputQueue.enqueue("right");
         lastFrameDown.right = true;
     } else if(cursors.right.isDown == false){
         lastFrameDown.right = false;
@@ -354,7 +369,7 @@ function update ()
     
     //move Left
     if (cursors.left.isDown && !lastFrameDown.left){
-        playerMoveTo(playerObject,"left");
+        inputQueue.enqueue("left");
         lastFrameDown.left = true;
     } else if(cursors.left.isDown == false){
         lastFrameDown.left = false;
@@ -362,7 +377,7 @@ function update ()
     
     //move Up
     if (cursors.up.isDown && !lastFrameDown.up){
-        playerMoveTo(playerObject,'up');
+        inputQueue.enqueue("up");
         lastFrameDown.up = true;
     } else if(cursors.up.isDown == false){
         lastFrameDown.up = false;
@@ -370,7 +385,7 @@ function update ()
     
     //move Down    
     if (cursors.down.isDown && !lastFrameDown.down){
-        playerMoveTo(playerObject,"down");
+        inputQueue.enqueue("down");
         lastFrameDown.down = true;
     } else if(cursors.down.isDown == false){
         lastFrameDown.down = false;
