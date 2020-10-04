@@ -3,7 +3,7 @@ var stageHeight = 6;
 var tileSize = 32;
 var playerObject;
 var player;
-var framesBetweenMoves = 30;
+var framesBetweenMoves = 2;
 var framesSinceMoved = framesBetweenMoves;
 var inputQueue = new queue()
 var assetsFile = "Sprint1/"
