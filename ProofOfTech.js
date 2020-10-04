@@ -34,11 +34,6 @@ for(var i = 0; i<stageWidth; i++){
     gameMatrix[i] = new Array(stageHeight);
 }
 
-for(i = 0; i<stageWidth; i++){
-    for(var j=0; j<stageHeight; j++){
-        gameMatrix[i][j] = new tileObject(i,j,null);
-    }
-}
 
 // Checks if coordinates are in bounds.
 function inBounds(x,y){
@@ -202,7 +197,7 @@ function preload ()
     this.load.spritesheet('character_left', assetsFile + 'Character_Left.png', { frameWidth: 32, frameHeight: 32 });
     this.load.spritesheet('character_up', assetsFile + 'Character_Up.png', { frameWidth: 32, frameHeight: 32 });
     this.load.spritesheet('character_down', assetsFile + 'Character_Down.png', { frameWidth: 32, frameHeight: 32 });
-    this.load.tilemapTiledJSON('tilemap', assetsFile + 'Level6JSON.json');
+    this.load.tilemapTiledJSON('tilemap', assetsFile + 'FinalLevel6.json');
     this.load.spritesheet('greg',"Sprint1/Character_Up.png",{frameWidth: 32, frameHeight:32});
     this.load.image('water', "Sprint1/Water.png");
     this.load.spritesheet('wall', 'Sprint1/tileset.png',{frameWidth: 32, frameHeight:32});
@@ -212,13 +207,8 @@ function preload ()
     this.load.audio('lab_music', "Sprint1/lab_gameplay_music.mp3");
 
 }
-
-function create ()
-{
-    const map = this.make.tilemap({ key: "tilemap" });
-
-    const floorTileSet = map.addTilesetImage("Flooring", "flooring");
-    
+function temporaryLevelCreate(){
+        
     this.physics.add.sprite(gridToPixel(3),gridToPixel(3),"water")
     
     addObject(this,1,2,'rock',"rock");
@@ -259,13 +249,26 @@ function create ()
     addObject(this,6,5,'wall',"wall");
     addObject(this,7,5,'wall',"wall");
     addObject(this,8,5,'wall',"wall");
+}
+
+function create ()
+{
+    const map = this.make.tilemap({ key: "tilemap" });
+    
+    for(i = 0; i<stageWidth; i++){
+        for(var j=0; j<stageHeight; j++){
+            gameMatrix[i][j] = new tileObject(i,j,null);
+        }
+    }
+
+    const floorTileSet = map.addTilesetImage("Flooring", "flooring");
+
     
     // Parameters: layer name (or index) from Tiled, tileset, x, y
-    //const blocksLayer = map.createStaticLayer("Black Blocks", floorTileSet, 0, 0);
-    //const backgroundLayer = map.createStaticLayer("Background", floorTileSet, 0, 0);
-    //console.log(map);
-    //const movableLayer = map.createDynamicLayer("Movable", tileset, 0, 0);
-    //const collectLayer = map.createDynamicLayer("Collectable", tileset, 0 , 0);
+    const blocksLayer = map.createStaticLayer("Black Blocks", floorTileSet, 0, 0);
+    console.log(blocksLayer);
+    const backgroundLayer = map.createStaticLayer("Background", floorTileSet, 0, 0);
+    console.log(map);
     
 
     //backgroundLayer.setCollisionByProperty( {collides : true} );
@@ -351,7 +354,6 @@ function rockPush(rockTile,direction){
     var toTile = rockTile.getTile(direction);
     if(toTile != null){
         if(toTile.foreground == null && toTile.background != "water"){
-            console.log(toTile.getTile(direction));
             rockTile.moveDirection(direction);
         }
     }
