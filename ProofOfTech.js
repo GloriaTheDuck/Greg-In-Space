@@ -116,27 +116,27 @@ function tileObject(x,y,foreground){
         console.log(this.foreground);
         if(direction == "up"){ 
             movingObjects.push(this.foreground);
-            this.foreground.setVelocityY(-30);
+            this.foreground.body.velocity.y = -30;
             if(this.foreground.name == "player"){
                 this.foreground.anims.play("up",true);
             }
         }
         if(direction == "down"){ 
             movingObjects.push(this.foreground);
-            this.foreground.setVelocityY(30);
+            this.foreground.body.velocity.y = 30;
             if(this.foreground.name == "player"){
                 this.foreground.anims.play("down",true);
             }}
         if(direction == "right"){
             movingObjects.push(this.foreground);
-            this.foreground.setVelocityX(30);
+            this.foreground.body.velocity.x = 30;
             if(this.foreground.name == "player"){
                 this.foreground.anims.play("right",true);
             }
         }
         if(direction == "left"){ 
             movingObjects.push(this.foreground);
-            this.foreground.setVelocityX(-30);
+            this.foreground.body.velocity.x = -30;
             if(this.foreground.name == "player"){
                 this.foreground.anims.play("left",true);
             }}
@@ -369,12 +369,15 @@ function update ()
 
     if(movingObjects.length > 0){
         for(var i = 0; i<movingObjects.length; i++){
+            console.log(current);
             current = movingObjects[i];
+            console.log(inGrid(current));
             if(inGrid(current)){
-                current.setVelocityX(0);
-                current.setVelocityY(0);
+                current.body.velocity.x = 0;
+                current.body.velocity.y = 0;
                 movingObjects.splice(i, 1);
                 i+= -1;
+                player.anims.stop();
             }
         }
     }
