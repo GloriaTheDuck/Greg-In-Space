@@ -1,6 +1,7 @@
 var stageWidth = 10;
 var stageHeight = 20;
 var tileSize = 32;
+var moveSpeed = 100;
 var playerObject;
 var player;
 var movingObjects = [];
@@ -22,11 +23,6 @@ var lastFrameDown = {
 // Converts pixel coords to grid coords
 function pixelToGrid(x){
     return Math.floor(x/tileSize);
-}
-
-//Checks if sprite is inGrid
-function inGrid(sprite){
-    return (Math.floor(player.x % tileSize)  == tileSize/2)  && (Math.floor(player.y % tileSize)  == tileSize/2)
 }
 
 // Converts grid coords to pixel coords
@@ -113,34 +109,30 @@ function tileObject(x,y,foreground){
     }
     
     this.moveDirection = function(direction){
-        console.log(this.foreground);
         if(direction == "up"){ 
-            movingObjects.push(this.foreground);
-            this.foreground.body.velocity.y = -30;
+            this.foreground.body.velocity.y = -moveSpeed;
             if(this.foreground.name == "player"){
                 this.foreground.anims.play("up",true);
             }
         }
         if(direction == "down"){ 
-            movingObjects.push(this.foreground);
-            this.foreground.body.velocity.y = 30;
+            this.foreground.body.velocity.y = moveSpeed;
             if(this.foreground.name == "player"){
                 this.foreground.anims.play("down",true);
             }}
         if(direction == "right"){
-            movingObjects.push(this.foreground);
-            this.foreground.body.velocity.x = 30;
+            this.foreground.body.velocity.x = moveSpeed;
             if(this.foreground.name == "player"){
                 this.foreground.anims.play("right",true);
             }
         }
         if(direction == "left"){ 
-            movingObjects.push(this.foreground);
-            this.foreground.body.velocity.x = -30;
+            this.foreground.body.velocity.x = -moveSpeed;
             if(this.foreground.name == "player"){
                 this.foreground.anims.play("left",true);
             }}
         this.getTile(direction).foreground = this.foreground;
+        movingObjects.push(this.getTile(direction));
         this.foreground = null;
     }
     
@@ -167,6 +159,13 @@ function tileObject(x,y,foreground){
         this.getTileLeft().foreground = this.foreground;
         this.foreground = null;
     };
+    
+    //Returns whether the foreground is in the correct position
+    this.inGrid = function(){
+        inX = (gridToPixel(this.x)-1 <= this.foreground.x) && (gridToPixel(this.x)+1 >= this.foreground.x)
+        inY = (gridToPixel(this.y)-1 <= this.foreground.y) && (gridToPixel(this.y)+1 >= this.foreground.y)
+        return inX && inY;
+    }
 }
 
 var scene = {
@@ -369,12 +368,11 @@ function update ()
 
     if(movingObjects.length > 0){
         for(var i = 0; i<movingObjects.length; i++){
-            console.log(current);
             current = movingObjects[i];
-            console.log(inGrid(current));
-            if(inGrid(current)){
-                current.body.velocity.x = 0;
-                current.body.velocity.y = 0;
+            if(current.inGrid()){
+                console.log(i);
+                current.foreground.body.velocity.x = 0;
+                current.foreground.body.velocity.y = 0;
                 movingObjects.splice(i, 1);
                 i+= -1;
                 player.anims.stop();
