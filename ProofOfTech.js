@@ -203,12 +203,11 @@ function preload ()
     this.load.image('flooring', assetsFile + 'tileset.png');
     this.load.image('rock', assetsFile + 'addwork.png');
     this.load.image('executive', assetsFile + 'EyeBall Monster-Sheet.png');
-    this.load.spritesheet('character_right', assetsFile + 'Character_Right.png', { frameWidth: 32, frameHeight: 32 } );
-    this.load.spritesheet('character_left', assetsFile + 'Character_Left.png', { frameWidth: 32, frameHeight: 32 });
-    this.load.spritesheet('character_up', assetsFile + 'Character_Up.png', { frameWidth: 32, frameHeight: 32 });
-    this.load.spritesheet('character_down', assetsFile + 'Character_Down.png', { frameWidth: 32, frameHeight: 32 });
+    this.load.spritesheet('character_right', 'sprite_right.png', { frameWidth: 32, frameHeight: 32 } );
+    this.load.spritesheet('character_left', 'sprite_left.png', { frameWidth: 32, frameHeight: 32 });
+    this.load.spritesheet('character_up', 'sprite_up.png', { frameWidth: 32, frameHeight: 32 });
+    this.load.spritesheet('character_down', 'sprite_down.png', { frameWidth: 32, frameHeight: 32 });
     this.load.tilemapTiledJSON('tilemap', assetsFile + 'FinalLevel6.json');
-    this.load.spritesheet('greg',"Sprint1/Character_Up.png",{frameWidth: 32, frameHeight:32});
     //this.load.image('water', "Sprint1/Water.png");
     this.load.spritesheet('wall', 'Sprint1/tileset.png',{frameWidth: 32, frameHeight:32});
     //this.load.image('exit', "Sprint1/exit.png");
