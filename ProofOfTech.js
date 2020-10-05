@@ -3,10 +3,12 @@ var stageHeight = 20;
 var tileSize = 32;
 var playerObject;
 var player;
+var movingObjects = [];
 var framesBetweenMoves = 2;
 var framesSinceMoved = framesBetweenMoves;
 var inputQueue = new queue()
 var assetsFile = "Sprint1/"
+
 
 // Variable used to keep track of what keys were pressed last frame
 // Used to make it so holding down buttons doesn't work.
@@ -20,6 +22,11 @@ var lastFrameDown = {
 // Converts pixel coords to grid coords
 function pixelToGrid(x){
     return Math.floor(x/tileSize);
+}
+
+//Checks if sprite is inGrid
+function inGrid(sprite){
+    return (Math.floor(player.x % tileSize)  == tileSize/2)  && (Math.floor(player.y % tileSize)  == tileSize/2)
 }
 
 // Converts grid coords to pixel coords
@@ -106,25 +113,30 @@ function tileObject(x,y,foreground){
     }
     
     this.moveDirection = function(direction){
+        console.log(this.foreground);
         if(direction == "up"){ 
-            this.foreground.y += -tileSize;
+            movingObjects.push(this.foreground);
+            this.foreground.setVelocityY(-30);
             if(this.foreground.name == "player"){
                 this.foreground.anims.play("up",true);
             }
         }
         if(direction == "down"){ 
-            this.foreground.y += tileSize;
+            movingObjects.push(this.foreground);
+            this.foreground.setVelocityY(30);
             if(this.foreground.name == "player"){
                 this.foreground.anims.play("down",true);
             }}
         if(direction == "right"){
-            this.foreground.x += tileSize;
+            movingObjects.push(this.foreground);
+            this.foreground.setVelocityX(30);
             if(this.foreground.name == "player"){
                 this.foreground.anims.play("right",true);
             }
         }
         if(direction == "left"){ 
-            this.foreground.x += -tileSize;
+            movingObjects.push(this.foreground);
+            this.foreground.setVelocityX(-30);
             if(this.foreground.name == "player"){
                 this.foreground.anims.play("left",true);
             }}
@@ -167,14 +179,14 @@ var config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
-    scene: scene,
     physics: {
         default: 'arcade',
         arcade: {
             gravity: { y: 0 },
             debug: false
         }
-    }
+    },
+    scene: scene
 };
 
 //  here.adds a sprite with image image and name name at grid coords x and y.
@@ -186,7 +198,6 @@ function addObject(here,x,y,image,name){
     return a;
 }
 
-var game = new Phaser.Game(config);
 
 function preload ()
 {
@@ -225,8 +236,10 @@ function create ()
     // Parameters: layer name (or index) from Tiled, tileset, x, y
     const blocksLayer = map.createStaticLayer("Black Blocks", floorTileSet, 0, 0);
     const backgroundLayer = map.createStaticLayer("Background", floorTileSet, 0, 0);
-    console.log(backgroundLayer);
-    const rocks = map.createFromObjects("Movable", "rock" , {key:"rock"} );
+    const rocks = map.createFromObjects("Movable", "rock" , {key:"rock", frame:1} );
+    console.log(this.physics.world.enable);
+    this.physics.world.enable(rocks);
+    
     for(var i = 0; i<rocks.length; i++){
         current = rocks[i];
         gameMatrix[pixelToGrid(current.x)][pixelToGrid(current.y)].foreground = current;
@@ -298,7 +311,6 @@ function create ()
     player = addObject(this,1,3,'greg',"player");
     player.execsCollected = 0;
     
-    gameMatrix[3][3].background = "water";
     
     var music = this.sound.add("lab_music", musicConfig);
     
@@ -355,9 +367,19 @@ function update ()
     var cursors = this.input.keyboard.createCursorKeys();
     playerObject = gameMatrix[Math.floor(player.x/32)][Math.floor(player.y/32)];
 
-    if(inputQueue.length() != 0 && framesBetweenMoves <= framesSinceMoved){
-        player.setVelocityX(0);
-        player.setVelocityY(0);
+    if(movingObjects.length > 0){
+        for(var i = 0; i<movingObjects.length; i++){
+            current = movingObjects[i];
+            if(inGrid(current)){
+                current.setVelocityX(0);
+                current.setVelocityY(0);
+                movingObjects.splice(i, 1);
+                i+= -1;
+            }
+        }
+    }
+    
+    if(inputQueue.length() != 0 && movingObjects.length == 0){
         direction = inputQueue.dequeue(); 
         player.anims.play("turn_" + direction);
         playerMoveTo(playerObject,direction);
@@ -399,3 +421,7 @@ function update ()
     }
 
 }
+
+
+// starts game
+var game = new Phaser.Game(config);
