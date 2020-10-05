@@ -28,29 +28,32 @@
       {
           this.load.image('flooring', 'tileset.png');
           this.load.image('rocks', 'addwork.png');
-          this.load.image('executives', 'EyeBall Monster-Sheet.png');
-          this.load.spritesheet('character_right', 'Character_Right.png', { frameWidth: 32, frameHeight: 32 } );
-          this.load.spritesheet('character_left', 'Character_Left.png', { frameWidth: 32, frameHeight: 32 });
-          this.load.spritesheet('character_up', 'Character_Up.png', { frameWidth: 32, frameHeight: 32 });
-          this.load.spritesheet('character_down', 'Character_Down.png', { frameWidth: 32, frameHeight: 32 });
-          this.load.tilemapTiledJSON('tilemap', 'FinalLevel6.json');
+          this.load.spritesheet('alien', 'aliensprite_idle.png', { frameWidth: 32, frameHeight: 32 } );
+          this.load.spritesheet('character_right', 'sprite_right.png', { frameWidth: 32, frameHeight: 32 } );
+          this.load.spritesheet('character_left', 'sprite_left.png', { frameWidth: 32, frameHeight: 32 });
+          this.load.spritesheet('character_up', 'sprite_up.png', { frameWidth: 32, frameHeight: 32 });
+          this.load.spritesheet('character_down', 'sprite_down.png', { frameWidth: 32, frameHeight: 32 });
+          this.load.tilemapTiledJSON('tilemap', 'Level6.json');
 
       }
 
       scene.create = function ()
       {
-          const map = this.make.tilemap({ key: "tilemap" });
+          const map = this.make.tilemap({ key: "tilemap", tileWidth: 32, tileHeight: 32 });
 
-          const tileset = map.addTilesetImage("Flooring", "flooring");
+          const tileset = map.addTilesetImage("Floor", "flooring");
 
           // Parameters: layer name (or index) from Tiled, tileset, x, y
-          const blocksLayer = map.createStaticLayer("Black Blocks", tileset, 0, 0);
+          const blocksLayer = map.createStaticLayer("Color Fill", tileset, 0, 0);
           const backgroundLayer = map.createStaticLayer("Background", tileset, 0, 0);
-          const collectLayer = map.getObjectLayer("Collectable")['objects']
+          const wallLayer = map.getObjectLayer("Walls")['objects'];
+          const groupLayer = map.getObjectLayer("Group")['objects'];
+          const playerLayer = map.getObjectLayer("Player")['objects'];
 
-          backgroundLayer.setCollisionByProperty( {collides : true} );
 
-          const spawnPoint = map.findObject("Movable", obj => obj.name === "spawnPoint");
+          //backgroundLayer.setCollisionByProperty( {collides : true} );
+
+          const spawnPoint = map.findObject("Player", obj => obj.name === "playerSpawn");
           player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "character_right");
           player.setCollideWorldBounds(true);
 
@@ -83,30 +86,24 @@
 
           cursors = this.input.keyboard.createCursorKeys();
 
-
-          //coins
-          executives = this.physics.add.staticGroup()
-          //this is how we actually render our coin object with coin asset we loaded into our game in the preload function
-          collectLayer.forEach(object => {
-          let obj = executives.create(object.x, object.y, "executives");
+          /*
+          alienGroup = this.physics.add.staticGroup()
+          groupLayer.forEach(object => {
+          let obj = alienGroup.create(object.x, object.y, "alien");
              obj.setScale(object.width/32, object.height/32);
-             obj.setOrigin(0);
+
              obj.body.width = object.width;
              obj.body.height = object.height;
           });
 
       //collisons
-          map.setCollisionBetween(-50, -15, true, 'backgroundLayer');
-          player.setCollideWorldBounds(true);
-          this.physics.add.collider(player, backgroundLayer);
-          this.physics.add.overlap(player, executives, scene.collectExec, null, this);
 
-          executives = this.physics.add.group({
-              key: 'executives',
-              setXY: { x: -10, y: 0, stepX: 0 }
+          this.physics.add.overlap(player, alienGroup, scene.collectAliens, null, this);
+
+          alienGroup = this.physics.add.group({
+              key: 'alien'
           });
-
-          this.physics.add.collider(player, backgroundLayer);
+          */
 
           //this.physics.add.overlap(player, executives, scene.collectExec, null, this);
       }
@@ -146,21 +143,21 @@
         }
       }
 
-      scene.collectExec = function (player, executives)
+      scene.collectAliens = function (player, alienGroup)
       {
-          executives.disableBody(true, true);
+          alienGroup.disableBody(true, true);
       }
 
       scene.leave = function (player)
       {
-          this.add.text(300, 300, "Level Cleared!", {fontSize: "32px", fill: "#FFF"});
+          this.add.text(16, 16, "Level Cleared!", {fontSize: "32px", fill: "#FFF"});
           gameOver = true;
       }
 
       var config = {
           type: Phaser.AUTO,
-          width: 800,
-          height: 600,
+          width: 256,
+          height: 224,
           physics: {
               default: 'arcade',
               arcade: {
