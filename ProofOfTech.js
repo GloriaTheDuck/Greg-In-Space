@@ -208,49 +208,6 @@ function preload ()
 
 }
 
-function temporaryLevelCreate(){
-        
-    this.physics.add.sprite(gridToPixel(3),gridToPixel(3),"water")
-    
-    addObject(this,1,2,'rock',"rock");
-    addObject(this,2,2,'rock',"rock");
-    addObject(this,2,3,'rock',"rock");
-    addObject(this,3,2,'rock',"rock");
-    addObject(this,4,3,'rock',"rock");
-    addObject(this,4,4,'rock',"rock");
-    addObject(this,6,4,'rock',"rock");
-    
-    addObject(this,3,1,'exec',"exec");
-    addObject(this,6,3,'exec',"exec");
-
-    addObject(this,0,0,'wall',"wall");
-    addObject(this,1,0,'wall',"wall");
-    addObject(this,2,0,'wall',"wall");
-    addObject(this,3,0,'wall',"wall");
-    addObject(this,4,0,'wall',"wall");
-    addObject(this,5,0,'wall',"wall");
-    addObject(this,6,0,'wall',"wall");
-    addObject(this,7,0,'wall',"wall");
-    addObject(this,8,0,'wall',"wall");
-    addObject(this,0,1,'wall',"wall");
-    addObject(this,5,1,'wall',"wall");
-    addObject(this,0,2,'wall',"wall");
-    addObject(this,5,2,'wall',"wall");
-    addObject(this,6,2,'wall',"wall");
-    addObject(this,0,3,'exit',"exit");
-    addObject(this,7,3,'wall',"wall");
-    addObject(this,0,4,'wall',"wall");
-    addObject(this,7,4,'wall',"wall");
-    addObject(this,0,5,'wall',"wall");
-    addObject(this,1,5,'wall',"wall");
-    addObject(this,2,5,'wall',"wall");
-    addObject(this,3,5,'wall',"wall");
-    addObject(this,4,5,'wall',"wall");
-    addObject(this,5,5,'wall',"wall");
-    addObject(this,6,5,'wall',"wall");
-    addObject(this,7,5,'wall',"wall");
-    addObject(this,8,5,'wall',"wall");
-}
 
 function create ()
 {
@@ -267,8 +224,8 @@ function create ()
     
     // Parameters: layer name (or index) from Tiled, tileset, x, y
     const blocksLayer = map.createStaticLayer("Black Blocks", floorTileSet, 0, 0);
-    console.log(blocksLayer);
     const backgroundLayer = map.createStaticLayer("Background", floorTileSet, 0, 0);
+    console.log(backgroundLayer);
     const rocks = map.createFromObjects("Movable", "rock" , {key:"rock"} );
     for(var i = 0; i<rocks.length; i++){
         current = rocks[i];
