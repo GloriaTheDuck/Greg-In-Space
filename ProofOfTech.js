@@ -202,14 +202,13 @@ function preload ()
 {
     this.load.image('flooring', assetsFile + 'tileset.png');
     this.load.image('rock', assetsFile + 'addwork.png');
-    this.load.image('executive', assetsFile + 'EyeBall Monster-Sheet.png');
+    this.load.spritesheet('executive', 'aliensprite_idle.png',{ frameWidth: 32, frameHeight: 32 });
     this.load.spritesheet('character_right', 'sprite_right.png', { frameWidth: 32, frameHeight: 32 } );
     this.load.spritesheet('character_left', 'sprite_left.png', { frameWidth: 32, frameHeight: 32 });
     this.load.spritesheet('character_up', 'sprite_up.png', { frameWidth: 32, frameHeight: 32 });
     this.load.spritesheet('character_down', 'sprite_down.png', { frameWidth: 32, frameHeight: 32 });
     this.load.tilemapTiledJSON('tilemap', assetsFile + 'FinalLevel6.json');
     //this.load.image('water', "Sprint1/Water.png");
-    this.load.spritesheet('wall', 'Sprint1/tileset.png',{frameWidth: 32, frameHeight:32});
     //this.load.image('exit', "Sprint1/exit.png");
     
     //loading music
@@ -233,9 +232,10 @@ function create ()
     
     // Parameters: layer name (or index) from Tiled, tileset, x, y
     const blocksLayer = map.createStaticLayer("Black Blocks", floorTileSet, 0, 0);
+    console.log(blocksLayer);
     const backgroundLayer = map.createStaticLayer("Background", floorTileSet, 0, 0);
+    console.log(backgroundLayer);
     const rocks = map.createFromObjects("Movable", "rock" , {key:"rock", frame:1} );
-    console.log(this.physics.world.enable);
     this.physics.world.enable(rocks);
     
     for(var i = 0; i<rocks.length; i++){
@@ -248,13 +248,36 @@ function create ()
         gameMatrix[pixelToGrid(current.x)][pixelToGrid(current.y)].foreground = current;
     }
     
+    backgroundData = backgroundLayer.layer.data;
+    for(var i =0; i<backgroundData.length; i++){
+        for(var j=0; j<backgroundData[i].length; j++){
+            current = backgroundData[i][j].index;
+            if(current == 2 || current == 8 || current == 13){
+                gameMatrix[j][i].foreground = backgroundLayer.getTileAt(j,i);
+                gameMatrix[j][i].foreground.name = "wall";
+            }
+        }
+    }
+    
 
     //backgroundLayer.setCollisionByProperty( {collides : true} );
 
     const spawnPoint = map.findObject("Movable", obj => obj.name === "spawnPoint");
     player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "character_right");
     player.setCollideWorldBounds(true);
-
+    
+    this.anims.create({
+        key: 'alien_idle',
+        frames: this.anims.generateFrameNumbers('executive', { start: 0, end: 1 }),
+        frameRate: 10,
+        repeat: -1
+    });
+    
+    for(var i = 0; i<executives.length;i++){
+        executives[i].anims.play("alien_idle",true);
+    }
+    
+    
     this.anims.create({
         key: 'left',
         frames: this.anims.generateFrameNumbers('character_left', { start: 0, end: 3 }),
