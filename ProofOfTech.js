@@ -263,7 +263,9 @@ function create ()
     //backgroundLayer.setCollisionByProperty( {collides : true} );
 
     const spawnPoint = map.findObject("Movable", obj => obj.name === "spawnPoint");
-    player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "character_right");
+    player = addObject(this,pixelToGrid(spawnPoint.x),pixelToGrid(spawnPoint.y),'character_right',"player");
+    player.execsCollected = 0;
+    
     player.setCollideWorldBounds(true);
     
     this.anims.create({
@@ -328,9 +330,6 @@ function create ()
         frames: this.anims.generateFrameNumbers('character_down', { start: 0, end: 0 }),
         frameRate: 0,
     });
-    
-    player = addObject(this,1,3,'greg',"player");
-    player.execsCollected = 0;
     
     
     var music = this.sound.add("lab_music", musicConfig);
