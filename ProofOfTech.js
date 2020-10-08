@@ -1,7 +1,7 @@
 var stageWidth = 10;
-var stageHeight = 20;
-var tileSize = 32;
+var stageHeight = 10;
 var moveSpeed = 100;
+var tileSize = 32;
 var playerObject;
 var player;
 var movingObjects = [];
@@ -10,6 +10,22 @@ var framesSinceMoved = framesBetweenMoves;
 var inputQueue = new queue()
 var assetsFile = "Sprint1/"
 
+// Creates the game matrix which stores the tile objects.
+var gameMatrix = new Array(stageWidth);
+
+for(var i = 0; i<stageWidth; i++){
+    gameMatrix[i] = new Array(stageHeight);
+}
+
+//creates gameParams used by outside methods
+var gameParams = {
+    gameMatrix: gameMatrix,
+    moveSpeed: moveSpeed,
+    tilesSize: tileSize,
+    movingObjects : movingObjects
+};
+
+import {tileObject} from "./tileObject.js";
 
 // Variable used to keep track of what keys were pressed last frame
 // Used to make it so holding down buttons doesn't work.
@@ -30,18 +46,8 @@ function gridToPixel(x){
     return x*tileSize + Math.floor(tileSize/2);
 }
 
-// Creates the game matrix which stores the tile objects.
-var gameMatrix = new Array(stageWidth);
-
-for(var i = 0; i<stageWidth; i++){
-    gameMatrix[i] = new Array(stageHeight);
-}
 
 
-// Checks if coordinates are in bounds.
-function inBounds(x,y){
-    return (0<= x) && (x < stageWidth) && (0<= y) && (y <stageHeight);
-}
 
 // Collects the executive
 function collectExec(player, executive){
@@ -63,110 +69,6 @@ function queue(){
     }
 }
 
-// Object with 4 attributes:
-// x and y keep track of tileObject's location in gameMatrix
-// foreground is sprite object used to indicate foreground object at x,y. null if no object in foregorund.
-// background is string used to indicate background. "water" if water tile and null otherwise.
-
-// Important methods:
-// getTile(direction) returns tile in direction of "up", "down", "left", or "right". Also getTileAbove(), getTileBelow(), getTileRight(), and getTileLeft().
-// moveDirection(direction) sets foreground of getTile(direction) to this.foreground, and this.foreground to null. Does not check for collision.
-// moveUp(), moveDown(), moveLeft(), and moveRight() does similar thing.
-
-function tileObject(x,y,foreground){
-    this.x = x;
-    this.y = y;
-    this.foreground = foreground;
-    this.background = null;
-    
-    this.getTileAbove =  function(){
-        return inBounds(this.x,this.y-1) ? gameMatrix[this.x][this.y-1] : null;
-    };
-    this.getTileBelow =  function(){
-        return inBounds(this.x,this.y+1) ? gameMatrix[this.x][this.y+1] : null;
-    };
-    this.getTileRight =  function(){
-        return inBounds(this.x+1,this.y) ? gameMatrix[this.x+1][this.y] : null;
-    };
-    this.getTileLeft =  function(){
-        return inBounds(this.x-1,this.y) ? gameMatrix[this.x-1][this.y] : null;
-    };
-    
-    
-    this.getTile = function(direction){
-        if(direction == "up"){
-            return this.getTileAbove()
-        }
-        if(direction == "down"){
-            return this.getTileBelow()
-        }
-        if(direction == "left"){
-            return this.getTileLeft()
-        }
-        if(direction == "right"){
-            return this.getTileRight()
-        }
-    }
-    
-    this.moveDirection = function(direction){
-        if(direction == "up"){ 
-            this.foreground.body.velocity.y = -moveSpeed;
-            if(this.foreground.name == "player"){
-                this.foreground.anims.play("up",true);
-            }
-        }
-        if(direction == "down"){ 
-            this.foreground.body.velocity.y = moveSpeed;
-            if(this.foreground.name == "player"){
-                this.foreground.anims.play("down",true);
-            }}
-        if(direction == "right"){
-            this.foreground.body.velocity.x = moveSpeed;
-            if(this.foreground.name == "player"){
-                this.foreground.anims.play("right",true);
-            }
-        }
-        if(direction == "left"){ 
-            this.foreground.body.velocity.x = -moveSpeed;
-            if(this.foreground.name == "player"){
-                this.foreground.anims.play("left",true);
-            }}
-        this.getTile(direction).foreground = this.foreground;
-        movingObjects.push(this.getTile(direction));
-        this.foreground = null;
-    }
-    
-    this.moveUp = function(){
-        this.foreground.y += -tileSize;
-        this.getTileAbove().foreground = this.foreground;
-        this.foreground = null;
-    };
-    
-    this.moveDown = function(){
-        this.foreground.y += tileSize;
-        this.getTileBelow().foreground = this.foreground;
-        this.foreground = null;
-    };
-    
-    this.moveRight = function(){
-        this.foreground.x += tileSize;
-        this.getTileRight().foreground = this.foreground;
-        this.foreground = null;
-    };
-    
-    this.moveLeft = function(){
-        this.foreground.x += -tileSize;
-        this.getTileLeft().foreground = this.foreground;
-        this.foreground = null;
-    };
-    
-    //Returns whether the foreground is in the correct position
-    this.inGrid = function(){
-        inX = (gridToPixel(this.x)-1 <= this.foreground.x) && (gridToPixel(this.x)+1 >= this.foreground.x)
-        inY = (gridToPixel(this.y)-1 <= this.foreground.y) && (gridToPixel(this.y)+1 >= this.foreground.y)
-        return inX && inY;
-    }
-}
 
 var scene = {
     preload: preload,
@@ -193,7 +95,7 @@ var config = {
 function addObject(here,x,y,image,name){
     var a = here.physics.add.sprite(gridToPixel(x), gridToPixel(y), image);
     a.name = name;
-    gameMatrix[x][y] = new tileObject(x,y,a);
+    gameMatrix[x][y] = new tileObject(x,y,a,gameParams);
     return a;
 }
 
@@ -221,9 +123,9 @@ function create ()
 {
     const map = this.make.tilemap({ key: "tilemap" });
     
-    for(i = 0; i<stageWidth; i++){
-        for(var j=0; j<stageHeight; j++){
-            gameMatrix[i][j] = new tileObject(i,j,null);
+    for(i = 0; i<gameMatrix.length; i++){
+        for(var j=0; j<gameMatrix[0].length; j++){
+            gameMatrix[i][j] = new tileObject(i,j,null,gameParams);
         }
     }
 
@@ -239,7 +141,7 @@ function create ()
     this.physics.world.enable(rocks);
     
     for(var i = 0; i<rocks.length; i++){
-        current = rocks[i];
+        var current = rocks[i];
         gameMatrix[pixelToGrid(current.x)][pixelToGrid(current.y)].foreground = current;
     }
     const executives = map.createFromObjects("Collectable", "executive" , {key: "executive"});
@@ -248,7 +150,7 @@ function create ()
         gameMatrix[pixelToGrid(current.x)][pixelToGrid(current.y)].foreground = current;
     }
     
-    backgroundData = backgroundLayer.layer.data;
+    var backgroundData = backgroundLayer.layer.data;
     for(var i =0; i<backgroundData.length; i++){
         for(var j=0; j<backgroundData[i].length; j++){
             current = backgroundData[i][j].index;
@@ -386,10 +288,11 @@ function update ()
 {
     var cursors = this.input.keyboard.createCursorKeys();
     playerObject = gameMatrix[Math.floor(player.x/32)][Math.floor(player.y/32)];
+    console.log(playerObject);
 
     if(movingObjects.length > 0){
         for(var i = 0; i<movingObjects.length; i++){
-            current = movingObjects[i];
+            var current = movingObjects[i];
             if(current.inGrid()){
                 console.log(i);
                 current.foreground.body.velocity.x = 0;
@@ -402,7 +305,7 @@ function update ()
     }
     
     if(inputQueue.length() != 0 && movingObjects.length == 0){
-        direction = inputQueue.dequeue(); 
+        var direction = inputQueue.dequeue(); 
         player.anims.play("turn_" + direction);
         playerMoveTo(playerObject,direction);
         framesSinceMoved = 0;
@@ -444,6 +347,7 @@ function update ()
 
 }
 
+export {gridToPixel, pixelToGrid}
 
 // starts game
 var game = new Phaser.Game(config);
