@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="8" height="7" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="54">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="8" height="7" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="58">
  <editorsettings>
   <export target="Lvl6.json" format="json"/>
  </editorsettings>
@@ -15,7 +15,7 @@
  <tileset firstgid="67" name="Flooring" tilewidth="32" tileheight="32" tilecount="63" columns="7">
   <image source="tileset.png" width="224" height="288"/>
  </tileset>
- <layer id="1" name="Color Fill" width="8" height="7" locked="1" tintcolor="#000000">
+ <layer id="1" name="Color Fill" width="8" height="7" tintcolor="#000000">
   <data encoding="csv">
 9,9,9,9,9,9,9,9,
 9,9,9,9,9,9,9,9,
@@ -26,7 +26,7 @@
 9,9,9,9,9,9,9,9
 </data>
  </layer>
- <layer id="2" name="Background" width="8" height="7" locked="1">
+ <layer id="2" name="Background" width="8" height="7">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,
 0,9,9,9,9,0,0,0,
@@ -37,143 +37,17 @@
 0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="4" name="Walls">
-  <object id="1" name="wallVert" gid="8" x="0" y="64" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="2" name="wallVert" gid="8" x="0" y="96" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="3" name="wallVert" gid="8" x="0" y="160" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="4" name="wallVert" gid="8" x="0" y="192" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="5" name="wallVert" gid="8" x="160" y="64" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="6" name="wallVert" gid="8" x="160" y="96" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="7" name="wallVert" gid="8" x="224" y="160" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="8" name="wallVert" gid="8" x="224" y="192" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="9" name="wallHoriz" gid="2" x="32" y="32" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="10" name="wallHoriz" gid="2" x="64" y="32" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="11" name="wallHoriz" gid="2" x="96" y="32" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="12" name="wallHoriz" gid="2" x="128" y="32" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="13" name="wallHoriz" gid="2" x="160" y="224" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="14" name="wallHoriz" gid="2" x="192" y="224" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="15" name="wallHoriz" gid="2" x="192" y="128" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="16" name="wallHoriz" gid="2" x="128" y="224" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="17" name="wallHoriz" gid="2" x="32" y="224" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="18" name="wallHoriz" gid="2" x="96" y="224" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="19" name="wallVert" gid="8" x="64" y="192" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="20" name="cornerTL" gid="22" x="0" y="32" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="21" name="cornerTL" gid="22" x="0" y="32" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="22" name="cornerBR" gid="11" x="224" y="224" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="23" name="cornerBL" gid="13" x="0" y="224" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="24" name="cornerBL" gid="13" x="160" y="128" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="25" name="cornerTR" gid="6" x="160" y="32" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="26" name="cornerTR" gid="6" x="224" y="128" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="27" name="wallConnect" gid="10" x="64" y="224" width="32" height="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
- </objectgroup>
+ <layer id="7" name="Walls" width="8" height="7">
+  <data encoding="csv">
+22,2,2,2,2,6,0,0,
+8,0,0,0,0,8,0,0,
+8,0,0,0,0,8,0,0,
+0,0,0,0,0,13,2,6,
+8,0,0,0,0,0,0,8,
+8,0,8,0,0,0,0,8,
+13,2,10,2,2,2,2,11
+</data>
+ </layer>
  <objectgroup id="5" name="Group">
   <object id="30" name="rock" gid="64" x="32" y="96" width="32" height="32"/>
   <object id="31" name="rock" gid="64" x="32" y="160" width="32" height="32"/>
@@ -192,10 +66,6 @@
   <object id="42" name="playerSpawn" x="48.3092" y="112.268">
    <point/>
   </object>
-  <object id="50" name="door" x="1.36082" y="95.2575" width="8.84534" height="34.0205">
-   <properties>
-    <property name="isExit" type="bool" value="true"/>
-   </properties>
-  </object>
+  <object id="57" name="exit" x="0" y="96" width="32" height="32"/>
  </objectgroup>
 </map>
