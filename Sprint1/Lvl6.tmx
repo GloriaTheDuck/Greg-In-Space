@@ -12,14 +12,14 @@
  <tileset firstgid="65" name="Alien" tilewidth="32" tileheight="32" tilecount="2" columns="2">
   <image source="aliensprite_idle.png" width="64" height="32"/>
  </tileset>
- <tileset firstgid="67" name="Flooring" tilewidth="32" tileheight="32" tilecount="63" columns="7">
-  <image source="tileset.png" width="224" height="288"/>
+ <tileset firstgid="67" name="Black Blocks" tilewidth="32" tileheight="32" tilecount="576" columns="24">
+  <image source="blacksquare.png" width="768" height="768"/>
  </tileset>
  <layer id="1" name="Color Fill" width="8" height="7" tintcolor="#000000">
   <data encoding="csv">
-9,9,9,9,9,9,9,9,
-9,9,9,9,9,9,9,9,
-9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,67,67,
+9,9,9,9,9,9,67,67,
+9,9,9,9,9,9,67,67,
 9,9,9,9,9,9,9,9,
 9,9,9,9,9,9,9,9,
 9,9,9,9,9,9,9,9,
@@ -31,7 +31,7 @@
 0,0,0,0,0,0,0,0,
 0,9,9,9,9,0,0,0,
 0,9,9,9,9,0,0,0,
-58,9,9,9,9,0,0,0,
+42,9,9,9,9,0,0,0,
 0,9,9,9,9,9,9,0,
 0,9,0,9,9,9,9,0,
 0,0,0,0,0,0,0,0
@@ -63,7 +63,7 @@
   <object id="53" name="alien" gid="65" x="192" y="160" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="6" name="Player">
-  <object id="42" name="playerSpawn" x="48.3092" y="112.268">
+  <object id="42" name="playerSpawn" x="48" y="112">
    <point/>
   </object>
   <object id="57" name="exit" x="0" y="96" width="32" height="32"/>
