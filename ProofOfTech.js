@@ -133,10 +133,6 @@ function create ()
     
     const floorTileSet = map.addTilesetImage("Floor", "flooring");
     
-    console.log(floorTileSet)
-    console.log(map.images);
-    console.log(floorTileSet.getTileData);
-    
     
     
     // Parameters: layer name (or index) from Tiled, tileset, x, y
@@ -150,26 +146,18 @@ function create ()
         var current = rocks[i];
         gameMatrix[pixelToGrid(current.x)][pixelToGrid(current.y)].foreground = current;
     }
-    const executives = map.createFromObjects("Group", "executive" , {key: "executive"});
-    for(var i = 0; i<executives.length; i++){
-        current = executives[i];
-        gameMatrix[pixelToGrid(current.x)][pixelToGrid(current.y)].foreground = current;
-    }
+
     
     var wallsLayer = map.getObjectLayer("Walls").objects;
     console.log(floorTileSet);
     
     for(var i = 0; i < wallsLayer.length; i++){
         var current = wallsLayer[i];
-        console.log(floorTileSet.getTileProperties(current.gid));
-        console.log([current.x/32,current.y])
         addObject(this,current.x/32,current.y/32,floorTileSet.getTileData(current.gid),"wall");
         
     }
     const walls = map.createFromObjects("Walls", 8, {key: "wall"});
-    
-    console.log(walls);  
-    console.log(map);
+
     //for(var i =0; i<backgroundData.length; i++){
     //    for(var j=0; j<backgroundData[i].length; j++){
     //        current = backgroundData[i][j].index;
@@ -185,12 +173,21 @@ function create ()
 
     const spawnPoint = map.findObject("Player", obj => obj.name === "playerSpawn");
     player = addObject(this,pixelToGrid(spawnPoint.x),pixelToGrid(spawnPoint.y),'character_right',"player");
+    console.log(spawnPoint.x,spawnPoint.y);
     player.execsCollected = 0;
     
-    const exitPoint = map.findObject("Player", obj => obj.name === "playerSpawn");
-    addObject(this,pixelToGrid(spawnPoint.x)+2,pixelToGrid(spawnPoint.y),'exit',"exit");
-    
+    const exitPoint = map.findObject("Player", obj => obj.name === "door");
+    addObject(this,pixelToGrid(exitPoint.x),pixelToGrid(exitPoint.y),'exit',"exit");
+    console.log(exitPoint.x,exitPoint.y);
     player.setCollideWorldBounds(true);
+    
+    const executives = map.createFromObjects("Group", "alien" , {key: "executive"});
+    console.log(executives);
+    for(var i = 0; i<executives.length; i++){
+        current = executives[i];
+        gameMatrix[pixelToGrid(current.x)][pixelToGrid(current.y)].foreground = current;
+        current.name = "executive"
+    }
     
     this.anims.create({
         key: 'alien_idle',
