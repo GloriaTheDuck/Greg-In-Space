@@ -148,15 +148,14 @@ function create ()
     }
 
     
-    var wallsLayer = map.getObjectLayer("Walls").objects;
-    console.log(floorTileSet);
-    
-    for(var i = 0; i < wallsLayer.length; i++){
-        var current = wallsLayer[i];
-        addObject(this,current.x/32,current.y/32,floorTileSet.getTileData(current.gid),"wall");
-        
+    var wallsLayer = map.createStaticLayer("Walls",floorTileSet,0,0);
+    var walls = wallsLayer.getTilesWithin();
+    for(var i = 0; i<walls.length; i++){
+        current = walls[i];
+        if(current.index >= 0){
+            gameMatrix[current.x][current.y].foreground = {name: "wall"};
+        }
     }
-    const walls = map.createFromObjects("Walls", 8, {key: "wall"});
 
     //for(var i =0; i<backgroundData.length; i++){
     //    for(var j=0; j<backgroundData[i].length; j++){
@@ -176,9 +175,10 @@ function create ()
     console.log(spawnPoint.x,spawnPoint.y);
     player.execsCollected = 0;
     
-    const exitPoint = map.findObject("Player", obj => obj.name === "door");
-    addObject(this,pixelToGrid(exitPoint.x),pixelToGrid(exitPoint.y),'exit',"exit");
-    console.log(exitPoint.x,exitPoint.y);
+    const exitPoint = map.findObject("Player", obj => obj.name === "exit");
+    console.log(exitPoint);
+    gameMatrix[pixelToGrid(exitPoint.x)][pixelToGrid(exitPoint.y)].foreground = {name : "exit"};
+    
     player.setCollideWorldBounds(true);
     
     const executives = map.createFromObjects("Group", "alien" , {key: "executive"});
@@ -284,14 +284,19 @@ function playerMoveTo(playerTile,direction){
         } else if(toTile.foreground.name == "executive"){
             collectExec(playerObject.foreground,toTile.foreground);
             playerObject.moveDirection(direction);
-        } else if(toTile.foreground == "exit"){
+        } else if(toTile.foreground.name == "exit"){
+            console.log(player.execsCollected);
             if(player.execsCollected == 2){
-                this.add.text(0, 0, 'You Won', { font: '"Press Start 2P"' });
+                winGame();
                 playerTile.moveDirection(direction);
             }
         }
         
     }
+}
+
+function winGame(){
+    console.log("WINNNER");
 }
 
 // Tries to move the Rock to tile Rock. Does check for collision.
