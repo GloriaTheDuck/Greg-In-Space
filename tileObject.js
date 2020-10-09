@@ -1,3 +1,11 @@
+
+// Checks if coordinates are in bounds.
+import {gridToPixel} from "./ProofOfTech.js"
+
+function inBounds(x,y,gameMatrix){
+    return (0<= x) && (x < gameMatrix.length) && (0<= y) && (y < gameMatrix[0].length);
+}
+
 // Object with 4 attributes:
 // x and y keep track of tileObject's location in gameMatrix
 // foreground is sprite object used to indicate foreground object at x,y. null if no object in foregorund.
@@ -7,14 +15,7 @@
 // getTile(direction) returns tile in direction of "up", "down", "left", or "right". Also getTileAbove(), getTileBelow(), getTileRight(), and getTileLeft().
 // moveDirection(direction) sets foreground of getTile(direction) to this.foreground, and this.foreground to null. Does not check for collision.
 // moveUp(), moveDown(), moveLeft(), and moveRight() does similar thing.
-
-// Checks if coordinates are in bounds.
-import {gridToPixel} from "./ProofOfTech.js"
-
-function inBounds(x,y,gameMatrix){
-    return (0<= x) && (x < gameMatrix.length) && (0<= y) && (y < gameMatrix[0].length);
-}
-
+// inGrid() returns whether or not the in game x,y positions of the foreground sprite match the x,y positions of the background sprite.
 
 export function tileObject(x,y,foreground,gameParams){
     this.gameParams = gameParams;
@@ -106,8 +107,8 @@ export function tileObject(x,y,foreground,gameParams){
     
     //Returns whether the foreground is in the correct position
     this.inGrid = function(){
-        var inX = (gridToPixel(this.x)-1 <= this.foreground.x) && (gridToPixel(this.x)+1 >= this.foreground.x)
-        var inY = (gridToPixel(this.y)-1 <= this.foreground.y) && (gridToPixel(this.y)+1 >= this.foreground.y)
+        var inX = (gridToPixel(this.x)-2 <= this.foreground.x) && (gridToPixel(this.x)+2 >= this.foreground.x)
+        var inY = (gridToPixel(this.y)-2 <= this.foreground.y) && (gridToPixel(this.y)+2 >= this.foreground.y)
         return inX && inY;
     }
 }

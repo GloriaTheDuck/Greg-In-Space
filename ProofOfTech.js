@@ -27,6 +27,8 @@ var gameParams = {
 
 import {tileObject} from "./tileObject.js";
 
+//import {update} from "./update.js"
+
 // Variable used to keep track of what keys were pressed last frame
 // Used to make it so holding down buttons doesn't work.
 var lastFrameDown = {
@@ -102,14 +104,14 @@ function addObject(here,x,y,image,name){
 
 function preload ()
 {
-    this.load.image('flooring', assetsFile + 'tileset.png');
+    this.load.image('flooring', 'Sprint1/tileset.png');
     this.load.image('rock', assetsFile + 'addwork.png');
     this.load.spritesheet('executive', 'aliensprite_idle.png',{ frameWidth: 32, frameHeight: 32 });
     this.load.spritesheet('character_right', 'sprite_right.png', { frameWidth: 32, frameHeight: 32 } );
     this.load.spritesheet('character_left', 'sprite_left.png', { frameWidth: 32, frameHeight: 32 });
     this.load.spritesheet('character_up', 'sprite_up.png', { frameWidth: 32, frameHeight: 32 });
     this.load.spritesheet('character_down', 'sprite_down.png', { frameWidth: 32, frameHeight: 32 });
-    this.load.tilemapTiledJSON('tilemap', assetsFile + 'FinalLevel6.json');
+    this.load.tilemapTiledJSON('tilemap', assetsFile + 'Lvl6.json');
     //this.load.image('water', "Sprint1/Water.png");
     //this.load.image('exit', "Sprint1/exit.png");
     
@@ -129,42 +131,46 @@ function create ()
         }
     }
 
-    const floorTileSet = map.addTilesetImage("Flooring", "flooring");
-
+    const floorTileSet = map.addTilesetImage("Floor", "flooring");
     
     // Parameters: layer name (or index) from Tiled, tileset, x, y
-    const blocksLayer = map.createStaticLayer("Black Blocks", floorTileSet, 0, 0);
-    console.log(blocksLayer);
+    const colorLayer = map.createStaticLayer("Color Fill", floorTileSet, 0, 0);
+    console.log(colorLayer);
+    colorLayer.forEachTile(object => {
+        console.log(object);
+    });
     const backgroundLayer = map.createStaticLayer("Background", floorTileSet, 0, 0);
-    console.log(backgroundLayer);
-    const rocks = map.createFromObjects("Movable", "rock" , {key:"rock", frame:1} );
+    backgroundLayer.forEachTile
+    var rocks = map.createFromObjects("Group", "rock" , {key:"rock", frame:1} );
     this.physics.world.enable(rocks);
     
     for(var i = 0; i<rocks.length; i++){
         var current = rocks[i];
         gameMatrix[pixelToGrid(current.x)][pixelToGrid(current.y)].foreground = current;
     }
-    const executives = map.createFromObjects("Collectable", "executive" , {key: "executive"});
+    const executives = map.createFromObjects("Group", "executive" , {key: "executive"});
     for(var i = 0; i<executives.length; i++){
         current = executives[i];
         gameMatrix[pixelToGrid(current.x)][pixelToGrid(current.y)].foreground = current;
     }
     
-    var backgroundData = backgroundLayer.layer.data;
-    for(var i =0; i<backgroundData.length; i++){
-        for(var j=0; j<backgroundData[i].length; j++){
-            current = backgroundData[i][j].index;
-            if(current == 2 || current == 8 || current == 13){
-                gameMatrix[j][i].foreground = backgroundLayer.getTileAt(j,i);
-                gameMatrix[j][i].foreground.name = "wall";
-            }
-        }
-    }
+    const walls = map.createFromObjects("Walls", "wallVert", {key: "wall"});
+    console.log(walls);  
+    console.log(map);
+    //for(var i =0; i<backgroundData.length; i++){
+    //    for(var j=0; j<backgroundData[i].length; j++){
+    //        current = backgroundData[i][j].index;
+    //        if(current == 2 || current == 8 || current == 13){
+    //            gameMatrix[j][i].foreground = backgroundLayer.getTileAt(j,i);
+    //            gameMatrix[j][i].foreground.name = "wall";
+    //        }
+    //    }
+    //}
     
 
     //backgroundLayer.setCollisionByProperty( {collides : true} );
 
-    const spawnPoint = map.findObject("Movable", obj => obj.name === "spawnPoint");
+    const spawnPoint = map.findObject("Player", obj => obj.name === "playerSpawn");
     player = addObject(this,pixelToGrid(spawnPoint.x),pixelToGrid(spawnPoint.y),'character_right',"player");
     player.execsCollected = 0;
     
@@ -288,13 +294,11 @@ function update ()
 {
     var cursors = this.input.keyboard.createCursorKeys();
     playerObject = gameMatrix[Math.floor(player.x/32)][Math.floor(player.y/32)];
-    console.log(playerObject);
 
     if(movingObjects.length > 0){
         for(var i = 0; i<movingObjects.length; i++){
             var current = movingObjects[i];
             if(current.inGrid()){
-                console.log(i);
                 current.foreground.body.velocity.x = 0;
                 current.foreground.body.velocity.y = 0;
                 movingObjects.splice(i, 1);
