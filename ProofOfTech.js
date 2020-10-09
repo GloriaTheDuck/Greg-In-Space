@@ -113,7 +113,7 @@ function preload ()
     this.load.spritesheet('character_down', 'sprite_down.png', { frameWidth: 32, frameHeight: 32 });
     this.load.tilemapTiledJSON('tilemap', assetsFile + 'Lvl6.json');
     //this.load.image('water', "Sprint1/Water.png");
-    //this.load.image('exit', "Sprint1/exit.png");
+    this.load.image('exit', "Sprint1/sprite_down.png",{ frameWidth: 32, frameHeight: 32 });
     
     //loading music
     this.load.audio('lab_music', "Sprint1/lab_gameplay_music.mp3");
@@ -130,15 +130,17 @@ function create ()
             gameMatrix[i][j] = new tileObject(i,j,null,gameParams);
         }
     }
-
+    
     const floorTileSet = map.addTilesetImage("Floor", "flooring");
+    
+    console.log(floorTileSet)
+    console.log(map.images);
+    console.log(floorTileSet.getTileData);
+    
+    
     
     // Parameters: layer name (or index) from Tiled, tileset, x, y
     const colorLayer = map.createStaticLayer("Color Fill", floorTileSet, 0, 0);
-    console.log(colorLayer);
-    colorLayer.forEachTile(object => {
-        console.log(object);
-    });
     const backgroundLayer = map.createStaticLayer("Background", floorTileSet, 0, 0);
     backgroundLayer.forEachTile
     var rocks = map.createFromObjects("Group", "rock" , {key:"rock", frame:1} );
@@ -154,7 +156,18 @@ function create ()
         gameMatrix[pixelToGrid(current.x)][pixelToGrid(current.y)].foreground = current;
     }
     
-    const walls = map.createFromObjects("Walls", "wallVert", {key: "wall"});
+    var wallsLayer = map.getObjectLayer("Walls").objects;
+    console.log(floorTileSet);
+    
+    for(var i = 0; i < wallsLayer.length; i++){
+        var current = wallsLayer[i];
+        console.log(floorTileSet.getTileProperties(current.gid));
+        console.log([current.x/32,current.y])
+        addObject(this,current.x/32,current.y/32,floorTileSet.getTileData(current.gid),"wall");
+        
+    }
+    const walls = map.createFromObjects("Walls", 8, {key: "wall"});
+    
     console.log(walls);  
     console.log(map);
     //for(var i =0; i<backgroundData.length; i++){
@@ -173,6 +186,9 @@ function create ()
     const spawnPoint = map.findObject("Player", obj => obj.name === "playerSpawn");
     player = addObject(this,pixelToGrid(spawnPoint.x),pixelToGrid(spawnPoint.y),'character_right',"player");
     player.execsCollected = 0;
+    
+    const exitPoint = map.findObject("Player", obj => obj.name === "playerSpawn");
+    addObject(this,pixelToGrid(spawnPoint.x)+2,pixelToGrid(spawnPoint.y),'exit',"exit");
     
     player.setCollideWorldBounds(true);
     
@@ -262,6 +278,7 @@ function create ()
 // Where win condition contained.
 function playerMoveTo(playerTile,direction){
     var toTile = playerObject.getTile(direction);
+    console.log(toTile.foreground);
     if( toTile != null){
         if(toTile.foreground == null){
             playerTile.moveDirection(direction);
