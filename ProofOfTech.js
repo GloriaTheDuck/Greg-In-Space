@@ -9,6 +9,14 @@ var framesBetweenMoves = 2;
 var framesSinceMoved = framesBetweenMoves;
 var inputQueue = new queue()
 var assetsFile = "Sprint1/"
+// Variable used to keep track of what keys were pressed last frame
+// Used to make it so holding down buttons doesn't work.
+var lastFrameDown = {
+    right:false,
+    left:false,
+    up:false,
+    down:false
+};
 
 // Creates the game matrix which stores the tile objects.
 var gameMatrix = new Array(stageWidth);
@@ -26,17 +34,6 @@ var gameParams = {
 };
 
 import {tileObject} from "./tileObject.js";
-
-//import {update} from "./update.js"
-
-// Variable used to keep track of what keys were pressed last frame
-// Used to make it so holding down buttons doesn't work.
-var lastFrameDown = {
-    right:false,
-    left:false,
-    up:false,
-    down:false
-};
 
 // Converts pixel coords to grid coords
 function pixelToGrid(x){

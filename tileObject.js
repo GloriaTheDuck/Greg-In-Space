@@ -1,10 +1,12 @@
-
-// Checks if coordinates are in bounds.
+import * as gameParams from globalVar.js;
 import {gridToPixel} from "./ProofOfTech.js"
 
+// Checks if coordinates are in bounds.
 function inBounds(x,y,gameMatrix){
     return (0<= x) && (x < gameMatrix.length) && (0<= y) && (y < gameMatrix[0].length);
 }
+
+
 
 // Object with 4 attributes:
 // x and y keep track of tileObject's location in gameMatrix
