@@ -5,9 +5,13 @@ var nextInput;
 function setNextInput(){
     nextInput = a;
 }
+
 var gameMatrix;
 function setGameMatrix(a){
     gameMatrix = a;
+}
+function addToGameMatrix(a,x,y){
+    gameMatrix[x][y] = a;
 }
 
 var movingObjects;
