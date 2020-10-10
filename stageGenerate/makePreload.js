@@ -12,6 +12,6 @@ export function makePreload(levelParams){
         this.load.image('exit', "Sprint1/sprite_down.png",{ frameWidth: 32, frameHeight: 32 });
     
         //loading music
-        this.load.audio('lab_music', levelParams.music);
+        this.load.audio('music', levelParams.music);
     }
 }
