@@ -1,15 +1,13 @@
-'use strict';
-
-const fs = require('fs');
-
-var gameParams = JSON.parse(fs.readFileSync('/Levels/testLevel.json'));
-
+import * as gameParams from "./globalVar.js"
+import * as testLevel from "/Levels/testLevel.js";
 import {makePreload} from "/stageGenerate/makePreload.js"
 import {create} from "/stageGenerate/makeCreate.js"
 import {update} from "/stageGenerate/makeUpdate.js"
+var movingObjects;
 
-preload = makePreload(gameParams);
-console.log("Why isn't this working?")
+
+console.log(testLevel.default);
+var preload = makePreload(testLevel.default);
 
 var scene = {
     preload: preload,

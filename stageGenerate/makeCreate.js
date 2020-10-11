@@ -4,10 +4,10 @@ import {tileObject} from "/tileObject.js";
 export function create ()
 {
     const map = this.make.tilemap({ key: "tilemap" });
-    var gameMatrix = new Array(stageWidth);
+    var gameMatrix = new Array(gameParams.stageWidth);
 
-    for(var i = 0; i<stageWidth; i++){
-        gameMatrix[i] = new Array(stageHeight);
+    for(var i = 0; i<gameParams.stageWidth; i++){
+        gameMatrix[i] = new Array(gameParams.stageHeight);
     }
     
     for(var i = 0; i<gameMatrix.length; i++){
@@ -20,19 +20,20 @@ export function create ()
     
     var movingObjects = [];
     gameParams.setMovingObjects(movingObjects);
+    console.log(map);
     
     const floorTileSet = map.addTilesetImage("Floor", "flooring");
     
     // Parameters: layer name (or index) from Tiled, tileset, x, y
     const colorLayer = map.createStaticLayer("Color Fill", floorTileSet, 0, 0);
     const backgroundLayer = map.createStaticLayer("Background", floorTileSet, 0, 0);
-    backgroundLayer.forEachTile
     var rocks = map.createFromObjects("Group", "rock" , {key:"rock", frame:1} );
+    console.log(rocks);
     this.physics.world.enable(rocks);
     
     for(var i = 0; i<rocks.length; i++){
         var current = rocks[i];
-        gameMatrix[pixelToGrid(current.x)][pixelToGrid(current.y)].foreground = current;
+        gameMatrix[map.worldToTileX(current.x)][map.worldToTileY(current.y)].foreground = current;
     }
 
     
@@ -46,20 +47,21 @@ export function create ()
     }
     
     const spawnPoint = map.findObject("Player", obj => obj.name === "playerSpawn");
-    var player = this.physics.add.sprite(spawnPoint.x,spawnPoint.y,'character_right',"player");
+    var player = this.physics.add.sprite(spawnPoint.x,spawnPoint.y,'character_right',"player")
+    gameParams.setPlayer(player);
     var playerObject = gameMatrix[map.worldToTileX(spawnPoint.x)][map.worldToTileY(spawnPoint.y)];
     gameMatrix[map.worldToTileX(spawnPoint.x)][map.worldToTileY(spawnPoint.y)].foreground = player;
     player.execsCollected = 0;
     
     const exitPoint = map.findObject("Player", obj => obj.name === "exit");
-    gameMatrix[pixelToGrid(exitPoint.x)][pixelToGrid(exitPoint.y)].foreground = {name : "exit"};
+    gameMatrix[map.worldToTileX(exitPoint.x)][map.worldToTileY(exitPoint.y)].foreground = {name : "exit"};
     
     player.setCollideWorldBounds(true);
     
     const executives = map.createFromObjects("Group", "alien" , {key: "executive"});
     for(var i = 0; i<executives.length; i++){
         current = executives[i];
-        gameMatrix[pixelToGrid(current.x)][pixelToGrid(current.y)].foreground = current;
+        gameMatrix[map.worldToTileX(current.x)][map.worldToTileY(current.y)].foreground = current;
         current.name = "executive"
     }
     
@@ -143,4 +145,3 @@ export function create ()
 
     music.play(musicConfig);
 }
-
