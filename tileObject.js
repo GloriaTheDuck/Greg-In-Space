@@ -1,5 +1,4 @@
 import * as gameParams from "/globalVar.js";
-import {gridToPixel} from "/ProofOfTech.js";
 
 // Checks if coordinates are in bounds.
 function inBounds(x,y){
@@ -112,4 +111,14 @@ export function tileObject(x,y,foreground){
         var inY = (gridToPixel(this.y)-2 <= this.foreground.y) && (gridToPixel(this.y)+2 >= this.foreground.y)
         return inX && inY;
     }
+}
+
+// Converts pixel coords to grid coords
+function pixelToGrid(x){
+    return Math.floor(x/tileSize);
+}
+
+// Converts grid coords to pixel coords
+function gridToPixel(x){
+    return x*tileSize + Math.floor(tileSize/2);
 }

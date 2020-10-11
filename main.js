@@ -1,3 +1,5 @@
+'use strict';
+
 const fs = require('fs');
 
 var gameParams = JSON.parse(fs.readFileSync('/Levels/testLevel.json'));
