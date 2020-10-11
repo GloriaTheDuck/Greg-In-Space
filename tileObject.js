@@ -55,24 +55,24 @@ export function tileObject(x,y,foreground){
     
     this.moveDirection = function(direction){
         if(direction == "up"){ 
-            this.foreground.body.velocity.y = -this.gameParams.moveSpeed;
+            this.foreground.body.velocity.y = -gameParams.moveSpeed;
             if(this.foreground.name == "player"){
                 this.foreground.anims.play("up",true);
             }
         }
         if(direction == "down"){ 
-            this.foreground.body.velocity.y = this.gameParams.moveSpeed;
+            this.foreground.body.velocity.y = gameParams.moveSpeed;
             if(this.foreground.name == "player"){
                 this.foreground.anims.play("down",true);
             }}
         if(direction == "right"){
-            this.foreground.body.velocity.x = this.gameParams.moveSpeed;
+            this.foreground.body.velocity.x = gameParams.moveSpeed;
             if(this.foreground.name == "player"){
                 this.foreground.anims.play("right",true);
             }
         }
         if(direction == "left"){ 
-            this.foreground.body.velocity.x = -this.gameParams.moveSpeed;
+            this.foreground.body.velocity.x = -gameParams.moveSpeed;
             if(this.foreground.name == "player"){
                 this.foreground.anims.play("left",true);
             }}
@@ -115,10 +115,10 @@ export function tileObject(x,y,foreground){
 
 // Converts pixel coords to grid coords
 function pixelToGrid(x){
-    return Math.floor(x/tileSize);
+    return Math.floor(x/gameParams.tileSize);
 }
 
 // Converts grid coords to pixel coords
 function gridToPixel(x){
-    return x*tileSize + Math.floor(tileSize/2);
+    return x*gameParams.tileSize + Math.floor(gameParams.tileSize/2);
 }

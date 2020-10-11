@@ -1,5 +1,6 @@
 import * as gameParams from "../globalVar.js";
 
+
 export function update ()
 {
     var gameMatrix = gameParams.gameMatrix;
@@ -7,7 +8,6 @@ export function update ()
     var cursors = this.input.keyboard.createCursorKeys();
     var playerObject = gameMatrix[Math.floor(player.x/32)][Math.floor(player.y/32)];
     var movingObjects = gameParams.movingObjects
-    console.log(playerObject);
     
     // If somethings moving, check if it needs to stop.
     if(movingObjects.length > 0){
@@ -26,6 +26,7 @@ export function update ()
         if(gameParams.nextInput != null ){ 
             player.anims.play("turn_" + gameParams.nextInput);
             playerMoveTo(playerObject, gameParams.nextInput);
+            gameParams.setNextInput(null);
         
         // If there's no nextInput, find one.
         } else {
@@ -47,6 +48,7 @@ export function update ()
 
 function playerMoveTo(playerTile,direction){
     var toTile = playerTile.getTile(direction);
+    console.log(toTile)
     if( toTile != null){
         if(toTile.foreground == null){
             playerTile.moveDirection(direction);
@@ -56,11 +58,24 @@ function playerMoveTo(playerTile,direction){
             collectExec(playerTile.foreground,toTile.foreground);
             playerTile.moveDirection(direction);
         } else if(toTile.foreground.name == "exit"){
-            if(player.execsCollected == 2){
+            if(playerTile.foreground.execsCollected == 2){
                 winGame();
                 playerTile.moveDirection(direction);
             }
         }
         
+    }
+}
+
+// Tries to move the Rock to tile Rock. Does check for collision.
+function rockPush(rockTile,direction){
+    var toTile = rockTile.getTile(direction);
+    console.log("Rock ", rockTile);
+    console.log("Rock Move To ",toTile);
+    if(toTile != null){
+        if(toTile.foreground == null && toTile.background != "water"){
+            rockTile.moveDirection(direction);
+            console.log(rockTile)
+        }
     }
 }
