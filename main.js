@@ -1,10 +1,13 @@
-import * as gameParams from "/Levels/testLevel.js";
+const fs = require('fs');
+
+var gameParams = JSON.parse(fs.readFileSync('/Levels/testLevel.json'));
 
 import {makePreload} from "/stageGenerate/makePreload.js"
 import {create} from "/stageGenerate/makeCreate.js"
 import {update} from "/stageGenerate/makeUpdate.js"
 
 preload = makePreload(gameParams);
+console.log("Why isn't this working?")
 
 var scene = {
     preload: preload,
