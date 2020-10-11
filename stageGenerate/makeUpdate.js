@@ -1,7 +1,8 @@
-import * as gameParams from "./globalVar.js";
+import * as gameParams from "../globalVar.js";
 
 export function update ()
 {
+    console.log(gameParams.gameMatrix);
     var cursors = this.input.keyboard.createCursorKeys();
     playerObject = gameMatrix[Math.floor(player.x/32)][Math.floor(player.y/32)];
     
@@ -43,7 +44,6 @@ export function update ()
 
 function playerMoveTo(playerTile,direction){
     var toTile = playerObject.getTile(direction);
-    console.log(toTile.foreground);
     if( toTile != null){
         if(toTile.foreground == null){
             playerTile.moveDirection(direction);
@@ -53,7 +53,6 @@ function playerMoveTo(playerTile,direction){
             collectExec(playerObject.foreground,toTile.foreground);
             playerObject.moveDirection(direction);
         } else if(toTile.foreground.name == "exit"){
-            console.log(player.execsCollected);
             if(player.execsCollected == 2){
                 winGame();
                 playerTile.moveDirection(direction);

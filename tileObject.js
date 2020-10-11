@@ -1,5 +1,5 @@
-import * as gameParams from "./globalVar.js";
-import {gridToPixel} from "./ProofOfTech.js";
+import * as gameParams from "/globalVar.js";
+import {gridToPixel} from "/ProofOfTech.js";
 
 // Checks if coordinates are in bounds.
 function inBounds(x,y){

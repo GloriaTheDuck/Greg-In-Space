@@ -1,5 +1,5 @@
-import * as gameParams from "./globalVar.js";
-import {tileObject} from "./tileObject.js";
+import * as gameParams from "/globalVar.js";
+import {tileObject} from "/tileObject.js";
 
 export function create ()
 {
@@ -52,13 +52,11 @@ export function create ()
     player.execsCollected = 0;
     
     const exitPoint = map.findObject("Player", obj => obj.name === "exit");
-    console.log(exitPoint);
     gameMatrix[pixelToGrid(exitPoint.x)][pixelToGrid(exitPoint.y)].foreground = {name : "exit"};
     
     player.setCollideWorldBounds(true);
     
     const executives = map.createFromObjects("Group", "alien" , {key: "executive"});
-    console.log(executives);
     for(var i = 0; i<executives.length; i++){
         current = executives[i];
         gameMatrix[pixelToGrid(current.x)][pixelToGrid(current.y)].foreground = current;

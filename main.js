@@ -1,4 +1,10 @@
-import * as gameParams from "./Levels/testLevel.js";
+import * as gameParams from "/Levels/testLevel.js";
+
+import {makePreload} from "/stageGenerate/makePreload.js"
+import {create} from "/stageGenerate/makeCreate.js"
+import {update} from "/stageGenerate/makeUpdate.js"
+
+preload = makePreload(gameParams);
 
 var scene = {
     preload: preload,
@@ -19,3 +25,6 @@ var config = {
     },
     scene: scene
 };
+
+// starts game
+var game = new Phaser.Game(config);
