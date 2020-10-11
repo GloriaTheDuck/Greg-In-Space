@@ -1,18 +1,27 @@
 import * as gameParams from "./globalVar.js";
+import {tileObject} from "./tileObject.js";
 
-function create ()
+export function create ()
 {
     const map = this.make.tilemap({ key: "tilemap" });
+    var gameMatrix = new Array(stageWidth);
+
+    for(var i = 0; i<stageWidth; i++){
+        gameMatrix[i] = new Array(stageHeight);
+    }
     
     for(var i = 0; i<gameMatrix.length; i++){
         for(var j=0; j<gameMatrix[0].length; j++){
-            gameMatrix[i][j] = new tileObject(i,j,null,gameParams);
+            gameMatrix[i][j] = new tileObject(i,j,null);
         }
     }
     
+    gameParams.setGameMatrix(gameMatrix);
+    
+    var movingObjects = [];
+    gameParams.setMovingObjects(movingObjects);
+    
     const floorTileSet = map.addTilesetImage("Floor", "flooring");
-    
-    
     
     // Parameters: layer name (or index) from Tiled, tileset, x, y
     const colorLayer = map.createStaticLayer("Color Fill", floorTileSet, 0, 0);
@@ -35,23 +44,11 @@ function create ()
             gameMatrix[current.x][current.y].foreground = {name: "wall"};
         }
     }
-
-    //for(var i =0; i<backgroundData.length; i++){
-    //    for(var j=0; j<backgroundData[i].length; j++){
-    //        current = backgroundData[i][j].index;
-    //        if(current == 2 || current == 8 || current == 13){
-    //            gameMatrix[j][i].foreground = backgroundLayer.getTileAt(j,i);
-    //            gameMatrix[j][i].foreground.name = "wall";
-    //        }
-    //    }
-    //}
     
-
-    //backgroundLayer.setCollisionByProperty( {collides : true} );
-
     const spawnPoint = map.findObject("Player", obj => obj.name === "playerSpawn");
-    player = addObject(this,pixelToGrid(spawnPoint.x),pixelToGrid(spawnPoint.y),'character_right',"player");
-    console.log(spawnPoint.x,spawnPoint.y);
+    var player = this.physics.add.sprite(spawnPoint.x,spawnPoint.y,'character_right',"player");
+    var playerObject = gameMatrix[map.worldToTileX(spawnPoint.x)][map.worldToTileY(spawnPoint.y)];
+    gameMatrix[map.worldToTileX(spawnPoint.x)][map.worldToTileY(spawnPoint.y)].foreground = player;
     player.execsCollected = 0;
     
     const exitPoint = map.findObject("Player", obj => obj.name === "exit");
@@ -148,3 +145,4 @@ function create ()
 
     music.play(musicConfig);
 }
+

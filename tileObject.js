@@ -1,9 +1,9 @@
-import * as gameParams from globalVar.js;
-import {gridToPixel} from "./ProofOfTech.js"
+import * as gameParams from "./globalVar.js";
+import {gridToPixel} from "./ProofOfTech.js";
 
 // Checks if coordinates are in bounds.
-function inBounds(x,y,gameMatrix){
-    return (0<= x) && (x < gameMatrix.length) && (0<= y) && (y < gameMatrix[0].length);
+function inBounds(x,y){
+    return (0<= x) && (x < gameParams.gameMatrix.length) && (0<= y) && (y < gameParams.gameMatrix[0].length);
 }
 
 
@@ -19,24 +19,23 @@ function inBounds(x,y,gameMatrix){
 // moveUp(), moveDown(), moveLeft(), and moveRight() does similar thing.
 // inGrid() returns whether or not the in game x,y positions of the foreground sprite match the x,y positions of the background sprite.
 
-export function tileObject(x,y,foreground,gameParams){
-    this.gameParams = gameParams;
+export function tileObject(x,y,foreground){
     this.x = x;
     this.y = y;
     this.foreground = foreground;
     this.background = null;
     
     this.getTileAbove =  function(){
-        return inBounds(this.x,this.y-1,this.gameParams.gameMatrix) ? this.gameParams.gameMatrix[this.x][this.y-1] : null;
+        return inBounds(this.x,this.y-1) ? gameParams.gameMatrix[this.x][this.y-1] : null;
     };
     this.getTileBelow =  function(){
-        return inBounds(this.x,this.y+1,this.gameParams.gameMatrix) ? this.gameParams.gameMatrix[this.x][this.y+1] : null;
+        return inBounds(this.x,this.y+1) ? gameParams.gameMatrix[this.x][this.y+1] : null;
     };
     this.getTileRight =  function(){
-        return inBounds(this.x+1,this.y,this.gameParams.gameMatrix) ? this.gameParams.gameMatrix[this.x+1][this.y] : null;
+        return inBounds(this.x+1,this.y) ? gameParams.gameMatrix[this.x+1][this.y] : null;
     };
     this.getTileLeft =  function(){
-        return inBounds(this.x-1,this.y,this.gameParams.gameMatrix) ? this.gameParams.gameMatrix[this.x-1][this.y] : null;
+        return inBounds(this.x-1,this.y) ? gameParams.gameMatrix[this.x-1][this.y] : null;
     };
     
     
@@ -79,7 +78,7 @@ export function tileObject(x,y,foreground,gameParams){
                 this.foreground.anims.play("left",true);
             }}
         this.getTile(direction).foreground = this.foreground;
-        this.gameParams.movingObjects.push(this.getTile(direction));
+        gameParams.addToMovingObjects(this.getTile(direction));
         this.foreground = null;
     }
     
