@@ -1,10 +1,13 @@
-import * as gameParams from "/Levels/testLevel.js";
-
+import * as gameParams from "./globalVar.js"
+import * as testLevel from "/Levels/testLevel.js";
 import {makePreload} from "/stageGenerate/makePreload.js"
 import {create} from "/stageGenerate/makeCreate.js"
 import {update} from "/stageGenerate/makeUpdate.js"
+var movingObjects;
 
-preload = makePreload(gameParams);
+
+console.log(testLevel.default);
+var preload = makePreload(testLevel.default);
 
 var scene = {
     preload: preload,
