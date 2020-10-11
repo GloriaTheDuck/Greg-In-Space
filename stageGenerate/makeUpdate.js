@@ -79,3 +79,9 @@ function rockPush(rockTile,direction){
         }
     }
 }
+
+// Collects the executive
+function collectExec(player, executive){
+    executive.destroy();
+    player.execsCollected += 1
+}
