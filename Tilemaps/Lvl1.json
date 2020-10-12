@@ -1,4 +1,12 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"..\/Sprint1\/Tilemaps\/Lvl1.json"
+        }
+    },
  "height":6,
  "infinite":false,
  "layers":[
@@ -110,8 +118,8 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":160.389997291685,
-                 "y":160.852216304053
+                 "x":160.39,
+                 "y":160.852
                 }],
          "opacity":1,
          "type":"objectgroup",

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="7" height="6" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="7">
+ <editorsettings>
+  <export target="../Sprint1/Tilemaps/Lvl1.json" format="json"/>
+ </editorsettings>
+ <tileset firstgid="1" name="Floor" tilewidth="32" tileheight="32" tilecount="63" columns="7">
+  <image source="../Assets/tileset.png" width="224" height="288"/>
+ </tileset>
+ <tileset firstgid="64" name="Rocks" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="../Assets/addwork.png" width="32" height="32"/>
+ </tileset>
+ <layer id="1" name="Background" width="7" height="6">
+  <data encoding="csv">
+0,0,0,0,0,0,0,
+0,9,9,9,9,9,0,
+0,9,9,9,9,9,0,
+0,9,9,9,9,9,0,
+0,9,9,9,9,9,0,
+0,0,0,0,0,35,0
+</data>
+ </layer>
+ <layer id="2" name="Walls" width="7" height="6" locked="1">
+  <data encoding="csv">
+22,2,2,2,2,2,6,
+8,0,0,0,0,0,8,
+8,0,0,0,0,0,8,
+8,0,0,0,0,0,8,
+8,0,0,0,0,0,8,
+13,2,2,2,2,0,11
+</data>
+ </layer>
+ <objectgroup id="4" name="Group" locked="1">
+  <object id="1" name="rocks" gid="64" x="64" y="160" width="32" height="32"/>
+  <object id="2" name="rocks" gid="64" x="96" y="128" width="32" height="32"/>
+  <object id="3" name="rocks" gid="64" x="64" y="96" width="32" height="32"/>
+  <object id="4" name="rocks" gid="64" x="32" y="128" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup id="3" name="Player">
+  <object id="5" name="playerSpawn" x="80" y="112">
+   <point/>
+  </object>
+  <object id="6" name="exit" x="160.39" y="160.852" width="32" height="32"/>
+ </objectgroup>
+</map>
