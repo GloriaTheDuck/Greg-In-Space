@@ -4,16 +4,16 @@
   <export target="Tutorial.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="Floor" tilewidth="32" tileheight="32" tilecount="63" columns="7">
-  <image source="tileset.png" width="224" height="288"/>
+  <image source="../Assets/tileset.png" width="224" height="288"/>
  </tileset>
  <tileset firstgid="64" name="Rocks" tilewidth="32" tileheight="32" tilecount="1" columns="1">
-  <image source="addwork.png" width="32" height="32"/>
+  <image source="../Assets/addwork.png" width="32" height="32"/>
  </tileset>
  <tileset firstgid="65" name="Aliens" tilewidth="32" tileheight="32" tilecount="2" columns="2">
-  <image source="aliensprite_idle.png" width="64" height="32"/>
+  <image source="../Assets/aliensprite_idle.png" width="64" height="32"/>
  </tileset>
  <tileset firstgid="67" name="Black Blocks" tilewidth="32" tileheight="32" tilecount="576" columns="24">
-  <image source="blacksquare.png" width="768" height="768"/>
+  <image source="../Assets/blacksquare.png" width="768" height="768"/>
  </tileset>
  <layer id="2" name="Color Fill" width="5" height="8" locked="1">
   <data encoding="csv">
@@ -27,7 +27,7 @@
 0,0,0,0,0
 </data>
  </layer>
- <layer id="1" name="Background" width="5" height="8" locked="1">
+ <layer id="1" name="Background" width="5" height="8">
   <data encoding="csv">
 0,0,0,0,0,
 0,0,9,0,0,
@@ -39,7 +39,7 @@
 0,0,0,0,0
 </data>
  </layer>
- <layer id="3" name="Walls" width="5" height="8" locked="1">
+ <layer id="3" name="Walls" width="5" height="8">
   <data encoding="csv">
 0,22,2,6,0,
 22,11,0,8,0,
@@ -52,10 +52,10 @@
 </data>
  </layer>
  <objectgroup id="6" name="Group">
-  <object id="1" name="rocks" gid="64" x="32" y="160" width="32" height="32"/>
+  <object id="1" name="rock" gid="64" x="32" y="160" width="32" height="32"/>
   <object id="4" name="alien" gid="65" x="64" y="96" width="32" height="32"/>
-  <object id="5" name="rocks" gid="64" x="64" y="192" width="32" height="32"/>
-  <object id="6" name="rocks" gid="64" x="96" y="192" width="32" height="32"/>
+  <object id="5" name="rock" gid="64" x="64" y="192" width="32" height="32"/>
+  <object id="6" name="rock" gid="64" x="96" y="192" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="5" name="Player">
   <object id="8" name="exit" x="128" y="160" width="32" height="32"/>

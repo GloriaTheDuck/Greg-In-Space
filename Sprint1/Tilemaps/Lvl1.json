@@ -1,46 +1,34 @@
 { "compressionlevel":-1,
- "height":8,
+ "height":6,
  "infinite":false,
  "layers":[
         {
-         "data":[67, 0, 0, 0, 67, 0, 0, 0, 0, 67, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         "height":8,
-         "id":2,
-         "name":"Color Fill",
-         "opacity":1,
-         "type":"tilelayer",
-         "visible":true,
-         "width":5,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "data":[0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 9, 9, 0, 0, 0, 9, 9, 9, 0, 0, 9, 9, 9, 0, 9, 9, 9, 9, 0, 0, 9, 9, 9, 0, 0, 0, 0, 0, 0],
-         "height":8,
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 9, 9, 9, 9, 9, 0, 0, 9, 9, 9, 9, 9, 0, 0, 9, 9, 9, 9, 9, 0, 0, 9, 9, 9, 9, 9, 0, 0, 0, 0, 0, 0, 35, 0],
+         "height":6,
          "id":1,
          "name":"Background",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
-         "width":5,
+         "width":7,
          "x":0,
          "y":0
         }, 
         {
-         "data":[0, 22, 2, 6, 0, 22, 11, 0, 8, 0, 8, 0, 0, 13, 6, 8, 0, 0, 0, 8, 8, 0, 0, 0, 8, 0, 0, 0, 0, 28, 8, 0, 0, 0, 8, 13, 2, 2, 2, 11],
-         "height":8,
-         "id":3,
+         "data":[22, 2, 2, 2, 2, 2, 6, 8, 0, 0, 0, 0, 0, 8, 8, 0, 0, 0, 0, 0, 8, 8, 0, 0, 0, 0, 0, 8, 8, 0, 0, 0, 0, 0, 8, 13, 2, 2, 2, 2, 0, 11],
+         "height":6,
+         "id":2,
          "name":"Walls",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
-         "width":5,
+         "width":7,
          "x":0,
          "y":0
         }, 
         {
          "draworder":"topdown",
-         "id":6,
+         "id":4,
          "name":"Group",
          "objects":[
                 {
@@ -52,14 +40,26 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":32,
+                 "x":64,
                  "y":160
                 }, 
                 {
-                 "gid":65,
+                 "gid":64,
                  "height":32,
-                 "id":4,
-                 "name":"alien",
+                 "id":2,
+                 "name":"rocks",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":96,
+                 "y":128
+                }, 
+                {
+                 "gid":64,
+                 "height":32,
+                 "id":3,
+                 "name":"rocks",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -70,26 +70,14 @@
                 {
                  "gid":64,
                  "height":32,
-                 "id":5,
+                 "id":4,
                  "name":"rocks",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":64,
-                 "y":192
-                }, 
-                {
-                 "gid":64,
-                 "height":32,
-                 "id":6,
-                 "name":"rocks",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":96,
-                 "y":192
+                 "x":32,
+                 "y":128
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -99,31 +87,31 @@
         }, 
         {
          "draworder":"topdown",
-         "id":5,
+         "id":3,
          "name":"Player",
          "objects":[
                 {
-                 "height":32,
-                 "id":8,
-                 "name":"exit",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":128,
-                 "y":160
-                }, 
-                {
                  "height":0,
-                 "id":9,
+                 "id":5,
                  "name":"playerSpawn",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":16,
-                 "y":175
+                 "x":80,
+                 "y":112
+                }, 
+                {
+                 "height":32,
+                 "id":6,
+                 "name":"exit",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":160.389997291685,
+                 "y":160.852216304053
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -131,8 +119,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":7,
- "nextobjectid":11,
+ "nextlayerid":5,
+ "nextobjectid":7,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.2",
@@ -141,7 +129,7 @@
         {
          "columns":7,
          "firstgid":1,
-         "image":"tileset.png",
+         "image":"..\/Assets\/tileset.png",
          "imageheight":288,
          "imagewidth":224,
          "margin":0,
@@ -154,7 +142,7 @@
         {
          "columns":1,
          "firstgid":64,
-         "image":"addwork.png",
+         "image":"..\/Assets\/addwork.png",
          "imageheight":32,
          "imagewidth":32,
          "margin":0,
@@ -163,35 +151,9 @@
          "tilecount":1,
          "tileheight":32,
          "tilewidth":32
-        }, 
-        {
-         "columns":2,
-         "firstgid":65,
-         "image":"aliensprite_idle.png",
-         "imageheight":32,
-         "imagewidth":64,
-         "margin":0,
-         "name":"Aliens",
-         "spacing":0,
-         "tilecount":2,
-         "tileheight":32,
-         "tilewidth":32
-        }, 
-        {
-         "columns":24,
-         "firstgid":67,
-         "image":"blacksquare.png",
-         "imageheight":768,
-         "imagewidth":768,
-         "margin":0,
-         "name":"Black Blocks",
-         "spacing":0,
-         "tilecount":576,
-         "tileheight":32,
-         "tilewidth":32
         }],
  "tilewidth":32,
  "type":"map",
  "version":1.4,
- "width":5
+ "width":7
 }

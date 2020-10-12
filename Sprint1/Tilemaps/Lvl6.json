@@ -246,7 +246,7 @@
         {
          "columns":7,
          "firstgid":1,
-         "image":"tileset.png",
+         "image":"..\/Assets\/tileset.png",
          "imageheight":288,
          "imagewidth":224,
          "margin":0,
@@ -259,7 +259,7 @@
         {
          "columns":1,
          "firstgid":64,
-         "image":"addwork.png",
+         "image":"..\/Assets\/addwork.png",
          "imageheight":32,
          "imagewidth":32,
          "margin":0,
@@ -272,11 +272,11 @@
         {
          "columns":2,
          "firstgid":65,
-         "image":"aliensprite_idle.png",
+         "image":"..\/Assets\/aliensprite_idle.png",
          "imageheight":32,
          "imagewidth":64,
          "margin":0,
-         "name":"Alien",
+         "name":"Aliens",
          "spacing":0,
          "tilecount":2,
          "tileheight":32,
@@ -285,7 +285,7 @@
         {
          "columns":24,
          "firstgid":67,
-         "image":"blacksquare.png",
+         "image":"..\/Assets\/blacksquare.png",
          "imageheight":768,
          "imagewidth":768,
          "margin":0,
