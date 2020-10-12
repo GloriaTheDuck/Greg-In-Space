@@ -65,6 +65,7 @@ function playerMoveTo(scene,playerTile,direction){
                 player.anims.play(direction);
                 var sceneManager = scene.scene;
                 sceneManager.run("endScene");
+                sceneManager.bringToTop("endScene");
             }
         }
         

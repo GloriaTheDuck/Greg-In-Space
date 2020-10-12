@@ -28,7 +28,7 @@ export var endScreen = {
             wordWrap: {width: 10}
         });
         this.text.setText(dialog[0].text);
-        this.dialogIndex = 0;
+        this.dialogIndex = 1;
         var player = this.physics.add.sprite(20,160,'greg');
         player.setScale(2);
         var exec = this.physics.add.sprite(200,160,'executive');
@@ -37,10 +37,12 @@ export var endScreen = {
     update: function(){
         var cursors = this.input.keyboard.createCursorKeys();
         
-        if(cursors.right.isDown){
+        if(cursors.space.isDown){
             if(this.dialogIndex < dialog.length && !lastFramePressed){
-                this.dialogIndex += 1;
                 this.text.setText(dialog[this.dialogIndex].text);
+                this.dialogIndex += 1;
+            }else{
+                this.scene.run("menu")
             }
             lastFramePressed = true;
         }
