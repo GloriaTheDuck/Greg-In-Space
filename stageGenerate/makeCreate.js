@@ -1,5 +1,5 @@
-import * as gameParams from "/globalVar.js";
-import {tileObject} from "/tileObject.js";
+import * as gameParams from "../globalVar.js";
+import {tileObject} from "../tileObject.js";
 //asdf
 export function create ()
 {
@@ -153,16 +153,4 @@ export function create ()
     }
 
     music.play(musicConfig);
-
-    var text = this.add.text(0, 0, 'Hello World', { font: '"Press Start 2P"' });
-    
-    var textBox = this.rexUI.add.textBox({
-        x: 0,
-        y: 0,
-        anchor: undefined,
-        width: undefined,
-        height: undefined,
-        orientation: 0,
-        text: text
-    });
 }

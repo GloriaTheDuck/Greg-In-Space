@@ -1,11 +1,15 @@
 var x = {
     testLevel: {
-        music: "Sprint1/lab_gameplay_music.mp3",
-        json : "Sprint1/Lvl6.json"
+        music: "Sound/lab_gameplay_music.mp3",
+        json : "Tilemaps/Lvl6.json"
     },
     tutorial:{
-        music: "Sprint1/lab_gameplay_music.mp3",
-        json : "Sprint1/tutorial.json"
+        music: "Sound/lab_gameplay_music.mp3",
+        json : "Tilemaps/tutorial.json"
+    },
+    level1:{
+        music: "Sound/lab_gameplay_music.mp3",
+        json : "Tilemaps/Lvl1.json"
     }
 };
 

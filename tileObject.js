@@ -1,4 +1,4 @@
-import * as gameParams from "/globalVar.js";
+import * as gameParams from "./globalVar.js";
 
 // Checks if coordinates are in bounds.
 function inBounds(x,y,gameMatrix){
