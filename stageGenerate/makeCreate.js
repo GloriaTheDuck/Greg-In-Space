@@ -3,7 +3,7 @@ import {tileObject} from "/tileObject.js";
 //asdf
 export function create ()
 {
-
+    this.nextInput = null;
     
     const map = this.make.tilemap({ key: "tilemap" });
     var gameMatrix = new Array(gameParams.stageWidth);
@@ -12,17 +12,17 @@ export function create ()
         gameMatrix[i] = new Array(gameParams.stageHeight);
     }
     
+    this.gameMatrix = gameMatrix;
+    
+    var movingObjects = [];
+    this.movingObjects = movingObjects;
+    
     for(var i = 0; i<gameMatrix.length; i++){
         for(var j=0; j<gameMatrix[0].length; j++){
-            gameMatrix[i][j] = new tileObject(i,j,null);
+            gameMatrix[i][j] = new tileObject(this,i,j,null);
         }
     }
     
-    gameParams.setGameMatrix(gameMatrix);
-    
-    var movingObjects = [];
-    gameParams.setMovingObjects(movingObjects);
-    console.log(map);
     
     const floorTileSet = map.addTilesetImage("Floor", "flooring");
     
@@ -52,9 +52,10 @@ export function create ()
     
     const spawnPoint = map.findObject("Player", obj => obj.name === "playerSpawn");
     var player = this.physics.add.sprite(spawnPoint.x,spawnPoint.y,'character_right',"player")
-    gameParams.setPlayer(player);
+    this.player = player;
     var playerObject = gameMatrix[map.worldToTileX(spawnPoint.x)][map.worldToTileY(spawnPoint.y)];
     gameMatrix[map.worldToTileX(spawnPoint.x)][map.worldToTileY(spawnPoint.y)].foreground = player;
+    this.playerObject = playerObject;
     
     const exitPoint = map.findObject("Player", obj => obj.name === "exit");
     console.log(map.worldToTileX(exitPoint.x),map.worldToTileY(exitPoint.y));
@@ -62,9 +63,10 @@ export function create ()
     
     player.setCollideWorldBounds(true);
     
-    const executives = map.createFromObjects("Group", "alien" , {key: "executive"});
-    for(var i = 0; i<executives.length; i++){
-        current = executives[i];
+    var executives = map.createFromObjects("Group", "alien" , {key: "executive"});
+    this.executives = executives
+    for(var i = 0; i<this.executives.length; i++){
+        current = this.executives[i];
         gameMatrix[map.worldToTileX(current.x)][map.worldToTileY(current.y)].foreground = current;
         current.name = "executive"
     }

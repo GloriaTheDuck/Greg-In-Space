@@ -1,15 +1,14 @@
-import * as gameParams from "../globalVar.js";
-
 export function update ()
 {
-    var gameMatrix = gameParams.gameMatrix;
-    var player = gameParams.player;
+    var gameMatrix = this.gameMatrix;
+    var player = this.player;
     var cursors = this.input.keyboard.createCursorKeys();
-    var playerObject = gameMatrix[Math.floor(player.x/32)][Math.floor(player.y/32)];
-    var movingObjects = gameParams.movingObjects
+    var playerObject = this.gameMatrix[Math.floor(player.x/32)][Math.floor(player.y/32)];
+    var movingObjects = this.movingObjects
     
     // If somethings moving, check if it needs to stop.
     if(movingObjects.length > 0){
+        console.log(movingObjects);
         for(var i = 0; i<movingObjects.length; i++){
             var current = movingObjects[i];
             if(current.inGrid()){
@@ -22,24 +21,24 @@ export function update ()
         }
     } else {
         // If nothings moving right now, the player moves according to nextInput.
-        if(gameParams.nextInput != null ){ 
-            player.anims.play("turn_" + gameParams.nextInput);
-            playerMoveTo(playerObject, gameParams.nextInput);
-            gameParams.setNextInput(null);
+        if(this.nextInput != null ){ 
+            player.anims.play("turn_" + this.nextInput);
+            playerMoveTo(playerObject, this.nextInput);
+            this.nextInput = null;
         
         // If there's no nextInput, find one.
         } else {
             if (cursors.right.isDown){
-                gameParams.setNextInput("right")
+                this.nextInput = "right";
             }
             if (cursors.left.isDown){
-                gameParams.setNextInput("left")
+                this.nextInput = "left";
             }
             if (cursors.up.isDown){
-                gameParams.setNextInput("up")
+                this.nextInput = "up";
             }
             if (cursors.down.isDown){
-                gameParams.setNextInput("down")
+                this.nextInput = "down";
             }
         }
     }
@@ -59,7 +58,7 @@ function playerMoveTo(playerTile,direction){
             playerTile.moveDirection(direction);
             player.anims.play(direction);
         } else if(toTile.foreground.name == "exit"){
-            if(playerTile.foreground.execsLeft == 0){
+            if(this.executives.length == 0){
                 winGame();
                 playerTile.moveDirection(direction);
                 player.foreground.anims.play(direction);
@@ -85,5 +84,5 @@ function rockPush(rockTile,direction){
 // Collects the executive
 function collectExec(player, executive){
     executive.destroy();
-    player.execsLeft += -1
+    player.execsCollected += 1
 }
