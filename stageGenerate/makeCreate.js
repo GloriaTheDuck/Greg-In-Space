@@ -28,11 +28,13 @@ export function create ()
     const colorLayer = map.createStaticLayer("Color Fill", floorTileSet, 0, 0);
     const backgroundLayer = map.createStaticLayer("Background", floorTileSet, 0, 0);
     var rocks = map.createFromObjects("Group", "rock" , {key:"rock", frame:1} );
+    rocks = rocks.concat(map.createFromObjects("Group", "rocks" , {key:"rock", frame:1} ));
     console.log(rocks);
     this.physics.world.enable(rocks);
     
     for(var i = 0; i<rocks.length; i++){
         var current = rocks[i];
+        current.name = "rock";
         gameMatrix[map.worldToTileX(current.x)][map.worldToTileY(current.y)].foreground = current;
     }
 
@@ -51,9 +53,9 @@ export function create ()
     gameParams.setPlayer(player);
     var playerObject = gameMatrix[map.worldToTileX(spawnPoint.x)][map.worldToTileY(spawnPoint.y)];
     gameMatrix[map.worldToTileX(spawnPoint.x)][map.worldToTileY(spawnPoint.y)].foreground = player;
-    player.execsCollected = 0;
     
     const exitPoint = map.findObject("Player", obj => obj.name === "exit");
+    console.log(map.worldToTileX(exitPoint.x),map.worldToTileY(exitPoint.y));
     gameMatrix[map.worldToTileX(exitPoint.x)][map.worldToTileY(exitPoint.y)].foreground = {name : "exit"};
     
     player.setCollideWorldBounds(true);
@@ -75,6 +77,8 @@ export function create ()
     for(var i = 0; i<executives.length;i++){
         executives[i].anims.play("alien_idle",true);
     }
+    
+    player.execsLeft = executives.length;
     
     
     this.anims.create({

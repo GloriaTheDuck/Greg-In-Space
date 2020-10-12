@@ -1,6 +1,5 @@
 import * as gameParams from "../globalVar.js";
 
-
 export function update ()
 {
     var gameMatrix = gameParams.gameMatrix;
@@ -58,7 +57,7 @@ function playerMoveTo(playerTile,direction){
             collectExec(playerTile.foreground,toTile.foreground);
             playerTile.moveDirection(direction);
         } else if(toTile.foreground.name == "exit"){
-            if(playerTile.foreground.execsCollected == 2){
+            if(playerTile.foreground.execsLeft == 0){
                 winGame();
                 playerTile.moveDirection(direction);
             }
@@ -83,5 +82,5 @@ function rockPush(rockTile,direction){
 // Collects the executive
 function collectExec(player, executive){
     executive.destroy();
-    player.execsCollected += 1
+    player.execsLeft += -1
 }

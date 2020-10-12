@@ -1,5 +1,5 @@
 import * as gameParams from "./globalVar.js";
-import * as testLevel from "/Levels/testLevel.js";
+import {testLevel, tutorial} from "./Levels/";
 import {makePreload} from "/stageGenerate/makePreload.js";
 import {create} from "/stageGenerate/makeCreate.js";
 import {update} from "/stageGenerate/makeUpdate.js";
@@ -29,3 +29,5 @@ var config = {
 
 // starts game
 var game = new Phaser.Game(config);
+
+console.log("after the game");
