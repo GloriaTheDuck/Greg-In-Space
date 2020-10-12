@@ -82,7 +82,7 @@ export function create ()
         executives[i].anims.play("alien_idle",true);
     }
     
-    player.execsLeft = executives.length;
+    player.execsCollected = 0;
     
     
     this.anims.create({

@@ -23,7 +23,7 @@ export function update ()
         // If nothings moving right now, the player moves according to nextInput.
         if(this.nextInput != null ){ 
             player.anims.play("turn_" + this.nextInput);
-            playerMoveTo(playerObject, this.nextInput);
+            playerMoveTo(this,playerObject, this.nextInput);
             this.nextInput = null;
         
         // If there's no nextInput, find one.
@@ -44,7 +44,7 @@ export function update ()
     }
 }
 
-function playerMoveTo(playerTile,direction){
+function playerMoveTo(scene,playerTile,direction){
     var toTile = playerTile.getTile(direction);
     let player = playerTile.foreground
     if( toTile != null){
@@ -58,7 +58,9 @@ function playerMoveTo(playerTile,direction){
             playerTile.moveDirection(direction);
             player.anims.play(direction);
         } else if(toTile.foreground.name == "exit"){
-            if(this.executives.length == 0){
+            console.log(scene.executives);
+            console.log("ec",player.execsCollected);
+            if(scene.executives.length == player.execsCollected){
                 winGame();
                 playerTile.moveDirection(direction);
                 player.foreground.anims.play(direction);
@@ -71,8 +73,6 @@ function playerMoveTo(playerTile,direction){
 // Tries to move the Rock to tile Rock. Does check for collision.
 function rockPush(rockTile,direction){
     var toTile = rockTile.getTile(direction);
-    console.log("Rock ", rockTile);
-    console.log("Rock Move To ",toTile);
     if(toTile != null){
         if(toTile.foreground == null && toTile.background != "water"){
             rockTile.moveDirection(direction);
