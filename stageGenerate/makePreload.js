@@ -1,5 +1,6 @@
 export function makePreload(levelParams){
     return function(){
+        this.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
         this.load.image('flooring', 'Sprint1/tileset.png');
         this.load.image('rock', 'Sprint1/addwork.png');
         this.load.spritesheet('executive', 'aliensprite_idle.png',{ frameWidth: 32, frameHeight: 32 });

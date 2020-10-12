@@ -47,19 +47,22 @@ export function update ()
 
 function playerMoveTo(playerTile,direction){
     var toTile = playerTile.getTile(direction);
-    console.log(toTile)
+    let player = playerTile.foreground
     if( toTile != null){
         if(toTile.foreground == null){
             playerTile.moveDirection(direction);
+            player.anims.play(direction);
         } else if(toTile.foreground.name == "rock"){
             rockPush(toTile,direction);
         } else if(toTile.foreground.name == "executive"){
             collectExec(playerTile.foreground,toTile.foreground);
             playerTile.moveDirection(direction);
+            player.anims.play(direction);
         } else if(toTile.foreground.name == "exit"){
             if(playerTile.foreground.execsLeft == 0){
                 winGame();
                 playerTile.moveDirection(direction);
+                player.foreground.anims.play(direction);
             }
         }
         

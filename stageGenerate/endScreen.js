@@ -6,6 +6,12 @@ var x = {
         
     },
     update: function(){
-    
+        if()
     }
+}
+           
+export default x;
+           
+function dialog(){
+            
 }
