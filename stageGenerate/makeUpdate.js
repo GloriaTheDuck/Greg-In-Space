@@ -44,6 +44,8 @@ export function update ()
     }
 }
 
+// Moves Player & checks for collision
+// Arguements Scene = this, playerTile = tile containing player, direction is string for which direction thing go.
 function playerMoveTo(scene,playerTile,direction){
     var toTile = playerTile.getTile(direction);
     let player = playerTile.foreground
@@ -58,12 +60,12 @@ function playerMoveTo(scene,playerTile,direction){
             playerTile.moveDirection(direction);
             player.anims.play(direction);
         } else if(toTile.foreground.name == "exit"){
-            console.log(scene.executives);
-            console.log("ec",player.execsCollected);
             if(scene.executives.length == player.execsCollected){
-                winGame();
                 playerTile.moveDirection(direction);
-                player.foreground.anims.play(direction);
+                player.anims.play(direction);
+                var sceneManager = scene.scene;
+                sceneManager.run("endScene");
+                console.log(sceneManager);
             }
         }
         

@@ -8,4 +8,5 @@ var x = {
         json : "Sprint1/Lvl6.json"
     }
 };
+
 export default x;
