@@ -5,7 +5,7 @@ var x = {
     },
     tutorial:{
         music: "Sprint1/lab_gameplay_music.mp3",
-        json : "Sprint1/Lvl6.json"
+        json : "Sprint1/tutorial.json"
     }
 };
 

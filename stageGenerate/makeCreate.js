@@ -64,6 +64,7 @@ export function create ()
     player.setCollideWorldBounds(true);
     
     var executives = map.createFromObjects("Group", "alien" , {key: "executive"});
+    executives.concat(map.createFromObjects("Group", "aliens", {key: "executive"}));
     this.executives = executives
     for(var i = 0; i<this.executives.length; i++){
         current = this.executives[i];

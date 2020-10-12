@@ -5,7 +5,7 @@ import {create} from "/stageGenerate/makeCreate.js";
 import {update} from "/stageGenerate/makeUpdate.js";
 import {endScreen} from "/stageGenerate/endScreen.js";
 
-var preload = makePreload(levels.default.testLevel);
+var preload = makePreload(levels.default.tutorial);
 
 var endScene = {
     preload: endScreen.preload,

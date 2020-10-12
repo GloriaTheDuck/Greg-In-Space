@@ -8,7 +8,6 @@ export function update ()
     
     // If somethings moving, check if it needs to stop.
     if(movingObjects.length > 0){
-        console.log(movingObjects);
         for(var i = 0; i<movingObjects.length; i++){
             var current = movingObjects[i];
             if(current.inGrid()){
@@ -60,12 +59,12 @@ function playerMoveTo(scene,playerTile,direction){
             playerTile.moveDirection(direction);
             player.anims.play(direction);
         } else if(toTile.foreground.name == "exit"){
+            console.log("made it to the exit")
             if(scene.executives.length == player.execsCollected){
                 playerTile.moveDirection(direction);
                 player.anims.play(direction);
                 var sceneManager = scene.scene;
                 sceneManager.run("endScene");
-                console.log(sceneManager);
             }
         }
         
@@ -78,7 +77,6 @@ function rockPush(rockTile,direction){
     if(toTile != null){
         if(toTile.foreground == null && toTile.background != "water"){
             rockTile.moveDirection(direction);
-            console.log(rockTile)
         }
     }
 }
