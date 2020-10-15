@@ -1,3 +1,4 @@
+// Creates custom Preload Function based upon levelParams from /levels.js
 export function makePreload(levelParams){
     return function(){
         this.load.image('flooring', 'Assets/tileset.png');

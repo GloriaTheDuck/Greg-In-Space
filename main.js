@@ -5,14 +5,15 @@ import {create} from "./stageGenerate/makeCreate.js";
 import {update} from "./stageGenerate/makeUpdate.js";
 import {endScreen} from "./stageGenerate/endScreen.js";
 
-console.log(levels, "levels")
-
+// Configuration for generic end screen
 var endScene = {
     preload: endScreen.preload,
     create: endScreen.create,
     update: endScreen.update
 };
 
+// Function to make levels from parameters.
+// Parameters can be seen in levels.js
 function makeConfig(levelsObject){
     return {
         preload: makePreload(levelsObject),
@@ -21,7 +22,7 @@ function makeConfig(levelsObject){
     }
 }
 
-
+// Basic configuration for test menu Screen.
 var menuScene = {
     preload: function(){},
     create: function(){
@@ -47,8 +48,7 @@ var menuScene = {
     }
 }
 
-console.log(endScreen);
-
+// Configuration for the game
 var config = {
     type: Phaser.AUTO,
     width: 800,
@@ -65,10 +65,9 @@ var config = {
 // starts game
 var game = new Phaser.Game(config);
 
+// Adds scenes to game
 game.scene.add("level6",makeConfig(levels.default.testLevel));
 game.scene.add("tut",makeConfig(levels.default.tutorial));
 game.scene.add("level1",makeConfig(levels.default.level1));
 game.scene.add("menu",menuScene,true);
 game.scene.add("endScene",endScreen);
-
-console.log("after the game");

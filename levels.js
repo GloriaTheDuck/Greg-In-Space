@@ -1,3 +1,6 @@
+// Json for the levels. 
+// Parameters used by the stageGenerate/* functions to create the level with custom music and tiled maps.
+// When adding a level, please add it here.
 var x = {
     testLevel: {
         music: "Sound/lab_gameplay_music.mp3",

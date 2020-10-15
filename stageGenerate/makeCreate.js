@@ -1,11 +1,12 @@
 import * as gameParams from "../globalVar.js";
 import {tileObject} from "../tileObject.js";
-//asdf
+
+// Generic Create Function for puzzle stage
 export function create ()
 {
     this.nextInput = null;
     
-    const map = this.make.tilemap({ key: "tilemap" });
+    // Creates this.gameMatrix = var gameMatrix used to store sprites and collision information.
     var gameMatrix = new Array(gameParams.stageWidth);
 
     for(var i = 0; i<gameParams.stageWidth; i++){
@@ -14,35 +15,45 @@ export function create ()
     
     this.gameMatrix = gameMatrix;
     
-    var movingObjects = [];
-    this.movingObjects = movingObjects;
-    
     for(var i = 0; i<gameMatrix.length; i++){
         for(var j=0; j<gameMatrix[0].length; j++){
             gameMatrix[i][j] = new tileObject(this,i,j,null);
         }
     }
     
+    // Creates this.movingObjects = var movingObjects
+    var movingObjects = [];
+    this.movingObjects = movingObjects;
+    this.movingObjects = movingObjects;
     
+    
+    // Creates Phaser tilemap object from tilemap loaded in Preload
+    const map = this.make.tilemap({ key: "tilemap" });
+    
+    // Adds flooring image
     const floorTileSet = map.addTilesetImage("Floor", "flooring");
     
-    // Parameters: layer name (or index) from Tiled, tileset, x, y
+    // Loads background sprites from tilemap as sprites
     const colorLayer = map.createStaticLayer("Color Fill", floorTileSet, 0, 0);
     const backgroundLayer = map.createStaticLayer("Background", floorTileSet, 0, 0);
+    
+    // Loads rocks from tilemap as sprites
     var rocks = map.createFromObjects("Group", "rock" , {key:"rock", frame:1} );
     rocks = rocks.concat(map.createFromObjects("Group", "rocks" , {key:"rock", frame:1} ));
-    console.log(rocks);
     this.physics.world.enable(rocks);
     
+    // Places rock into gameMatrix
     for(var i = 0; i<rocks.length; i++){
         var current = rocks[i];
         current.name = "rock";
         gameMatrix[map.worldToTileX(current.x)][map.worldToTileY(current.y)].foreground = current;
     }
 
-    
+    // Creates walls from sprites
     var wallsLayer = map.createStaticLayer("Walls",floorTileSet,0,0);
     var walls = wallsLayer.getTilesWithin();
+    // Adds walls to gameMatrix
+    // Note doesn't actually load sprites, just loads Object with single attribute this.name="wall"
     for(var i = 0; i<walls.length; i++){
         current = walls[i];
         if(current.index >= 0){
@@ -50,19 +61,23 @@ export function create ()
         }
     }
     
+    // Loads the player in from the spawn point, and places in gameMatrix.
+    // Sets this.player = player and this.playerObject = gameMatrix.find(player)
+    // Adds attribute this.execsCollected = 0 to player.
     const spawnPoint = map.findObject("Player", obj => obj.name === "playerSpawn");
     var player = this.physics.add.sprite(spawnPoint.x,spawnPoint.y,'character_right',"player")
     this.player = player;
+    player.execsCollected = 0;
     var playerObject = gameMatrix[map.worldToTileX(spawnPoint.x)][map.worldToTileY(spawnPoint.y)];
     gameMatrix[map.worldToTileX(spawnPoint.x)][map.worldToTileY(spawnPoint.y)].foreground = player;
     this.playerObject = playerObject;
     
+    // Takes exit info from tilemap and stores it in player
     const exitPoint = map.findObject("Player", obj => obj.name === "exit");
-    console.log(map.worldToTileX(exitPoint.x),map.worldToTileY(exitPoint.y));
     gameMatrix[map.worldToTileX(exitPoint.x)][map.worldToTileY(exitPoint.y)].foreground = {name : "exit"};
     
-    player.setCollideWorldBounds(true);
     
+    // Loads the executives and places them in the gameMatrix
     var executives = map.createFromObjects("Group", "alien" , {key: "executive"});
     executives.concat(map.createFromObjects("Group", "aliens", {key: "executive"}));
     this.executives = executives
@@ -72,6 +87,9 @@ export function create ()
         current.name = "executive"
     }
     
+    // ANIMATIONS
+    
+    // alien_idle animation
     this.anims.create({
         key: 'alien_idle',
         frames: this.anims.generateFrameNumbers('executive', { start: 0, end: 1 }),
@@ -79,13 +97,13 @@ export function create ()
         repeat: -1
     });
     
+    // Applies alien_idle to aliens
     for(var i = 0; i<executives.length;i++){
         executives[i].anims.play("alien_idle",true);
     }
     
-    player.execsCollected = 0;
-    
-    
+    // left right up down movement anims for player
+    // also single animations for player turning turn_left turn_right turn_up turn_down
     this.anims.create({
         key: 'left',
         frames: this.anims.generateFrameNumbers('character_left', { start: 0, end: 3 }),
@@ -137,7 +155,7 @@ export function create ()
         frameRate: 0,
     });
     
-    
+    // Loads music from makeCreate
     var music = this.sound.add("music", musicConfig);
     
     var musicConfig = {

@@ -1,6 +1,6 @@
+// temporary test for the dialog function
 var dialog = [
     {
-        
         speaker: "greg",
         spealerSprite: "player",
         speakerLocation: "left",
@@ -15,6 +15,7 @@ var dialog = [
 ];
 var lastFramePressed = false;
 
+// Gives generic configuration for end screen
 export var endScreen = {
     preload: function(){
         console.log(this.game);
@@ -42,6 +43,9 @@ export var endScreen = {
                 this.text.setText(dialog[this.dialogIndex].text);
                 this.dialogIndex += 1;
             }else{
+                this.getScenes(true).forEach(function(){
+                    
+                });
                 this.scene.run("menu")
             }
             lastFramePressed = true;
