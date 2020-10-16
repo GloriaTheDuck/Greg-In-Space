@@ -1,47 +1,57 @@
 // Json for the levels. 
 // Parameters used by the stageGenerate/* functions to create the level with custom music and tiled maps.
 // When adding a level, please add it here.
-var x = {
-    testLevel: {
+var x = [
+    {
+        sceneName: "testLevel",
         music: "Sound/lab_gameplay_music.mp3",
         json : "Tilemaps/Lvl6.json"
     },
-    tutorial:{
+    {
+        sceneName: "tutorial",
         music: "Sound/lab_gameplay_music.mp3",
         json : "Tilemaps/tutorial.json"
     },
-    level1:{
+    {
+        sceneName: "level1",
         music: "Sound/lab_gameplay_music.mp3",
         json : "Tilemaps/Lvl1.json"
     },
-    level2:{
+    {
+        sceneName: "level2",
         music: "Sound/lab_gameplay_music.mp3",
         json : "Tilemaps/Lvl2.json"
     },
-    level3:{
+    {
+        sceneName: "level3",
         music: "Sound/lab_gameplay_music.mp3",
         json : "Tilemaps/Lvl3.json"
     },
-    level4:{
+    {
+        sceneName: "level4",
         music: "Sound/lab_gameplay_music.mp3",
         json : "Tilemaps/Lvl4.json"
     },
-    level5:{
+    {
+        sceneName: "level5",
         music: "Sound/lab_gameplay_music.mp3",
         json : "Tilemaps/Lvl5.json"
     },
-    level6:{
+    {
+        sceneName: "level6",
         music: "Sound/lab_gameplay_music.mp3",
         json : "Tilemaps/Lvl6.json"
     },
-    level7:{
+    {
+        sceneName: "level7",
         music: "Sound/lab_gameplay_music.mp3",
         json : "Tilemaps/Lvl7.json"
     },
-    level8:{
+    {
+        sceneName: "level8",
         music: "Sound/lab_gameplay_music.mp3",
         json : "Tilemaps/Lvl8.json"
     },
-};
+];
 
 export default x;

@@ -14,5 +14,7 @@ export function makePreload(levelParams){
     
         //loading music
         this.load.audio('music', levelParams.music);
+        
+        this.name = levelParams.sceneName;
     }
 }

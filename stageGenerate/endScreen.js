@@ -18,7 +18,6 @@ var lastFramePressed = false;
 // Gives generic configuration for end screen
 export var endScreen = {
     preload: function(){
-        console.log(this.game);
         this.load.spritesheet('greg', 'sprite_right.png', { frameWidth: 32, frameHeight: 32 } );
         this.load.spritesheet('executive', 'aliensprite_idle.png',{ frameWidth: 32, frameHeight: 32 });
     },
@@ -43,14 +42,13 @@ export var endScreen = {
                 this.text.setText(dialog[this.dialogIndex].text);
                 this.dialogIndex += 1;
             }else{
-                this.getScenes(true).forEach(function(){
-                    
+                this.scene.manager.getScenes(true).forEach(function(e){
+                    e.scene.stop();
                 });
                 this.scene.run("menu")
             }
             lastFramePressed = true;
-        }
-        else{
+        }else{
             lastFramePressed = false;
         }
     }

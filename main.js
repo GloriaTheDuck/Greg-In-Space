@@ -35,7 +35,7 @@ var menuScene = {
         if(cursors.up.isDown){
             cursors.up.isDown = false;
             this.game.scene.pause("menu");
-            this.game.scene.switch("menu","tut")
+            this.game.scene.switch("menu","tutorial")
         }
         
         if(cursors.down.isDown){
@@ -66,8 +66,11 @@ var config = {
 var game = new Phaser.Game(config);
 
 // Adds scenes to game
-game.scene.add("level6",makeConfig(levels.default.testLevel));
-game.scene.add("tut",makeConfig(levels.default.tutorial));
-game.scene.add("level1",makeConfig(levels.default.level1));
+console.log(levels.default);
+levels.default.forEach(function(lvl){
+    console.log(lvl);
+    game.scene.add(lvl.sceneName,makeConfig(lvl));
+})
+
 game.scene.add("menu",menuScene,true);
 game.scene.add("endScene",endScreen);
