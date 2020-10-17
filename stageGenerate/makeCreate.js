@@ -180,4 +180,25 @@ export function create ()
     }
 
     music.play(musicConfig);
+    
+    //sound effects
+    this.traversingtiles = this.sound.add("traversing_tiles", sound_effectsConfig);
+    this.rockpushing = this.sound.add("rock-pushing", sound_effectsConfig);
+    this.collectalien = this.sound.add("collect_alien", sound_effectsConfig);
+    this.invalidmove = this.sound.add("invalid", sound_effectsConfig);
+
+
+
+
+    var sound_effectsConfig = {
+
+        mute: false,
+        volume: 0.5,
+        rate: 1,
+        detune: 0,
+        seek: 0,
+        loop: false,
+        delay: 0
+    }
+
 }
