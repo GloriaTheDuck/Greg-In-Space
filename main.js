@@ -43,7 +43,7 @@ var menuScene = {
         }
         
         if(cursors.left.isDown){
-            this.game.scene.switch("menu","level6")
+            this.game.scene.switch("menu","level7")
         }
     }
 }

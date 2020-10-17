@@ -37,6 +37,14 @@ export function create ()
     const colorLayer = map.createStaticLayer("Color Fill", floorTileSet, 0, 0);
     const backgroundLayer = map.createStaticLayer("Background", floorTileSet, 0, 0);
     
+    // Loads water into the game
+    var waterTiles = map.createFromObjects("Group", "puddle", {key: "water"});
+    waterTiles.forEach(function(e){
+        e.name = "water"
+        gameMatrix[map.worldToTileX(e.x)][map.worldToTileY(e.y)].background = "water";
+    })
+    
+    
     // Loads rocks from tilemap as sprites
     var rocks = map.createFromObjects("Group", "rock" , {key:"rock", frame:1} );
     rocks = rocks.concat(map.createFromObjects("Group", "rocks" , {key:"rock", frame:1} ));
@@ -87,6 +95,7 @@ export function create ()
         current.name = "executive"
     }
     
+
     // ANIMATIONS
     
     // alien_idle animation

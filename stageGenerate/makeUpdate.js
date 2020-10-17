@@ -50,8 +50,10 @@ function playerMoveTo(scene,playerTile,direction){
     let player = playerTile.foreground
     if( toTile != null){
         if(toTile.foreground == null){
-            playerTile.moveDirection(direction);
-            player.anims.play(direction);
+            if(toTile.background != "water" || player.execsCollected == 0){
+                playerTile.moveDirection(direction);
+                player.anims.play(direction);
+            }
         } else if(toTile.foreground.name == "rock"){
             rockPush(toTile,direction);
         } else if(toTile.foreground.name == "executive"){
@@ -59,7 +61,6 @@ function playerMoveTo(scene,playerTile,direction){
             playerTile.moveDirection(direction);
             player.anims.play(direction);
         } else if(toTile.foreground.name == "exit"){
-            console.log("made it to the exit")
             if(scene.executives.length == player.execsCollected){
                 playerTile.moveDirection(direction);
                 player.anims.play(direction);
@@ -68,7 +69,6 @@ function playerMoveTo(scene,playerTile,direction){
                 sceneManager.run("endScene");
             }
         }
-        
     }
 }
 
