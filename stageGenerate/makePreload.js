@@ -16,5 +16,11 @@ export function makePreload(levelParams){
         this.load.audio('music', levelParams.music);
         
         this.name = levelParams.sceneName;
+        
+        //loading sound effects
+        this.load.audio('rock-pushing', "Sound/rock_pushing.mp3");
+        this.load.audio('traversing_tiles', "Sound/traversing_tiles.mp3");
+        this.load.audio('collect_alien', "Sound/collect_alien.mp3");
+        this.load.audio('invalid', "Sound/invalid.mp3");
     }
 }
