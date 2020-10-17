@@ -50,13 +50,19 @@ function playerMoveTo(scene,playerTile,direction){
     let player = playerTile.foreground
     if( toTile != null){
         if(toTile.foreground == null){
+            //calls walking sound effect
+            scene.traversingtiles.play();
             if(toTile.background != "water" || player.execsCollected == 0){
                 playerTile.moveDirection(direction);
                 player.anims.play(direction);
             }
         } else if(toTile.foreground.name == "rock"){
+            //calls rock pushing sound effect
+            scene.rockpushing.play();
             rockPush(toTile,direction);
         } else if(toTile.foreground.name == "executive"){
+            //calls collect executive sound effect
+            scene.collectalien.play();
             collectExec(playerTile.foreground,toTile.foreground);
             playerTile.moveDirection(direction);
             player.anims.play(direction);
