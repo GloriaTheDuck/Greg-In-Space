@@ -6,13 +6,13 @@ var dialog = [
         speaker: "greg",
         spealerSprite: "player",
         speakerLocation: "left",
-        text: "This is where the developers would put comedic text",
+        text: "Finally, you took long enough",
     },
     {
         speaker: "greg",
         spealerSprite: "player",
         speakerLocation: "left",
-        text: "If you have ideas, email us at smallstorage compartment @gmail.com",
+        text: "Any longer and I would have to have asked for help",
     }
 ];
 var lastFramePressed = false;
@@ -27,7 +27,7 @@ export var endScreen = {
         this.text = this.add.text(48, 150, dialog[0], {
             fontSize : '16px',
             backgroundColor : "#1e2",
-            wordWrap: {width: 100}
+            wordWrap: {width: 130}
         });
         this.text.setText(dialog[0].text);
         this.dialogIndex = 1;
