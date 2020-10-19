@@ -47,6 +47,7 @@ var menuScene = {
         this.key = "menu"
         console.log(this.key)
         this.add.text(0,0, 'Press arrowKeys for different levels, ↑:Tutorial, ←:Level 1, ↓:Level 2, →:Level 3');
+        this.add.text(0,100,'Space for bonus level');
     },
     update: function(){
         var cursors = this.input.keyboard.createCursorKeys();
@@ -68,6 +69,10 @@ var menuScene = {
         if(cursors.right.isDown){
             this.game.scene.stop("menu")
             this.game.scene.start("level7")
+        }
+        if(cursors.space.isDown){
+            this.game.scene.stop("menu")
+            this.game.scene.start("level6")
         }
     }
 }
