@@ -8,7 +8,6 @@ export function makePreload(levelParams){
         this.load.spritesheet('character_left', 'Assets/sprite_left.png', { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('character_up', 'Assets/sprite_up.png', { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('character_down', 'Assets/sprite_down.png', { frameWidth: 32, frameHeight: 32 });
-        this.load.tilemapTiledJSON('tilemap', levelParams.json);
         this.load.image('water', "Assets/MasterSimple.png");
         this.load.image('exit', "Assets/sprite_down.png",{ frameWidth: 32, frameHeight: 32 });
     
@@ -16,6 +15,8 @@ export function makePreload(levelParams){
         this.load.audio('music', levelParams.music);
         
         this.name = levelParams.sceneName;
+        
+        this.load.tilemapTiledJSON('tilemap' + this.name, levelParams.json);
         
         //loading sound effects
         this.load.audio('rock-pushing', "Sound/rock_pushing.mp3");

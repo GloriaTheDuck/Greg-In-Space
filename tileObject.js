@@ -21,8 +21,7 @@ export function tileObject(scene,x,y,foreground){
     this.y = y;
     this.foreground = foreground;
     this.background = null;
-    this.scene = scene
-    console.log(this.scene.movingObjects);
+    this.scene = scene;
     
     this.getTileAbove =  function(){
         return inBounds(this.x,this.y-1,this.scene.gameMatrix) ? this.scene.gameMatrix[this.x][this.y-1] : null;

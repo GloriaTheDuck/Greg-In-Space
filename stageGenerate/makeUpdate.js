@@ -1,6 +1,7 @@
 export function update ()
 {
     var gameMatrix = this.gameMatrix;
+    console.log(gameMatrix);
     var player = this.player;
     var cursors = this.input.keyboard.createCursorKeys();
     var playerObject = this.gameMatrix[Math.floor(player.x/32)][Math.floor(player.y/32)];
