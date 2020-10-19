@@ -36,13 +36,14 @@ export var endScreen = {
     },
     update: function(){
         var cursors = this.input.keyboard.createCursorKeys();
-
+        
+        console.log(cursors.space.isDown,lastFramePressed)
         if(cursors.space.isDown){
             if(this.dialogIndex < dialog.length && !lastFramePressed){
                 this.text.setText(dialog[this.dialogIndex].text);
                 this.dialogIndex += 1;
                 lastFramePressed = true;
-            }else if(this.dialogIndex == dialog.length){
+            }else if(this.dialogIndex == dialog.length && !lastFramePressed){
                 this.scene.manager.getScenes(false).forEach(function(e){
                     console.log(e);
                     e.scene.stop();
