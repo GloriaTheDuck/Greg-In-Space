@@ -116,7 +116,7 @@ game.scene.add("tutorialText",{
             fontSize : '16px',
             wordWrap: {width: 200}
         });
-        this.text.setText("Press arrow Keys to move around. Collect executives and then make it to the exit.");
+        this.text.setText("Press arrow Keys to move around. Collect the pink aliens and then make it to the exit.");
     },
     update: function(){
         var keyPressed = false;
