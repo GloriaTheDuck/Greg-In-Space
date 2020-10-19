@@ -28,6 +28,7 @@ export function create ()
     
     
     // Creates Phaser tilemap object from tilemap loaded in Preload
+    console.log("tilemap"+this.name)
     var map = this.make.tilemap({ key: "tilemap"+this.name });
     
     // Adds flooring image

@@ -15,6 +15,8 @@ export function makePreload(levelParams){
         this.load.audio('music', levelParams.music);
         
         this.name = levelParams.sceneName;
+        console.log('tilemap'+this.name);
+        console.log(levelParams.json)
         
         this.load.tilemapTiledJSON('tilemap' + this.name, levelParams.json);
         

@@ -53,7 +53,7 @@ var menuScene = {
         var cursors = this.input.keyboard.createCursorKeys();
         if(cursors.up.isDown){
             this.game.scene.stop("menu");
-            this.game.scene.start("tutorial")
+            this.game.scene.start("level0")
         }
 
         if(cursors.down.isDown){
@@ -101,23 +101,13 @@ levels.default.forEach(function(lvl){
 
 // Adds tutorial and tutorial text
 var tutParams = levels.default[1]
-game.scene.add("tutorial",{
+game.scene.add("level0",{
     preload:makePreload(tutParams),
     create:function(){
         create.call(this);
-        this.firstFrame = true;
+        this.scene.run("tutorialText");
     },
-    update:function(){
-        if(this.firstFrame){
-            this.firstFrame = false;
-            this.scene.run("tutorialText");
-        }
-        if(this.player.execsCollected == 1){
-            
-        }
-        update.call(this);
-        console.log(this.scene.isVisible())
-    }
+    update: update
 });
 
 game.scene.add("tutorialText",{
