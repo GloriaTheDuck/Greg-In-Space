@@ -2,9 +2,8 @@ import * as gameParams from "../globalVar.js";
 import {tileObject} from "../tileObject.js";
 
 // Generic Create Function for puzzle stage
-export function makeCreate ()
+export function create ()
 {
-return function(e){
     this.nextInput = null;
     
     // Creates this.gameMatrix = var gameMatrix used to store sprites and collision information.
@@ -203,5 +202,4 @@ return function(e){
         delay: 0
     }
     
-}
 }

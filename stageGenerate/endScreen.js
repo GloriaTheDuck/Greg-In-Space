@@ -42,7 +42,7 @@ export var endScreen = {
                 this.text.setText(dialog[this.dialogIndex].text);
                 this.dialogIndex += 1;
                 lastFramePressed = true;
-            }else{
+            }else if(this.dialogIndex == dialog.length){
                 this.scene.manager.getScenes(false).forEach(function(e){
                     console.log(e);
                     e.scene.stop();

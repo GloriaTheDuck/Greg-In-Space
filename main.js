@@ -1,7 +1,7 @@
 import * as gameParams from "./globalVar.js";
 import * as levels from "./levels.js";
 import {makePreload} from "./stageGenerate/makePreload.js";
-import {makeCreate} from "./stageGenerate/makeCreate.js";
+import {create} from "./stageGenerate/makeCreate.js";
 import {update} from "./stageGenerate/makeUpdate.js";
 import {endScreen} from "./stageGenerate/endScreen.js";
 
@@ -17,7 +17,7 @@ var endScene = {
 function makeConfig(levelsObject){
     return {
         preload: makePreload(levelsObject),
-        create: makeCreate(levelsObject),
+        create: create,
         update: update
     }
 }
@@ -35,7 +35,6 @@ var titleScene = {
   update: function(){
     this.input.on('pointerdown', function(pointer){
       console.log("click");
-      this.scene.stop("title");
       this.scene.start("menu");
     }, this);
   },
@@ -65,7 +64,6 @@ var menuScene = {
             this.game.scene.stop("menu");
             this.game.scene.start("level7")
         }
-        console.log(this.game.scene.getScenes());
     }
 }
 
@@ -88,11 +86,51 @@ var game = new Phaser.Game(config);
 
 // Adds scenes to game
 levels.default.forEach(function(lvl){
-    console.log(lvl);
     game.scene.add(lvl.sceneName,makeConfig(lvl));
 })
 
+var tutParams = levels.default[1]
+game.scene.add("tutorial",{
+    preload:makePreload(tutParams),
+    create:function(){
+        create.call(this);
+        this.firstFrame = true;
+    },
+    update:function(){
+        if(this.firstFrame){
+            this.firstFrame = false;
+            this.scene.run("tutorialText");
+        }
+        if(this.player.execsCollected == 1){
+            
+        }
+        update.call(this);
+        console.log(this.scene.isVisible())
+    }
+});
 
+game.scene.add("tutorialText",{
+    preload: function(){},
+    create: function(){
+        this.text = this.add.text(48, 150, "hello", {
+            fontSize : '16px',
+            wordWrap: {width: 200}
+        });
+        this.text.setText("Press arrow Keys to move around. Collect executives and then make it to the exit.");
+    },
+    update: function(){
+        var keyPressed = false;
+        var cursors = this.input.keyboard.createCursorKeys();
+        [cursors.right,cursors.left,cursors.up,cursors.down].forEach(function(e){
+          if(e.isDown){
+              keyPressed = true;
+          }  
+        })
+        if(keyPressed){
+            this.scene.stop();
+        }
+    }
+});
 
 game.scene.add()
 game.scene.add("title", titleScene, true);
