@@ -1,16 +1,18 @@
+import * as gameParams from "../globalVar.js";
+
 // temporary test for the dialog function
 var dialog = [
     {
         speaker: "greg",
         spealerSprite: "player",
         speakerLocation: "left",
-        text: "sampleText1 sampleText1 sampleText1 sampleText1 sampleText1 sampleText1 ",
+        text: "This is where the developers would put comedic text",
     },
     {
         speaker: "greg",
         spealerSprite: "player",
         speakerLocation: "left",
-        text: "sampleText2",
+        text: "If you have ideas, email us at smallstorage compartment @gmail.com",
     }
 ];
 var lastFramePressed = false;
@@ -25,7 +27,7 @@ export var endScreen = {
         this.text = this.add.text(48, 150, dialog[0], {
             fontSize : '16px',
             backgroundColor : "#1e2",
-            wordWrap: {width: 10}
+            wordWrap: {width: 100}
         });
         this.text.setText(dialog[0].text);
         this.dialogIndex = 1;
@@ -46,6 +48,7 @@ export var endScreen = {
             }else if(this.dialogIndex == dialog.length && !lastFramePressed){
                 this.scene.manager.getScenes(false).forEach(function(e){
                     console.log(e);
+                    gameParams.music.stop();
                     e.scene.stop();
                 });
                 this.scene.run("menu")
