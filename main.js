@@ -22,7 +22,7 @@ function makeConfig(levelsObject){
     }
 }
 
-//
+// Title Scene
 var titleScene = {
   preload: function(){
     this.load.image("background", "Assets/planet.png")
@@ -89,6 +89,7 @@ levels.default.forEach(function(lvl){
     game.scene.add(lvl.sceneName,makeConfig(lvl));
 })
 
+// Adds tutorial and tutorial text
 var tutParams = levels.default[1]
 game.scene.add("tutorial",{
     preload:makePreload(tutParams),
