@@ -1,3 +1,4 @@
+import * as gameParams from "../globalVar.js";
 export function update ()
 {
     var gameMatrix = this.gameMatrix;
@@ -5,6 +6,12 @@ export function update ()
     var cursors = this.input.keyboard.createCursorKeys();
     var playerObject = this.gameMatrix[Math.floor(player.x/32)][Math.floor(player.y/32)];
     var movingObjects = this.movingObjects
+    var restartKey = this.input.keyboard.addKey('R');
+    
+    if(restartKey.isDown){
+        gameParams.music.stop();
+        this.scene.restart()
+    }
     
     // If somethings moving, check if it needs to stop.
     if(movingObjects.length > 0){

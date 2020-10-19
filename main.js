@@ -46,7 +46,7 @@ var menuScene = {
     create: function(){
         this.key = "menu"
         console.log(this.key)
-        this.add.text(0,0, 'Press arrowKeys for different levels');
+        this.add.text(0,0, 'Press arrowKeys for different levels, ↑:Tutorial, ←:Level 1, ↓:Level 2, →:Level 3');
     },
     update: function(){
         var cursors = this.input.keyboard.createCursorKeys();
@@ -56,12 +56,17 @@ var menuScene = {
         }
 
         if(cursors.down.isDown){
-            this.game.scene.stop("menu");
-            this.game.scene.start("level1")
+            this.game.scene.stop("menu")
+            this.game.scene.start("level5")
         }
 
         if(cursors.left.isDown){
-            this.game.scene.stop("menu");
+            this.game.scene.stop("menu")
+            this.game.scene.start("level4")
+        }
+        
+        if(cursors.right.isDown){
+            this.game.scene.stop("menu")
             this.game.scene.start("level7")
         }
     }
