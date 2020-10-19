@@ -36,6 +36,7 @@ var titleScene = {
     this.input.on('pointerdown', function(pointer){
       console.log("click");
       this.scene.stop("title");
+      this.scene.start("menu");
     }, this);
   },
 }
@@ -90,8 +91,10 @@ levels.default.forEach(function(lvl){
     console.log(lvl);
     game.scene.add(lvl.sceneName,makeConfig(lvl));
 })
-game.scene.add("tutorial",makeConfig(levels.default[1]));
 
+
+
+game.scene.add()
 game.scene.add("title", titleScene, true);
-game.scene.add("menu",menuScene,true);
+game.scene.add("menu",menuScene);
 game.scene.add("endScene",endScreen);
