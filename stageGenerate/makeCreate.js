@@ -2,8 +2,9 @@ import * as gameParams from "../globalVar.js";
 import {tileObject} from "../tileObject.js";
 
 // Generic Create Function for puzzle stage
-export function create ()
+export function makeCreate ()
 {
+return function(e){
     this.nextInput = null;
     
     // Creates this.gameMatrix = var gameMatrix used to store sprites and collision information.
@@ -12,7 +13,7 @@ export function create ()
     for(var i = 0; i<gameParams.stageWidth; i++){
         gameMatrix[i] = new Array(gameParams.stageHeight);
     }
-    
+    console.log(this.gameMatrix)
     this.gameMatrix = gameMatrix;
     
     for(var i = 0; i<gameMatrix.length; i++){
@@ -28,14 +29,14 @@ export function create ()
     
     
     // Creates Phaser tilemap object from tilemap loaded in Preload
-    const map = this.make.tilemap({ key: "tilemap" });
+    var map = this.make.tilemap({ key: "tilemap"+this.name });
     
     // Adds flooring image
-    const floorTileSet = map.addTilesetImage("Floor", "flooring");
+    var floorTileSet = map.addTilesetImage("Floor", "flooring");
     
     // Loads background sprites from tilemap as sprites
-    const colorLayer = map.createStaticLayer("Color Fill", floorTileSet, 0, 0);
-    const backgroundLayer = map.createStaticLayer("Background", floorTileSet, 0, 0);
+    var colorLayer = map.createStaticLayer("Color Fill", floorTileSet, 0, 0);
+    var backgroundLayer = map.createStaticLayer("Background", floorTileSet, 0, 0);
     
     // Loads water into the game
     var waterTiles = map.createFromObjects("Group", "puddle", {key: "water"});
@@ -166,6 +167,7 @@ export function create ()
     
     // Loads music from makeCreate
     var music = this.sound.add("music", musicConfig);
+    gameParams.setMusic(music)
     
     var musicConfig = {
         
@@ -200,5 +202,6 @@ export function create ()
         loop: false,
         delay: 0
     }
-
+    
+}
 }

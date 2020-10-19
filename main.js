@@ -1,7 +1,7 @@
 import * as gameParams from "./globalVar.js";
 import * as levels from "./levels.js";
 import {makePreload} from "./stageGenerate/makePreload.js";
-import {create} from "./stageGenerate/makeCreate.js";
+import {makeCreate} from "./stageGenerate/makeCreate.js";
 import {update} from "./stageGenerate/makeUpdate.js";
 import {endScreen} from "./stageGenerate/endScreen.js";
 
@@ -17,7 +17,7 @@ var endScene = {
 function makeConfig(levelsObject){
     return {
         preload: makePreload(levelsObject),
-        create: create,
+        create: makeCreate(levelsObject),
         update: update
     }
 }
@@ -51,18 +51,20 @@ var menuScene = {
     update: function(){
         var cursors = this.input.keyboard.createCursorKeys();
         if(cursors.up.isDown){
-            cursors.up.isDown = false;
-            this.game.scene.pause("menu");
-            this.game.scene.switch("menu","tutorial")
+            this.game.scene.stop("menu");
+            this.game.scene.start("tutorial")
         }
 
         if(cursors.down.isDown){
-            this.game.scene.switch("menu","level1")
+            this.game.scene.stop("menu");
+            this.game.scene.start("level1")
         }
 
         if(cursors.left.isDown){
-            this.game.scene.switch("menu","level7")
+            this.game.scene.stop("menu");
+            this.game.scene.start("level7")
         }
+        console.log(this.game.scene.getScenes());
     }
 }
 
@@ -84,11 +86,11 @@ var config = {
 var game = new Phaser.Game(config);
 
 // Adds scenes to game
-console.log(levels.default);
 levels.default.forEach(function(lvl){
     console.log(lvl);
     game.scene.add(lvl.sceneName,makeConfig(lvl));
 })
+game.scene.add("tutorial",makeConfig(levels.default[1]));
 
 game.scene.add("title", titleScene, true);
 game.scene.add("menu",menuScene,true);
