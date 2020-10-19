@@ -22,6 +22,24 @@ function makeConfig(levelsObject){
     }
 }
 
+//
+var titleScene = {
+  preload: function(){
+    this.load.image("background", "Assets/planet.png")
+  },
+  create: function(){
+    this.add.image(400, 300, "background")
+    this.key = "title";
+    console.log(this.key);
+  },
+  update: function(){
+    this.input.on('pointerdown', function(pointer){
+      console.log("click");
+      this.scene.stop("title");
+    }, this);
+  },
+}
+
 // Basic configuration for test menu Screen.
 var menuScene = {
     preload: function(){},
@@ -37,11 +55,11 @@ var menuScene = {
             this.game.scene.pause("menu");
             this.game.scene.switch("menu","tutorial")
         }
-        
+
         if(cursors.down.isDown){
             this.game.scene.switch("menu","level1")
         }
-        
+
         if(cursors.left.isDown){
             this.game.scene.switch("menu","level7")
         }
@@ -59,7 +77,7 @@ var config = {
             gravity: { y: 0 },
             debug: false
         }
-    }
+    },
 };
 
 // starts game
@@ -72,5 +90,6 @@ levels.default.forEach(function(lvl){
     game.scene.add(lvl.sceneName,makeConfig(lvl));
 })
 
+game.scene.add("title", titleScene, true);
 game.scene.add("menu",menuScene,true);
 game.scene.add("endScene",endScreen);

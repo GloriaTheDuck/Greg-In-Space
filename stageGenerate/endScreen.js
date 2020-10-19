@@ -18,8 +18,8 @@ var lastFramePressed = false;
 // Gives generic configuration for end screen
 export var endScreen = {
     preload: function(){
-        this.load.spritesheet('greg', 'sprite_right.png', { frameWidth: 32, frameHeight: 32 } );
-        this.load.spritesheet('executive', 'aliensprite_idle.png',{ frameWidth: 32, frameHeight: 32 });
+        this.load.spritesheet('greg', 'Assets/sprite_right.png', { frameWidth: 32, frameHeight: 32 } );
+        this.load.spritesheet('executive', 'Assets/aliensprite_idle.png',{ frameWidth: 32, frameHeight: 32 });
     },
     create: function(){
         this.text = this.add.text(48, 150, dialog[0], {
@@ -36,7 +36,7 @@ export var endScreen = {
     },
     update: function(){
         var cursors = this.input.keyboard.createCursorKeys();
-        
+
         if(cursors.space.isDown){
             if(this.dialogIndex < dialog.length && !lastFramePressed){
                 this.text.setText(dialog[this.dialogIndex].text);
