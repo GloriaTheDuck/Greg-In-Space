@@ -45,7 +45,6 @@ var menuScene = {
     preload: function(){},
     create: function(){
         this.key = "menu"
-        console.log(this.key)
         this.add.text(0,0, 'Press arrowKeys for different levels, ↑:Tutorial, ←:Level 1, ↓:Level 2, →:Level 3');
         this.add.text(0,100,'Space for bonus level');
     },
