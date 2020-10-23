@@ -40,6 +40,14 @@ var titleScene = {
   },
 }
 
+// Returns a function for starting level i
+function makePointerFunction(i){
+    return function(pointer){
+        this.scene.scene.stop("menu");
+        this.scene.scene.start(levels.default[i].sceneName);      
+    }
+}
+
 // Basic configuration for test menu Screen.
 var menuScene = {
     preload: function(){},
@@ -47,33 +55,20 @@ var menuScene = {
         this.key = "menu"
         this.add.text(0,0, 'Press arrowKeys for different levels, ↑:Tutorial, ←:Level 1, ↓:Level 2, →:Level 3');
         this.add.text(0,100,'Space for bonus level');
-    },
-    update: function(){
-        var cursors = this.input.keyboard.createCursorKeys();
-        if(cursors.up.isDown){
-            this.game.scene.stop("menu");
-            this.game.scene.start("level0")
-        }
-
-        if(cursors.down.isDown){
-            this.game.scene.stop("menu")
-            this.game.scene.start("level5")
-        }
-
-        if(cursors.left.isDown){
-            this.game.scene.stop("menu")
-            this.game.scene.start("level4")
-        }
         
-        if(cursors.right.isDown){
-            this.game.scene.stop("menu")
-            this.game.scene.start("level7")
+        for(var i = 0; i<levels.default.length; i++){
+            var currentIcon = this.physics.add.sprite(100 + 100*(i % 7), 100 + 100 * Math.floor(i/7),'temp')
+            currentIcon.index = i;
+            currentIcon.setInteractive();
+            currentIcon.on('pointerup', makePointerFunction(i));
         }
-        if(cursors.space.isDown){
-            this.game.scene.stop("menu")
-            this.game.scene.start("level6")
-        }
-    }
+        var image = this.physics.add.sprite(100,100,'temp').setInteractive();
+        image.on('pointerup', function(){
+            this.scene.scene.stop("menu");
+            this.scene.scene.start("level1");
+        })
+    },
+    update: function(){}
 }
 
 // Configuration for the game
