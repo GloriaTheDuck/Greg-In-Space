@@ -28,8 +28,9 @@ var titleScene = {
     this.load.image("background", "Assets/planet.png")
   },
   create: function(){
-    this.add.image(400, 300, "background")
+    var background = this.add.image(200, 150, "background")
     this.key = "title";
+    background.setScale(0.5);
     console.log(this.key);
   },
   update: function(){
@@ -74,8 +75,12 @@ var menuScene = {
 // Configuration for the game
 var config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    scale: {
+        parent: 'yourgamediv',
+        mode: Phaser.Scale.FIT,
+        width: 400,
+        height: 300
+    },
     physics: {
         default: 'arcade',
         arcade: {
