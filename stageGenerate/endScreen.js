@@ -39,6 +39,7 @@ export var endScreen = {
     update: function(){
         var cursors = this.input.keyboard.createCursorKeys();
         
+        console.log(cursors.space.isDown,lastFramePressed)
         if(cursors.space.isDown){
             if(this.dialogIndex < dialog.length && !lastFramePressed){
                 this.text.setText(dialog[this.dialogIndex].text);
@@ -46,6 +47,7 @@ export var endScreen = {
                 lastFramePressed = true;
             }else if(this.dialogIndex == dialog.length && !lastFramePressed){
                 this.scene.manager.getScenes(false).forEach(function(e){
+                    console.log(e);
                     gameParams.music.stop();
                     e.scene.stop();
                 });
