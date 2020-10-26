@@ -66,6 +66,11 @@ var x = [
         music: "Sound/lab_gameplay_music.mp3",
         json : "Tilemaps/Lvl8.json"
     },
+    {
+        sceneName: "level9",
+        music: "Sound/lab_gameplay_music.mp3",
+        json : "Tilemaps/Lvl9.json"
+    },
 ];
 
 export default x;
