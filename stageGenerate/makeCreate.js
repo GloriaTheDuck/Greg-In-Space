@@ -102,7 +102,7 @@ export function create ()
     this.anims.create({
         key: 'alien_idle',
         frames: this.anims.generateFrameNumbers('executive', { start: 0, end: 1 }),
-        frameRate: 10,
+        frameRate: 1,
         repeat: -1
     });
     
