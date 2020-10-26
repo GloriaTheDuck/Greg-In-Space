@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="8" height="6" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="13">
+ <tileset firstgid="1" name="Floor" tilewidth="32" tileheight="32" tilecount="63" columns="7">
+  <image source="../Assets/tileset.png" width="224" height="288"/>
+ </tileset>
+ <tileset firstgid="64" name="Black Blocks" tilewidth="32" tileheight="32" tilecount="576" columns="24">
+  <image source="../Assets/blacksquare.png" width="768" height="768"/>
+ </tileset>
+ <tileset firstgid="640" name="Rocks" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="../Assets/addwork.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="641" name="Aliens" tilewidth="32" tileheight="32" tilecount="2" columns="2">
+  <image source="../Assets/aliensprite_idle.png" width="64" height="32"/>
+ </tileset>
+ <tileset firstgid="643" name="Water" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="../Assets/MasterSimple.png" width="32" height="32"/>
+ </tileset>
+ <layer id="2" name="Color Fill" width="8" height="6" locked="1">
+  <data encoding="csv">
+0,0,0,0,0,0,64,64,
+0,0,0,0,0,0,64,64,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="1" name="Background" width="8" height="6" locked="1">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,
+0,9,9,9,9,0,0,0,
+0,9,9,9,9,0,0,0,
+42,9,9,9,9,9,9,0,
+0,9,9,9,9,9,9,0,
+0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="3" name="Walls" width="8" height="6" locked="1">
+  <data encoding="csv">
+22,2,2,2,2,6,0,0,
+8,0,0,0,0,8,0,0,
+8,0,0,0,0,13,2,6,
+0,0,0,0,0,0,0,8,
+8,0,0,0,0,0,0,8,
+13,2,2,2,2,2,2,11
+</data>
+ </layer>
+ <objectgroup id="4" name="Group" locked="1">
+  <object id="1" name="rock" gid="640" x="32" y="96" width="32" height="32"/>
+  <object id="2" name="rock" gid="640" x="64" y="96" width="32" height="32"/>
+  <object id="3" name="rock" gid="640" x="64" y="128" width="32" height="32"/>
+  <object id="4" name="rock" gid="640" x="96" y="96" width="32" height="32"/>
+  <object id="5" name="rock" gid="640" x="128" y="128" width="32" height="32"/>
+  <object id="6" name="rock" gid="640" x="128" y="160" width="32" height="32"/>
+  <object id="7" name="rock" gid="640" x="192" y="160" width="32" height="32"/>
+  <object id="8" name="alien" gid="641" x="192" y="128" width="32" height="32"/>
+  <object id="9" name="alien" gid="641" x="96" y="64" width="32" height="32"/>
+  <object id="10" name="puddle" gid="643" x="96" y="128" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup id="5" name="Player" locked="1">
+  <object id="11" name="playerSpawn" x="48" y="112">
+   <point/>
+  </object>
+  <object id="12" name="exit" x="0" y="96" width="32" height="32"/>
+ </objectgroup>
+</map>
