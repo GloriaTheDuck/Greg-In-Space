@@ -1,4 +1,6 @@
 import * as gameParams from "../globalVar.js";
+import {textConfig} from "./makeText.js";
+
 export function update ()
 {
     var gameMatrix = this.gameMatrix;
@@ -27,6 +29,14 @@ export function update ()
         }
     } else {
         // If nothings moving right now, the player moves according to nextInput.
+        if(this.textScene != null){
+            this.scene.add("textScene",new textConfig(this.textScene,this), true);
+            console.log("text Scene added. This scene should pause")
+            console.log(this.scene);
+            this.scene.pause();
+            this.textScene = null;
+        }
+        
         if(this.nextInput != null ){ 
             player.anims.play("turn_" + this.nextInput);
             playerMoveTo(this,playerObject, this.nextInput);
@@ -71,6 +81,9 @@ function playerMoveTo(scene,playerTile,direction){
             //calls collect executive sound effect
             scene.collectalien.play();
             collectExec(playerTile.foreground,toTile.foreground);
+            if(player.execsCollected == 1){
+                scene.textScene = scene.textScenes.executive
+            }
             playerTile.moveDirection(direction);
             player.anims.play(direction);
         } else if(toTile.foreground.name == "exit"){
