@@ -81,7 +81,7 @@ function playerMoveTo(scene,playerTile,direction){
             //calls collect executive sound effect
             scene.collectalien.play();
             collectExec(playerTile.foreground,toTile.foreground);
-            if(player.execsCollected == 1){
+            if(player.execsCollected == 1 && scene.textScenes != null){
                 scene.textScene = scene.textScenes.executive
             }
             playerTile.moveDirection(direction);
