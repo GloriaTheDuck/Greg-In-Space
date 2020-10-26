@@ -28,8 +28,9 @@ var titleScene = {
     this.load.image("background", "Assets/planet.png")
   },
   create: function(){
-    this.add.image(400, 300, "background")
+    var background = this.add.image(200, 150, "background")
     this.key = "title";
+    background.setScale(0.5);
     console.log(this.key);
   },
   update: function(){
@@ -50,19 +51,23 @@ function makePointerFunction(i){
 
 // Basic configuration for test menu Screen.
 var menuScene = {
-    preload: function(){},
+    preload: function(){
+        this.load.image('levelSel', "Assets/levelselect.png");
+    },
     create: function(){
         this.key = "menu"
-        this.add.text(0,0, 'Press arrowKeys for different levels, ↑:Tutorial, ←:Level 1, ↓:Level 2, →:Level 3');
-        this.add.text(0,100,'Space for bonus level');
+        
+        var image = this.add.image(200,150,'levelSel');
+        image.scaleX = 0.5
+        image.scaleY = 0.48
         
         for(var i = 0; i<levels.default.length; i++){
-            var currentIcon = this.physics.add.sprite(100 + 100*(i % 7), 100 + 100 * Math.floor(i/7),'temp')
+            var currentIcon = this.physics.add.sprite(80 + 60*(i % 5), 151 + 60 * Math.floor(i/5),'temp')
             currentIcon.index = i;
             currentIcon.setInteractive();
+            currentIcon.setAlpha(0.001);
             currentIcon.on('pointerup', makePointerFunction(i));
         }
-        var image = this.physics.add.sprite(100,100,'temp').setInteractive();
         image.on('pointerup', function(){
             this.scene.scene.stop("menu");
             this.scene.scene.start("level1");
@@ -74,8 +79,12 @@ var menuScene = {
 // Configuration for the game
 var config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    scale: {
+        parent: 'yourgamediv',
+        mode: Phaser.Scale.FIT,
+        width: 400,
+        height: 300
+    },
     physics: {
         default: 'arcade',
         arcade: {
