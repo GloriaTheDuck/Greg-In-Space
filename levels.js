@@ -2,25 +2,25 @@
 // Parameters used by the stageGenerate/* functions to create the level with custom music and tiled maps.
 // When adding a level, please add it here.
 var x = [
-    {
-        sceneName: "testLevel",
-        music: "Sound/lab_gameplay_music.mp3",
-        json : "Tilemaps/Lvl6.json",
-        textScenes : {
-            executive: [
-                {
-                    speaker: "greg",
-                    spealerSprite: "player",
-                    text: "Finally, you took long enough",
-                },
-                {
-                    speaker: "greg",
-                    spealerSprite: "player",
-                    text: "Any longer and I would have to have asked for help",
-                }
-            ]
-        }
-    },
+    //{
+    //    sceneName: "testLevel",
+    //    music: "Sound/lab_gameplay_music.mp3",
+    //    json : "Tilemaps/Lvl6.json",
+    //    textScenes : {
+    //        executive: [
+    //            {
+    //                speaker: "greg",
+    //                spealerSprite: "player",
+    //                text: "Finally, you took long enough",
+    //            },
+    //            {
+    //                speaker: "greg",
+    //                spealerSprite: "player",
+    //                text: "Any longer and I would have to have asked for help",
+    //            }
+    //        ]
+    //    }
+    //},
     {
         sceneName: "level0",
         music: "Sound/lab_gameplay_music.mp3",

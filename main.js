@@ -41,6 +41,7 @@ var titleScene = {
   },
 }
 
+
 // Returns a function for starting level i
 function makePointerFunction(i){
     return function(pointer){
@@ -61,13 +62,26 @@ var menuScene = {
         image.scaleX = 0.5
         image.scaleY = 0.48
         
-        for(var i = 0; i<levels.default.length; i++){
+        // Creates buttons for levels 1-10
+        for(var i = 0; i<levels.default.length-1; i++){
             var currentIcon = this.physics.add.sprite(80 + 60*(i % 5), 151 + 60 * Math.floor(i/5),'temp')
-            currentIcon.index = i;
+            currentIcon.index = i+1;
             currentIcon.setInteractive();
             currentIcon.setAlpha(0.001);
-            currentIcon.on('pointerup', makePointerFunction(i));
+            currentIcon.on('pointerup', makePointerFunction(i+1));
         }
+        
+        // Creates icon for tutorial
+        var tutorialIcon = this.physics.add.sprite(200,90,'temp');
+        tutorialIcon.scaleX = 6.3
+        tutorialIcon.scaleY = 1.4
+        tutorialIcon.setInteractive();
+        tutorialIcon.setAlpha(0.001)
+        tutorialIcon.on('pointerup', function(){
+            this.scene.scene.stop("menu");
+            this.scene.scene.start("level0");
+        })
+        
         image.on('pointerup', function(){
             this.scene.scene.stop("menu");
             this.scene.scene.start("level1");
@@ -75,6 +89,7 @@ var menuScene = {
     },
     update: function(){}
 }
+
 
 // Configuration for the game
 var config = {
@@ -103,7 +118,7 @@ levels.default.forEach(function(lvl){
 })
 
 // Adds tutorial and tutorial text
-var tutParams = levels.default[1]
+var tutParams = levels.default[0]
 game.scene.add("level0",{
     preload:makePreload(tutParams),
     create:function(){
@@ -113,6 +128,7 @@ game.scene.add("level0",{
     update: update
 });
 
+// Text specifically for Tutorial Text
 game.scene.add("tutorialText",{
     preload: function(){},
     create: function(){
