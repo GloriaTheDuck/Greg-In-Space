@@ -24,7 +24,6 @@ export function create ()
     // Creates this.movingObjects = var movingObjects
     var movingObjects = [];
     this.movingObjects = movingObjects;
-    this.movingObjects = movingObjects;
     
     
     // Creates Phaser tilemap object from tilemap loaded in Preload
