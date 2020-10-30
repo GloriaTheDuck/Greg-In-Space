@@ -31,14 +31,14 @@ var titleScene = {
     var background = this.add.image(200, 150, "background")
     this.key = "title";
     background.setScale(0.5);
-    console.log(this.key);
-  },
-  update: function(){
-    this.input.on('pointerdown', function(pointer){
-      console.log("click");
-      this.scene.start("menu");
+    
+    // Add next button
+    this.input.on('pointerup', function(pointer){
+        console.log("click");
+        this.scene.start("menu");
     }, this);
   },
+  update: function(){}
 }
 
 
