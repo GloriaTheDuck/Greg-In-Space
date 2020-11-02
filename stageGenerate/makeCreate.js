@@ -12,12 +12,23 @@ export function create ()
     for(var i = 0; i<gameParams.stageWidth; i++){
         gameMatrix[i] = new Array(gameParams.stageHeight);
     }
-    console.log(this.gameMatrix)
     this.gameMatrix = gameMatrix;
     
+    // Creates Phaser tilemap object from tilemap loaded in Preload
+    var map = this.make.tilemap({ key: "tilemap"+this.name });
+    console.log(map)
+    
+    // Creates Good Tilemap Manager for good worldToTile and tileToWorld functions
+    var goodMap = new goodTileMapManager(map);
+    this.worldToTileX = goodMap.worldToTileX;
+    this.worldToTileY = goodMap.worldToTileY;
+    this.tileToWorldX = goodMap.tileToWorldX;
+    this.tileToWorldY = goodMap.tileToWorldY;
+    
+    // Fills in information about tileObjects
     for(var i = 0; i<gameMatrix.length; i++){
         for(var j=0; j<gameMatrix[0].length; j++){
-            gameMatrix[i][j] = new tileObject(this,i,j,null);
+            gameMatrix[i][j] = new tileObject(this,i,j,null,goodMap);
         }
     }
     
@@ -25,22 +36,28 @@ export function create ()
     var movingObjects = [];
     this.movingObjects = movingObjects;
     
-    
-    // Creates Phaser tilemap object from tilemap loaded in Preload
-    var map = this.make.tilemap({ key: "tilemap"+this.name });
-    
     // Adds flooring image
     var floorTileSet = map.addTilesetImage("Floor", "flooring");
     
+    
     // Loads background sprites from tilemap as sprites
     var colorLayer = map.createStaticLayer("Color Fill", floorTileSet, 0, 0);
+    if(colorLayer != null){    
+        colorLayer.x = goodMap.topLeftX;
+        colorLayer.y = goodMap.topLeftY
+    }
+    
     var backgroundLayer = map.createStaticLayer("Background", floorTileSet, 0, 0);
+    backgroundLayer.x = goodMap.topLeftX
+    backgroundLayer.y = goodMap.topLeftY
     
     // Loads water into the game
     var waterTiles = map.createFromObjects("Group", "puddle", {key: "water"});
     waterTiles.forEach(function(e){
+        e.x = goodMap.tileToWorldX(math.Floor(e.x/32));
+        e.y = goodMap.tileToWorldY(math.Floor(e.y/32));
         e.name = "water"
-        gameMatrix[map.worldToTileX(e.x)][map.worldToTileY(e.y)].background = "water";
+        gameMatrix[goodMap.worldToTileX(e.x)][goodMap.worldToTileY(e.y)].background = "water";
     })
     
     
@@ -53,12 +70,17 @@ export function create ()
     for(var i = 0; i<rocks.length; i++){
         var current = rocks[i];
         current.name = "rock";
-        gameMatrix[map.worldToTileX(current.x)][map.worldToTileY(current.y)].foreground = current;
+        current.x += goodMap.topLeftX
+        current.y += goodMap.topLeftY
+        gameMatrix[goodMap.worldToTileX(current.x)][goodMap.worldToTileY(current.y)].foreground = current;
     }
 
     // Creates walls from sprites
     var wallsLayer = map.createStaticLayer("Walls",floorTileSet,0,0);
+    wallsLayer.x = goodMap.topLeftX
+    wallsLayer.y = goodMap.topLeftY
     var walls = wallsLayer.getTilesWithin();
+    console.log(wallsLayer);
     // Adds walls to gameMatrix
     // Note doesn't actually load sprites, just loads Object with single attribute this.name="wall"
     for(var i = 0; i<walls.length; i++){
@@ -72,16 +94,22 @@ export function create ()
     // Sets this.player = player and this.playerObject = gameMatrix.find(player)
     // Adds attribute this.execsCollected = 0 to player.
     const spawnPoint = map.findObject("Player", obj => obj.name === "playerSpawn");
-    var player = this.physics.add.sprite(spawnPoint.x,spawnPoint.y,'character_right',"player")
+    spawnPoint.x += goodMap.topLeftX;
+    spawnPoint.y += goodMap.topLeftY;
+    var player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y,'character_right',"player")
     this.player = player;
     player.execsCollected = 0;
-    var playerObject = gameMatrix[map.worldToTileX(spawnPoint.x)][map.worldToTileY(spawnPoint.y)];
-    gameMatrix[map.worldToTileX(spawnPoint.x)][map.worldToTileY(spawnPoint.y)].foreground = player;
+    
+    var playerObject = gameMatrix[goodMap.worldToTileX(spawnPoint.x)][goodMap.worldToTileY(spawnPoint.y)];
+    gameMatrix[map.worldToTileX(spawnPoint.x)][goodMap.worldToTileY(spawnPoint.y)].foreground = player;
     this.playerObject = playerObject;
     
     // Takes exit info from tilemap and stores it in player
+    
     const exitPoint = map.findObject("Player", obj => obj.name === "exit");
-    gameMatrix[map.worldToTileX(exitPoint.x)][map.worldToTileY(exitPoint.y)].foreground = {name : "exit"};
+    exitPoint.x += goodMap.topLeftX;
+    exitPoint.y += goodMap.topLeftY;
+    gameMatrix[goodMap.worldToTileX(exitPoint.x)][goodMap.worldToTileY(exitPoint.y)].foreground = {name : "exit"};
     
     
     // Loads the executives and places them in the gameMatrix
@@ -90,7 +118,7 @@ export function create ()
     this.executives = executives
     for(var i = 0; i<this.executives.length; i++){
         current = this.executives[i];
-        gameMatrix[map.worldToTileX(current.x)][map.worldToTileY(current.y)].foreground = current;
+        gameMatrix[goodMap.worldToTileX(current.x)][goodMap.worldToTileY(current.y)].foreground = current;
         current.name = "executive"
     }
     
@@ -200,5 +228,26 @@ export function create ()
         loop: false,
         delay: 0
     }
-    
+}
+
+function findCentering(windowLength, pictureLength){
+    return (windowLength-pictureLength)/2
+}
+
+function makeCenter(layer){
+    console.log(layer);
+    layer.x = findCentering(400,layer.widthInPixels)
+    layer.y = findCentering(300,layer.heightInPixels)
+    console.log(layer.x,layer.y)
+}
+
+function goodTileMapManager(tilemap){
+    this.topLeftX = findCentering(400, tilemap.widthInPixels);
+    this.topLeftY = findCentering(300, tilemap.heightInPixels);
+    this.worldToTileX = (x) => Math.floor((x-this.topLeftX)/32);
+    this.worldToTileY = (y) => Math.floor((y-this.topLeftY)/32);
+    this.tileToWorldX = (x) => 32*x + this.topLeftX;
+    this.tileToWorldY = (y) => 32*y + this.topLeftY;
+    this.tileWidth = tilemap.tileWidth;
+    this.tileHeight = tilemap.tileHeight;
 }

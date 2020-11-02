@@ -16,12 +16,13 @@ function inBounds(x,y,gameMatrix){
 // moveUp(), moveDown(), moveLeft(), and moveRight() does similar thing.
 // inGrid() returns whether or not the in game x,y positions of the foreground sprite match the x,y positions of the background sprite.
 
-export function tileObject(scene,x,y,foreground){
+export function tileObject(scene,x,y,foreground,map){
     this.x = x;
     this.y = y;
     this.foreground = foreground;
     this.background = null;
     this.scene = scene;
+    this.map = map;
     
     this.getTileAbove =  function(){
         return inBounds(this.x,this.y-1,this.scene.gameMatrix) ? this.scene.gameMatrix[this.x][this.y-1] : null;
@@ -82,8 +83,12 @@ export function tileObject(scene,x,y,foreground){
     
     //Returns whether the foreground is in the correct position
     this.inGrid = function(){
-        var inX = (gridToPixel(this.x)-2 <= this.foreground.x) && (gridToPixel(this.x)+2 >= this.foreground.x)
-        var inY = (gridToPixel(this.y)-2 <= this.foreground.y) && (gridToPixel(this.y)+2 >= this.foreground.y)
+        var trueX = map.tileToWorldX(this.x);
+        var trueY = map.tileToWorldY(this.y);
+        
+        console.log(trueX,trueY,this.foreground.x,map.tileWidth/2)
+        var inX = (trueX-2 <= this.foreground.x - map.tileWidth/2) && (trueX+2 >= this.foreground.x - map.tileWidth/2)
+        var inY = (trueY-2 <= this.foreground.y - map.tileHeight/2) && (trueY+2 >= this.foreground.y - map.tileHeight/2)
         return inX && inY;
     }
 }

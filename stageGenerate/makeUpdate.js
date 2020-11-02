@@ -1,12 +1,15 @@
 import * as gameParams from "../globalVar.js";
 import {textConfig} from "./makeText.js";
 
+
+
 export function update ()
 {
     var gameMatrix = this.gameMatrix;
     var player = this.player;
     var cursors = this.input.keyboard.createCursorKeys();
-    var playerObject = this.gameMatrix[Math.floor(player.x/32)][Math.floor(player.y/32)];
+    var playerObject = this.gameMatrix[this.worldToTileX(player.x)][this.worldToTileY(player.y)];
+    console.log(playerObject)
     var movingObjects = this.movingObjects
     var restartKey = this.input.keyboard.addKey('R');
     
