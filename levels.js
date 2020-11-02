@@ -29,7 +29,17 @@ var x = [
     {
         sceneName: "level1",
         music: "Sound/lab_gameplay_music.mp3",
-        json : "Tilemaps/Lvl1.json"
+        json : "Tilemaps/Lvl1.json",
+        textScenes : {
+            endScene : [
+                {
+                    text: "eat my shorts"
+                },
+                {
+                    text: "no u"
+                }
+            ]
+        }
     },
     {
         sceneName: "level2",

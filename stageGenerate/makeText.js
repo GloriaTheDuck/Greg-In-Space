@@ -19,8 +19,9 @@ var lastFramePressed = false;
 
 
 // Gives generic configuration for end screen
-export function textConfig(dialog, returnScene){
-    this.preload = makePreload.call(this,dialog, returnScene);
+export function textConfig(dialog, returnScene, endLevel){
+    this.endLevel = endLevel || false;
+    this.preload = makePreload.call(this, dialog, returnScene);
     this.create = function(){
         this.text = this.add.text(48, 150, "", {
             fontSize : '16px',
@@ -45,9 +46,15 @@ export function textConfig(dialog, returnScene){
                 this.dialogIndex += 1;
                 lastFramePressed = true;
             }else if(this.dialogIndex == this.dialog.length && !lastFramePressed){
-                console.log(this)
                 this.scene.remove("textScene")
-                this.returnScene.scene.resume();
+                if(this.endLevel){
+                    this.scene.manager.getScenes(false).forEach(function(e){
+                        e.scene.stop();
+                    });
+                    this.scene.start("menu");
+                } else {
+                    this.returnScene.scene.resume();
+                }
             }
         }else{
             lastFramePressed = false;

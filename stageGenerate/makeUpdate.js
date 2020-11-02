@@ -9,7 +9,6 @@ export function update ()
     var player = this.player;
     var cursors = this.input.keyboard.createCursorKeys();
     var playerObject = this.gameMatrix[this.worldToTileX(player.x)][this.worldToTileY(player.y)];
-    console.log(playerObject)
     var movingObjects = this.movingObjects
     var restartKey = this.input.keyboard.addKey('R');
     
@@ -31,13 +30,26 @@ export function update ()
             }
         }
     } else {
-        // If nothings moving right now, the player moves according to nextInput.
+        // If nothings moving right now, the player moves according to nextInput. 
+        
         if(this.textScene != null){
-            this.scene.add("textScene",new textConfig(this.textScene,this), true);
-            console.log("text Scene added. This scene should pause")
-            console.log(this.scene);
+            this.scene.add("textScene",new textConfig(this.textScene,this, this.endLevel), true);
+            console.log(this.scene.manager);
             this.scene.pause();
+            this.framesSincePause = 0
             this.textScene = null;
+        }
+        
+        if(this.endLevel == true){
+            if(this.framesSincePause < 2){
+                this.framesSincePause += 1;
+            } else {
+                gameParams.music.stop();
+                this.scene.manager.getScenes(false).forEach(function(e){
+                    e.scene.stop();
+                });
+                this.scene.start("menu");   
+            }
         }
         
         if(this.nextInput != null ){ 
@@ -93,9 +105,14 @@ function playerMoveTo(scene,playerTile,direction){
             if(scene.executives.length == player.execsCollected){
                 playerTile.moveDirection(direction);
                 player.anims.play(direction);
-                var sceneManager = scene.scene;
-                sceneManager.scene.scene.pause();
-                sceneManager.run("endScene");
+                if(scene.textScenes != null){
+                    if(scene.textScenes.endScene != null){
+                        scene.textScene = scene.textScenes.endScene;
+                    }
+                } else {
+                    scene.framesSincePause =2;
+                }
+                scene.endLevel = true;
             }
         }
     }
