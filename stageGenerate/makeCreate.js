@@ -54,8 +54,8 @@ export function create ()
     // Loads water into the game
     var waterTiles = map.createFromObjects("Group", "puddle", {key: "water"});
     waterTiles.forEach(function(e){
-        e.x = goodMap.tileToWorldX(math.Floor(e.x/32));
-        e.y = goodMap.tileToWorldY(math.Floor(e.y/32));
+        e.x += goodMap.topLeftX;
+        e.y += goodMap.topLeftY;
         e.name = "water"
         gameMatrix[goodMap.worldToTileX(e.x)][goodMap.worldToTileY(e.y)].background = "water";
     })
@@ -118,6 +118,8 @@ export function create ()
     this.executives = executives
     for(var i = 0; i<this.executives.length; i++){
         current = this.executives[i];
+        current.x += goodMap.topLeftX;
+        current.y += goodMap.topLeftY;
         gameMatrix[goodMap.worldToTileX(current.x)][goodMap.worldToTileY(current.y)].foreground = current;
         current.name = "executive"
     }
