@@ -44,6 +44,7 @@ export function update ()
             if(this.framesSincePause < 2){
                 this.framesSincePause += 1;
             } else {
+                this.endLevel = false;
                 gameParams.music.stop();
                 this.scene.manager.getScenes(false).forEach(function(e){
                     e.scene.stop();
