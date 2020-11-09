@@ -83,9 +83,10 @@ function playerMoveTo(scene,playerTile,direction){
     let player = playerTile.foreground
     if( toTile != null){
         if(toTile.foreground == null){
-            //calls walking sound effect
-            scene.traversingtiles.play();
             if(toTile.background != "water" || player.execsCollected == 0){
+                //calls walking sound effect
+                scene.traversingtiles.play();
+                
                 playerTile.moveDirection(direction);
                 player.anims.play(direction);
             }
