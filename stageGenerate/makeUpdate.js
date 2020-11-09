@@ -30,16 +30,15 @@ export function update ()
             }
         }
     } else {
-        // If nothings moving right now, the player moves according to nextInput. 
-        
+        // If nothings moving right now, check if you need to play a text scene
         if(this.textScene != null){
             this.scene.add("textScene",new textConfig(this.textScene,this, this.endLevel), true);
-            console.log(this.scene.manager);
             this.scene.pause();
             this.framesSincePause = 0
             this.textScene = null;
         }
         
+        // If there's no text scene to play, and you need to end the level, end the level.
         if(this.endLevel == true){
             if(this.framesSincePause < 2){
                 this.framesSincePause += 1;
@@ -53,15 +52,17 @@ export function update ()
             }
         }
         
-        if(this.nextInput != null ){ 
+        // If none of the above are true, try to move the player
+        if(this.nextInput != null){ 
             player.anims.play("turn_" + this.nextInput);
             playerMoveTo(this,playerObject, this.nextInput);
+            this.lastInput = this.nextInput;
             this.nextInput = null;
         
         // If there's no nextInput, find one.
         } else {
             if (cursors.right.isDown){
-                this.nextInput = "right";
+                this.nextInput = 'right';
             }
             if (cursors.left.isDown){
                 this.nextInput = "left";
@@ -71,6 +72,9 @@ export function update ()
             }
             if (cursors.down.isDown){
                 this.nextInput = "down";
+            }
+            if(this.nextInput != this.lastInput){
+                this.lastInput = null;
             }
         }
     }
@@ -89,6 +93,8 @@ function playerMoveTo(scene,playerTile,direction){
                 
                 playerTile.moveDirection(direction);
                 player.anims.play(direction);
+            } else if(scene.lastInput != direction){
+                scene.invalidmove.play();
             }
         } else if(toTile.foreground.name == "rock"){
             //calls rock pushing sound effect
