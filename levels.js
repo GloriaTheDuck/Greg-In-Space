@@ -69,7 +69,13 @@ var x = [
     {
         sceneName: "level7",
         music: "Sound/lab_gameplay_music.mp3",
-        json : "Tilemaps/Lvl7.json"
+        json : "Tilemaps/Lvl7.json",
+        textScenes : {
+            executive: [
+                {text: "Hey. Long mouth. Don't you dare stick me in that water or I'll get my suit wet"},
+                {text: "Also my alien body will disintigrate in the water"}
+            ]
+        }
     },
     {
         sceneName: "level8",
