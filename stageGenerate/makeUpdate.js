@@ -91,8 +91,9 @@ function playerMoveTo(scene,playerTile,direction){
             }
         } else if(toTile.foreground.name == "rock"){
             //calls rock pushing sound effect
-            scene.rockpushing.play();
-            rockPush(toTile,direction);
+            if(rockPush(toTile,direction)){
+                scene.rockpushing.play();
+            }
         } else if(toTile.foreground.name == "executive"){
             //calls collect executive sound effect
             scene.collectalien.play();
@@ -125,8 +126,10 @@ function rockPush(rockTile,direction){
     if(toTile != null){
         if(toTile.foreground == null && toTile.background != "water"){
             rockTile.moveDirection(direction);
+            return true;
         }
     }
+    return false;
 }
 
 // Collects the executive
