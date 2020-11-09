@@ -49,11 +49,14 @@ export function create ()
     }
     
     var backgroundLayer = map.createStaticLayer("Background", floorTileSet, 0, 0);
-    backgroundLayer.x = goodMap.topLeftX
-    backgroundLayer.y = goodMap.topLeftY
+    if(backgroundLayer != null){
+        backgroundLayer.x = goodMap.topLeftX
+        backgroundLayer.y = goodMap.topLeftY   
+    }
     
     // Loads water into the game
     var waterTiles = map.createFromObjects("Group", "puddle", {key: "water"});
+    console.log(waterTiles);
     waterTiles.forEach(function(e){
         e.x += goodMap.topLeftX;
         e.y += goodMap.topLeftY;

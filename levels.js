@@ -27,31 +27,6 @@ var x = [
         json : "Tilemaps/Tutorial.json"
     },
     {
-        sceneName: "level1",
-        music: "Sound/lab_gameplay_music.mp3",
-        json : "Tilemaps/Lvl1.json",
-        textScenes : {
-            endScene : [
-                {
-                    text: "eat my shorts"
-                },
-                {
-                    text: "no u"
-                }
-            ]
-        }
-    },
-    {
-        sceneName: "level2",
-        music: "Sound/lab_gameplay_music.mp3",
-        json : "Tilemaps/Lvl2.json"
-    },
-    {
-        sceneName: "level3",
-        music: "Sound/lab_gameplay_music.mp3",
-        json : "Tilemaps/Lvl3.json"
-    },
-    {
         sceneName: "level4",
         music: "Sound/lab_gameplay_music.mp3",
         json : "Tilemaps/Lvl4.json"
@@ -68,7 +43,7 @@ var x = [
     },
     {
         sceneName: "level7",
-        music: "Sound/lab_gameplay_music.mp3",
+        music: "Sound/CS_329E_Music_2.mp3",
         json : "Tilemaps/Lvl7.json",
         textScenes : {
             executive: [
@@ -79,14 +54,20 @@ var x = [
     },
     {
         sceneName: "level8",
-        music: "Sound/lab_gameplay_music.mp3",
+        music: "Sound/CS_329E_Music_2.mp3",
         json : "Tilemaps/Lvl8.json"
     },
     {
         sceneName: "level9",
-        music: "Sound/lab_gameplay_music.mp3",
+        music: "Sound/CS_329E_Music_2.mp3",
         json : "Tilemaps/Lvl9.json"
     },
+    {
+        sceneName: "level10",
+        music: "Sound/CS_329E_Music_2.mp3",
+        json : "Tilemaps/Lvl10.json"
+    }
+    
 ];
 
 export default x;
