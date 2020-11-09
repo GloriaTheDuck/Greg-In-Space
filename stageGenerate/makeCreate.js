@@ -4,7 +4,8 @@ import {tileObject} from "../tileObject.js";
 // Generic Create Function for puzzle stage
 export function create ()
 {
-    this.nextInput = null;
+    this.nextInput;
+    this.lastInput;
     
     // Creates this.gameMatrix = var gameMatrix used to store sprites and collision information.
     var gameMatrix = new Array(gameParams.stageWidth);
