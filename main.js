@@ -4,6 +4,7 @@ import {makePreload} from "./stageGenerate/makePreload.js";
 import {create} from "./stageGenerate/makeCreate.js";
 import {update} from "./stageGenerate/makeUpdate.js";
 import {endScreen} from "./stageGenerate/endScreen.js";
+import {introScreen} from "./stageGenerate/introScreen.js";
 
 // Configuration for generic end screen
 var endScene = {
@@ -35,7 +36,7 @@ var titleScene = {
     // Add next button
     this.input.on('pointerup', function(pointer){
         console.log("click");
-        this.scene.start("menu");
+        this.scene.start("introScreen");
     }, this);
   },
   update: function(){}
@@ -156,3 +157,4 @@ game.scene.add()
 game.scene.add("title", titleScene, true);
 game.scene.add("menu",menuScene);
 game.scene.add("endScene",endScreen);
+game.scene.add("introScreen",introScreen);
