@@ -90,6 +90,18 @@
                  "width":32,
                  "x":96,
                  "y":96
+                }, 
+                {
+                 "gid":65,
+                 "height":32,
+                 "id":9,
+                 "name":"alien",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":32,
+                 "y":96
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -132,7 +144,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":9,
+ "nextobjectid":10,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.2",
@@ -161,6 +173,19 @@
          "name":"Rocks",
          "spacing":0,
          "tilecount":1,
+         "tileheight":32,
+         "tilewidth":32
+        }, 
+        {
+         "columns":2,
+         "firstgid":65,
+         "image":"..\/Assets\/aliensprite_idle.png",
+         "imageheight":32,
+         "imagewidth":64,
+         "margin":0,
+         "name":"Aliens",
+         "spacing":0,
+         "tilecount":2,
          "tileheight":32,
          "tilewidth":32
         }],
