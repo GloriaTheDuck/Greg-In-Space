@@ -61,7 +61,7 @@ var x = [
         sceneName: "level10",
         music: "Sound/CS_329E_Music_2.mp3",
         json : "Tilemaps/Lvl10.json"
-    }
+    },
     {
         sceneName: "level9",
         music: "Sound/CS_329E_Music_2.mp3",
