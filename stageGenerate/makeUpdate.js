@@ -11,10 +11,15 @@ export function update ()
     var playerObject = this.gameMatrix[this.worldToTileX(player.x)][this.worldToTileY(player.y)];
     var movingObjects = this.movingObjects
     var restartKey = this.input.keyboard.addKey('R');
+    var exitKey = this.input.keyboard.addKey('ESC');
     
     if(restartKey.isDown){
         gameParams.music.stop();
         this.scene.restart()
+    }
+    
+    if(exitKey.isDown){
+        endLevel.call(this);
     }
     
     // If somethings moving, check if it needs to stop.
@@ -43,12 +48,7 @@ export function update ()
             if(this.framesSincePause < 2){
                 this.framesSincePause += 1;
             } else {
-                this.endLevel = false;
-                gameParams.music.stop();
-                this.scene.manager.getScenes(false).forEach(function(e){
-                    e.scene.stop();
-                });
-                this.scene.start("menu");   
+                endLevel.call(this);
             }
         }
         
@@ -126,6 +126,16 @@ function playerMoveTo(scene,playerTile,direction){
         }
     }
 }
+
+function endLevel(){
+    this.endLevel = false;
+    gameParams.music.stop();
+    this.scene.manager.getScenes(false).forEach(function(e){
+        e.scene.stop();
+    });
+    this.scene.start("menu");   
+}
+
 
 // Tries to move the Rock to tile Rock. Does check for collision.
 function rockPush(rockTile,direction){
