@@ -25,7 +25,7 @@ export function textConfig(dialog, returnScene, endLevel){
     this.create = function(){
         this.text = this.add.text(48, 150, "", {
             fontSize : '16px',
-            backgroundColor : "#1e2",
+            backgroundColor : "#000",
             wordWrap: {width: 130}
         });
         this.text.setFont("Roboto");
