@@ -56,17 +56,18 @@ var x = [
         sceneName: "level8",
         music: "Sound/CS_329E_Music_2.mp3",
         json : "Tilemaps/Lvl8.json"
-    },
-    {
-        sceneName: "level9",
-        music: "Sound/CS_329E_Music_2.mp3",
-        json : "Tilemaps/Lvl9.json"
-    },
+    },    
     {
         sceneName: "level10",
         music: "Sound/CS_329E_Music_2.mp3",
         json : "Tilemaps/Lvl10.json"
     }
+    {
+        sceneName: "level9",
+        music: "Sound/CS_329E_Music_2.mp3",
+        json : "Tilemaps/Lvl9.json"
+    },
+
     
 ];
 
