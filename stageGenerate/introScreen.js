@@ -4,6 +4,7 @@ export var introScreen = {
         this.load.image('scene2', 'Assets/scene2.png');
         this.load.image('scene3', 'Assets/scene3.png');
         this.load.image('scene4', 'Assets/scene4.png');
+        this.load.audio('introMusic', "Sound/CS_Storyboard_Music.mp3")
     },
     create : function(){
         this.images = [];
@@ -20,7 +21,23 @@ export var introScreen = {
         this.images[0].setAlpha(1);
         
         this.lastFramePressed = false;
+        var music = this.sound.add("introMusic", musicConfig);
+        this.music = music;
+    
+        var musicConfig = {
+        
+            mute: false,
+            volume: 0.5,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: true,
+            delay: 0
+
+        }
+        music.play();
         this.index = 0
+        
         
 
         
@@ -37,6 +54,7 @@ export var introScreen = {
                 this.scene.manager.getScenes(false).forEach(function(e){
                     e.scene.stop();
                 });
+                this.music.stop();
                 this.scene.start("menu");
             }
         }else{

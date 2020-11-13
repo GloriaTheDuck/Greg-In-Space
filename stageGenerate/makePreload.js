@@ -10,12 +10,12 @@ export function makePreload(levelParams){
         this.load.spritesheet('character_down', 'Assets/sprite_down.png', { frameWidth: 32, frameHeight: 32 });
         this.load.image('water', "Assets/MasterSimple.png");
         this.load.image('exit', "Assets/sprite_down.png",{ frameWidth: 32, frameHeight: 32 });
-    
-        //loading music
-        this.load.audio('music', levelParams.music);
         
         //names scene
         this.name = levelParams.sceneName;
+        
+        //loading music
+        this.load.audio('music'+this.name, levelParams.music);
         
         this.textScenes = levelParams.textScenes;
         

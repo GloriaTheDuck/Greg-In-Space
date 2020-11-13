@@ -198,7 +198,7 @@ export function create ()
     });
     
     // Loads music from makeCreate
-    var music = this.sound.add("music", musicConfig);
+    var music = this.sound.add("music" + this.name, musicConfig);
     gameParams.setMusic(music)
     
     var musicConfig = {
