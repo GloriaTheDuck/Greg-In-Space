@@ -23,6 +23,7 @@ export function tileObject(scene,x,y,foreground,map){
     this.background = null;
     this.scene = scene;
     this.map = map;
+    this.scale = 2
     
     this.getTileAbove =  function(){
         return inBounds(this.x,this.y-1,this.scene.gameMatrix) ? this.scene.gameMatrix[this.x][this.y-1] : null;
@@ -85,9 +86,10 @@ export function tileObject(scene,x,y,foreground,map){
     this.inGrid = function(){
         var trueX = map.tileToWorldX(this.x);
         var trueY = map.tileToWorldY(this.y);
+        console.log(map.tileWidth, map.tileHeight)
         
-        var inX = (trueX-2 <= this.foreground.x - map.tileWidth/2) && (trueX+2 >= this.foreground.x - map.tileWidth/2)
-        var inY = (trueY-2 <= this.foreground.y - map.tileHeight/2) && (trueY+2 >= this.foreground.y - map.tileHeight/2)
+        var inX = (trueX-4 <= this.foreground.x - map.tileWidth/2) && (trueX+4 >= this.foreground.x - map.tileWidth/2)
+        var inY = (trueY-4 <= this.foreground.y - map.tileHeight/2) && (trueY+4 >= this.foreground.y - map.tileHeight/2)
         return inX && inY;
     }
 }

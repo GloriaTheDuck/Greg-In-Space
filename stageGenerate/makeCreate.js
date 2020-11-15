@@ -20,7 +20,7 @@ export function create ()
     console.log(map)
     
     // Creates Good Tilemap Manager for good worldToTile and tileToWorld functions
-    var goodMap = new goodTileMapManager(map);
+    var goodMap = new goodTileMapManager(map,2);
     this.worldToTileX = goodMap.worldToTileX;
     this.worldToTileY = goodMap.worldToTileY;
     this.tileToWorldX = goodMap.tileToWorldX;
@@ -44,23 +44,20 @@ export function create ()
     // Loads background sprites from tilemap as sprites
     var colorLayer = map.createStaticLayer("Color Fill", floorTileSet, 0, 0);
     if(colorLayer != null){    
-        colorLayer.x = goodMap.topLeftX;
-        colorLayer.y = goodMap.topLeftY
+        goodMap.makeGoodLayer(colorLayer);
     }
     
     var backgroundLayer = map.createStaticLayer("Background", floorTileSet, 0, 0);
     if(backgroundLayer != null){
-        backgroundLayer.x = goodMap.topLeftX
-        backgroundLayer.y = goodMap.topLeftY   
+        goodMap.makeGoodLayer(backgroundLayer);
     }
     
     // Loads water into the game
     var waterTiles = map.createFromObjects("Group", "puddle", {key: "water"});
     console.log(waterTiles);
     waterTiles.forEach(function(e){
-        e.x += goodMap.topLeftX;
-        e.y += goodMap.topLeftY;
         e.name = "water"
+        goodMap.makeGoodObject(e);
         gameMatrix[goodMap.worldToTileX(e.x)][goodMap.worldToTileY(e.y)].background = "water";
     })
     
@@ -74,15 +71,13 @@ export function create ()
     for(var i = 0; i<rocks.length; i++){
         var current = rocks[i];
         current.name = "rock";
-        current.x += goodMap.topLeftX
-        current.y += goodMap.topLeftY
+        goodMap.makeGoodObject(current);
         gameMatrix[goodMap.worldToTileX(current.x)][goodMap.worldToTileY(current.y)].foreground = current;
     }
 
     // Creates walls from sprites
     var wallsLayer = map.createStaticLayer("Walls",floorTileSet,0,0);
-    wallsLayer.x = goodMap.topLeftX
-    wallsLayer.y = goodMap.topLeftY
+    goodMap.makeGoodLayer(wallsLayer);
     var walls = wallsLayer.getTilesWithin();
     console.log(wallsLayer);
     // Adds walls to gameMatrix
@@ -98,21 +93,20 @@ export function create ()
     // Sets this.player = player and this.playerObject = gameMatrix.find(player)
     // Adds attribute this.execsCollected = 0 to player.
     const spawnPoint = map.findObject("Player", obj => obj.name === "playerSpawn");
-    spawnPoint.x += goodMap.topLeftX;
-    spawnPoint.y += goodMap.topLeftY;
     var player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y,'character_right',"player")
+    goodMap.makeGoodObject(player);
     this.player = player;
     player.execsCollected = 0;
     
-    var playerObject = gameMatrix[goodMap.worldToTileX(spawnPoint.x)][goodMap.worldToTileY(spawnPoint.y)];
-    gameMatrix[map.worldToTileX(spawnPoint.x)][goodMap.worldToTileY(spawnPoint.y)].foreground = player;
+    console.log(goodMap.worldToTileX(player.x), goodMap.worldToTileY(player.y))
+    var playerObject = gameMatrix[goodMap.worldToTileX(player.x)][goodMap.worldToTileY(player.y)];
+    gameMatrix[map.worldToTileX(player.x)][goodMap.worldToTileY(player.y)].foreground = player;
     this.playerObject = playerObject;
     
     // Takes exit info from tilemap and stores it in player
     
     const exitPoint = map.findObject("Player", obj => obj.name === "exit");
-    exitPoint.x += goodMap.topLeftX;
-    exitPoint.y += goodMap.topLeftY;
+    goodMap.makeGoodObject(exitPoint);
     gameMatrix[goodMap.worldToTileX(exitPoint.x)][goodMap.worldToTileY(exitPoint.y)].foreground = {name : "exit"};
     
     
@@ -122,8 +116,7 @@ export function create ()
     this.executives = executives
     for(var i = 0; i<this.executives.length; i++){
         current = this.executives[i];
-        current.x += goodMap.topLeftX;
-        current.y += goodMap.topLeftY;
+        goodMap.makeGoodObject(current);
         gameMatrix[goodMap.worldToTileX(current.x)][goodMap.worldToTileY(current.y)].foreground = current;
         current.name = "executive"
     }
@@ -247,13 +240,24 @@ function makeCenter(layer){
     console.log(layer.x,layer.y)
 }
 
-function goodTileMapManager(tilemap){
-    this.topLeftX = findCentering(400, tilemap.widthInPixels);
-    this.topLeftY = findCentering(300, tilemap.heightInPixels);
-    this.worldToTileX = (x) => Math.floor((x-this.topLeftX)/32);
-    this.worldToTileY = (y) => Math.floor((y-this.topLeftY)/32);
-    this.tileToWorldX = (x) => 32*x + this.topLeftX;
-    this.tileToWorldY = (y) => 32*y + this.topLeftY;
-    this.tileWidth = tilemap.tileWidth;
-    this.tileHeight = tilemap.tileHeight;
+function goodTileMapManager(tilemap, scale){
+    this.scale = scale
+    this.topLeftX = findCentering(800, tilemap.widthInPixels * this.scale);
+    this.topLeftY = findCentering(600, tilemap.heightInPixels * this.scale);
+    this.worldToTileX = (x) => Math.floor((x-this.topLeftX)/64);
+    this.worldToTileY = (y) => Math.floor((y-this.topLeftY)/64);
+    this.tileToWorldX = (x) => 64*x + this.topLeftX;
+    this.tileToWorldY = (y) => 64*y + this.topLeftY;
+    this.tileWidth = tilemap.tileWidth * scale;
+    this.tileHeight = tilemap.tileHeight * scale;
+    this.makeGoodLayer = function(layer){
+        layer.scale = this.scale;
+        layer.x = this.topLeftX
+        layer.y = this.topLeftY
+    }
+    this.makeGoodObject = function(a){
+        a.x = 2 * a.x + this.topLeftX;
+        a.y = 2 * a.y + this.topLeftY;
+        a.scale = 2;
+    }
 }

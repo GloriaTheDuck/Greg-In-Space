@@ -98,8 +98,8 @@ var config = {
     scale: {
         parent: 'yourgamediv',
         mode: Phaser.Scale.FIT,
-        width: 400,
-        height: 300
+        width: 800,
+        height: 600
     },
     physics: {
         default: 'arcade',
