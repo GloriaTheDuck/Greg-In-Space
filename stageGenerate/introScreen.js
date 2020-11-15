@@ -10,8 +10,7 @@ export var introScreen = {
         this.images = [];
         var words = ["scene1","scene2","scene3", "scene4"];
         this.addImage = function(e){
-            var image = this.add.image(200,150,e);
-            image.setScale(0.5);
+            var image = this.add.image(400,300,e);
             image.setAlpha(0)
             this.images.push(image);
         }

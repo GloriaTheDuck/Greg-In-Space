@@ -29,9 +29,8 @@ var titleScene = {
     this.load.image("background", "Assets/planet.png")
   },
   create: function(){
-    var background = this.add.image(200, 150, "background")
+    var background = this.add.image(400, 300, "background")
     this.key = "title";
-    background.setScale(0.5);
     
     // Add next button
     this.input.on('pointerup', function(pointer){
@@ -59,23 +58,22 @@ var menuScene = {
     create: function(){
         this.key = "menu"
         
-        var image = this.add.image(200,150,'levelSel');
-        image.scaleX = 0.5
-        image.scaleY = 0.48
+        var image = this.add.image(400,300,'levelSel');
         
         // Creates buttons for levels 1-10
         for(var i = 0; i<levels.default.length-1; i++){
-            var currentIcon = this.physics.add.sprite(80 + 60*(i % 5), 151 + 60 * Math.floor(i/5),'temp')
+            var currentIcon = this.physics.add.sprite(160 + 120*(i % 5), 302 + 120 * Math.floor(i/5),'temp')
             currentIcon.index = i+1;
             currentIcon.setInteractive();
+            currentIcon.scale = 2;
             currentIcon.setAlpha(0.001);
             currentIcon.on('pointerup', makePointerFunction(i+1));
         }
         
         // Creates icon for tutorial
-        var tutorialIcon = this.physics.add.sprite(200,90,'temp');
-        tutorialIcon.scaleX = 6.3
-        tutorialIcon.scaleY = 1.4
+        var tutorialIcon = this.physics.add.sprite(400,180,'temp');
+        tutorialIcon.scaleX = 12.6
+        tutorialIcon.scaleY = 2.8
         tutorialIcon.setInteractive();
         tutorialIcon.setAlpha(0.001)
         tutorialIcon.on('pointerup', function(){
