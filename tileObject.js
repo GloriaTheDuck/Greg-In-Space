@@ -88,8 +88,9 @@ export function tileObject(scene,x,y,foreground,map){
         var trueY = map.tileToWorldY(this.y);
         console.log(map.tileWidth, map.tileHeight)
         
-        var inX = (trueX-4 <= this.foreground.x - map.tileWidth/2) && (trueX+4 >= this.foreground.x - map.tileWidth/2)
-        var inY = (trueY-4 <= this.foreground.y - map.tileHeight/2) && (trueY+4 >= this.foreground.y - map.tileHeight/2)
+        var tol = 6
+        var inX = (trueX-tol <= this.foreground.x - map.tileWidth/2) && (trueX+tol >= this.foreground.x - map.tileWidth/2)
+        var inY = (trueY-tol <= this.foreground.y - map.tileHeight/2) && (trueY+tol >= this.foreground.y - map.tileHeight/2)
         return inX && inY;
     }
 }

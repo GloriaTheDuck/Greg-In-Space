@@ -9,6 +9,7 @@ export function update ()
     var player = this.player;
     var cursors = this.input.keyboard.createCursorKeys();
     var playerObject = this.gameMatrix[this.worldToTileX(player.x)][this.worldToTileY(player.y)];
+    // Moving Objects contains tile objects
     var movingObjects = this.movingObjects
     var restartKey = this.input.keyboard.addKey('R');
     var exitKey = this.input.keyboard.addKey('ESC');
@@ -26,9 +27,13 @@ export function update ()
     if(movingObjects.length > 0){
         for(var i = 0; i<movingObjects.length; i++){
             var current = movingObjects[i];
+            console.log(current.x,current.y)
             if(current.inGrid()){
                 current.foreground.body.velocity.x = 0;
                 current.foreground.body.velocity.y = 0;
+                if(current.body != null)
+                current.foreground.x = this.tileToWorldX(current.x);
+                current.foreground.y = this.tileToWorldY(current.y)+32;
                 movingObjects.splice(i, 1);
                 i+= -1;
                 player.anims.stop();
