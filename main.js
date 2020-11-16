@@ -137,18 +137,19 @@ game.scene.add("tutorialText",{
         });
         this.text.setText("Press arrow Keys to move around. Collect the pink aliens and then make it to the exit.");
     },
-    update: function(){
-        var keyPressed = false;
-        var cursors = this.input.keyboard.createCursorKeys();
-        [cursors.right,cursors.left,cursors.up,cursors.down].forEach(function(e){
-          if(e.isDown){
-              keyPressed = true;
-          }  
-        })
-        if(keyPressed){
-            this.scene.stop();
-        }
-    }
+    // Optional code for remove text functionality
+    //update: function(){
+    //    var keyPressed = false;
+    //    var cursors = this.input.keyboard.createCursorKeys();
+    //    [cursors.right,cursors.left,cursors.up,cursors.down].forEach(function(e){
+    //      if(e.isDown){
+    //          keyPressed = true;
+    //      }  
+    //    })
+    //    if(keyPressed){
+    //        this.scene.stop();
+    //    }
+    //}
 });
 
 game.scene.add()
