@@ -146,7 +146,8 @@ function endLevel(){
                 this.scene.start(levels.default[index+1].sceneName)    
             } else {
                 // Put End Scene Here
-                this.scene.start("menu")
+                this.scene.start("endCard")
+                console.log("new level")
             }
         }
         index+=1;
