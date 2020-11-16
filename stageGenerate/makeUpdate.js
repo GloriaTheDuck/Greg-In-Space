@@ -1,6 +1,6 @@
 import * as gameParams from "../globalVar.js";
 import {textConfig} from "./makeText.js";
-
+import * as levels from "../levels.js";
 
 
 export function update ()
@@ -133,7 +133,19 @@ function endLevel(){
     this.scene.manager.getScenes(false).forEach(function(e){
         e.scene.stop();
     });
-    this.scene.start("menu");   
+    var index = 0;
+    while(index < levels.default.length){
+        console.log(this.name,);
+        if(levels.default[index].sceneName == this.name){
+            if(index != levels.default.length-1){
+                this.scene.start(levels.default[index+1].sceneName)    
+            } else {
+                // Put End Scene Here
+                this.scene.start("menu")
+            }
+        }
+        index+=1;
+    }
 }
 
 
