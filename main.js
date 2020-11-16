@@ -159,7 +159,7 @@ game.scene.add("endScene",endScreen);
 game.scene.add("introScreen",introScreen);
 game.scene.add("endCard",{
     preload: function(){
-        this.load.image("e","/Assets/endcard.png");
+        this.load.image("e","Assets/endcard.png");
     },
     create: function(){
         this.physics.add.image(400,300,"e");

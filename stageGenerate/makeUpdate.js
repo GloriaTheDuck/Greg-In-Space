@@ -20,7 +20,11 @@ export function update ()
     }
     
     if(exitKey.isDown){
-        endLevel.call(this);
+        gameParams.music.stop();
+        this.scene.manager.getScenes(false).forEach(function(e){
+            e.scene.stop();
+        });
+        this.scene.start("menu")
     }
     
     // If somethings moving, check if it needs to stop.
@@ -147,7 +151,6 @@ function endLevel(){
             } else {
                 // Put End Scene Here
                 this.scene.start("endCard")
-                console.log("new level")
             }
         }
         index+=1;
