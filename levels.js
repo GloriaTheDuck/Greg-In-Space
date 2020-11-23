@@ -27,6 +27,11 @@ var x = [
         json : "Tilemaps/Tutorial.json"
     },
     {
+        sceneName: "level3",
+        music: "Sound/lab_gameplay_music.mp3",
+        json : "Tilemaps/Lvl3.json"
+    },
+    {
         sceneName: "level4",
         music: "Sound/lab_gameplay_music.mp3",
         json : "Tilemaps/Lvl4.json"
