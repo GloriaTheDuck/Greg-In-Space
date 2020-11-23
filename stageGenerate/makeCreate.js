@@ -98,7 +98,7 @@ export function create ()
     this.player = player;
     player.execsCollected = 0;
     
-    console.log(goodMap.worldToTileX(player.x), goodMap.worldToTileY(player.y))
+
     var playerObject = gameMatrix[goodMap.worldToTileX(player.x)][goodMap.worldToTileY(player.y)];
     gameMatrix[map.worldToTileX(player.x)][goodMap.worldToTileY(player.y)].foreground = player;
     this.playerObject = playerObject;

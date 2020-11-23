@@ -1,6 +1,7 @@
 import * as gameParams from "../globalVar.js";
 import {textConfig} from "./makeText.js";
 import * as levels from "../levels.js";
+import {makeTransitionCard} from "./transitionCard.js"
 
 
 export function update ()
@@ -140,19 +141,19 @@ function playerMoveTo(scene,playerTile,direction){
 
 function endLevel(){
     this.endLevel = false;
-    gameParams.music.stop();
-    this.scene.manager.getScenes(false).forEach(function(e){
-        e.scene.stop();
-    });
+    // this.scene.pause();
     var index = 0;
     while(index < levels.default.length){
-        console.log(this.name,);
         if(levels.default[index].sceneName == this.name){
+            console.log(index);
             if(index != levels.default.length-1){
-                this.scene.start(levels.default[index+1].sceneName)    
+                console.log(makeTransitionCard(levels.default[index+1].sceneName))
+                this.scene.add("transitionCard",makeTransitionCard(levels.default[index+1].sceneName),true)
+                this.scene.pause();
             } else {
                 // Put End Scene Here
-                this.scene.start("endCard")
+                this.scene.add("transitionCard",makeTransitionCard("endCard"),true)
+                this.scene.pause();
             }
         }
         index+=1;
