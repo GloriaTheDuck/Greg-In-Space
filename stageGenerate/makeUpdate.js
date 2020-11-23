@@ -41,6 +41,7 @@ export function update ()
                 movingObjects.splice(i, 1);
                 i+= -1;
                 player.anims.stop();
+                player.anims.play("turn_"+current.direction);
             }
         }
     } else {

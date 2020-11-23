@@ -78,6 +78,7 @@ export function tileObject(scene,x,y,foreground,map){
                 this.foreground.anims.play("left",true);
             }}
         this.getTile(direction).foreground = this.foreground;
+        this.getTile(direction).direction = direction;
         this.scene.movingObjects.push(this.getTile(direction));
         this.foreground = null;
     }
