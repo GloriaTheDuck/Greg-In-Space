@@ -23,7 +23,7 @@ export function textConfig(dialog, returnScene, endLevel){
     this.endLevel = endLevel || false;
     this.preload = makePreload.call(this, dialog, returnScene);
     this.create = function(){
-        this.text = this.add.text(48, 150, "", {
+        this.text = this.add.text(320, 400, "", {
             fontSize : '16px',
             backgroundColor : "#000",
             wordWrap: {width: 130}
@@ -31,9 +31,7 @@ export function textConfig(dialog, returnScene, endLevel){
         this.text.setFont("Roboto");
         this.text.setText(this.dialog[0].text);
         this.dialogIndex = 1;
-        var player = this.physics.add.sprite(20,160,'greg');
-        player.setScale(2);
-        var exec = this.physics.add.sprite(200,160,'executive');
+        var exec = this.physics.add.sprite(270,400,'executive');
         exec.setScale(2);
     }
     this.update = function(){
