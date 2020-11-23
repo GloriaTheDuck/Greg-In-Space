@@ -47,6 +47,7 @@ export function update ()
         // If nothings moving right now, check if you need to play a text scene
         if(this.textScene != null){
             this.scene.add("textScene",new textConfig(this.textScene,this, this.endLevel), true);
+            this.nextInput = null;
             this.scene.pause();
             this.framesSincePause = 0
             this.textScene = null;
