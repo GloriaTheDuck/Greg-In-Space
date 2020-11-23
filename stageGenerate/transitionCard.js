@@ -23,7 +23,7 @@ export function makeTransitionCard(nextScene){
 function makeButton(button,nextName){
     button.setInteractive();
     button.on('pointerup', function(nextSceneName){
-        return function(nextSceneName){
+        return function(){
             this.scene.scene.manager.getScenes(false).forEach(function(e){
                 e.scene.stop();
             });
