@@ -56,17 +56,17 @@ var x = [
                 {text: "Also my alien body will disintigrate in the water"}
             ]
         }
-    },
-    {
-        sceneName: "level12",
-        music: "Sound/CS_329E_Music_2.mp3",
-        json : "Tilemaps/Lvl12.json"
-    },  
+    }, 
     {
         sceneName: "level8",
         music: "Sound/CS_329E_Music_2.mp3",
         json : "Tilemaps/Lvl8.json"
     },    
+    {
+        sceneName: "level12",
+        music: "Sound/CS_329E_Music_2.mp3",
+        json : "Tilemaps/Lvl12.json"
+    }, 
     {
         sceneName: "level11",
         music: "Sound/CS_329E_Music_2.mp3",
