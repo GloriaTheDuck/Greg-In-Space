@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="6" height="10" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="17">
+ <editorsettings>
+  <export target="Lvl5.json" format="json"/>
+ </editorsettings>
  <tileset firstgid="1" name="Floor" tilewidth="32" tileheight="32" tilecount="63" columns="7">
   <image source="../Assets/tileset.png" width="224" height="288"/>
  </tileset>
@@ -26,7 +29,7 @@
 0,0,0,0,0,0,
 0,0,0,0,0,0,
 0,0,0,0,0,68,
-0,0,0,0,0,68
+0,0,0,68,68,68
 </data>
  </layer>
  <layer id="1" name="Background" width="6" height="10">
@@ -39,7 +42,7 @@
 0,9,9,9,9,0,
 0,9,9,9,9,0,
 0,9,9,9,0,0,
-0,9,0,9,0,0,
+0,9,0,0,0,0,
 0,0,0,0,0,0
 </data>
  </layer>
@@ -53,8 +56,8 @@
 8,0,0,0,0,8,
 8,0,0,0,0,8,
 8,0,0,0,22,11,
-8,0,8,0,8,0,
-13,2,10,2,11,0
+8,0,22,2,11,0,
+13,2,10,0,0,0
 </data>
  </layer>
  <objectgroup id="3" name="Group">
