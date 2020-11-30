@@ -30,9 +30,6 @@ var titleScene = {
   },
   create: function(){
     var background = this.add.image(400, 300, "background")
-    
-
-      
     this.key = "title";
     
     // Add next button
@@ -84,10 +81,8 @@ var menuScene = {
             this.scene.scene.start("level0");
         })
         
-        image.on('pointerup', function(){
-            this.scene.scene.stop("menu");
-            this.scene.scene.start("level1");
-        })
+        
+        
     },
     update: function(){}
 }
