@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="7" height="7" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="13">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="6" height="7" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="14">
  <editorsettings>
   <export target="Lvl11.json" format="json"/>
  </editorsettings>
@@ -15,44 +15,44 @@
  <tileset firstgid="67" name="Rocks" tilewidth="32" tileheight="32" tilecount="1" columns="1">
   <image source="../Assets/addwork.png" width="32" height="32"/>
  </tileset>
- <layer id="1" name="Background" width="7" height="7">
+ <layer id="1" name="Background" width="6" height="7">
   <data encoding="csv">
-0,0,0,0,49,0,0,
-0,9,9,9,9,9,0,
-0,9,9,9,9,9,0,
-0,9,9,9,9,9,0,
-0,9,9,9,9,9,0,
-0,9,9,9,9,9,0,
-0,0,0,0,0,0,0
+0,0,0,49,0,0,
+0,9,9,9,9,0,
+0,9,9,9,9,0,
+0,9,9,9,9,0,
+0,9,9,9,9,0,
+0,9,9,9,9,0,
+0,0,0,0,0,0
 </data>
  </layer>
- <layer id="2" name="Walls" width="7" height="7">
+ <layer id="2" name="Walls" width="6" height="7">
   <data encoding="csv">
-22,2,2,2,0,2,6,
-8,0,0,0,0,0,8,
-8,0,0,0,0,0,8,
-8,0,0,0,0,0,8,
-8,0,0,0,0,0,8,
-8,0,0,0,0,0,8,
-13,2,2,2,2,2,11
+22,2,2,0,2,6,
+8,0,0,0,0,8,
+8,0,0,0,0,8,
+8,0,0,0,0,8,
+8,0,0,0,0,8,
+8,0,0,0,0,8,
+13,2,2,2,2,11
 </data>
  </layer>
  <objectgroup id="3" name="Group">
-  <object id="1" name="puddle" gid="66" x="96" y="64" width="32" height="32"/>
-  <object id="2" name="puddle" gid="66" x="64" y="96" width="32" height="32"/>
-  <object id="3" name="puddle" gid="66" x="96" y="160" width="32" height="32"/>
-  <object id="4" name="puddle" gid="66" x="160" y="96" width="32" height="32"/>
-  <object id="5" name="puddle" gid="66" x="160" y="128" width="32" height="32"/>
-  <object id="6" name="rock" gid="67" x="128" y="96" width="32" height="32"/>
-  <object id="7" name="rock" gid="67" x="128" y="128" width="32" height="32"/>
-  <object id="8" name="rock" gid="67" x="96" y="128" width="32" height="32"/>
-  <object id="9" name="alien" gid="64" x="64" y="128" width="32" height="32"/>
-  <object id="10" name="alien" gid="64" x="128" y="160" width="32" height="32"/>
+  <object id="1" name="puddle" gid="66" x="64" y="64" width="32" height="32"/>
+  <object id="2" name="puddle" gid="66" x="32" y="96" width="32" height="32"/>
+  <object id="3" name="puddle" gid="66" x="64" y="160" width="32" height="32"/>
+  <object id="4" name="puddle" gid="66" x="128" y="96" width="32" height="32"/>
+  <object id="5" name="puddle" gid="66" x="128" y="128" width="32" height="32"/>
+  <object id="6" name="rock" gid="67" x="96" y="96" width="32" height="32"/>
+  <object id="7" name="rock" gid="67" x="96" y="128" width="32" height="32"/>
+  <object id="8" name="rock" gid="67" x="64" y="128" width="32" height="32"/>
+  <object id="10" name="alien" gid="64" x="96" y="160" width="32" height="32"/>
+  <object id="13" name="puddle" gid="66" x="32" y="128" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="4" name="Player">
-  <object id="11" name="playerSpawn" x="144" y="48">
+  <object id="11" name="playerSpawn" x="112" y="48">
    <point/>
   </object>
-  <object id="12" name="exit" x="128" y="0" width="32" height="32"/>
+  <object id="12" name="exit" x="96" y="0" width="32" height="32"/>
  </objectgroup>
 </map>
