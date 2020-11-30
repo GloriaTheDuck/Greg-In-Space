@@ -141,8 +141,6 @@ function playerMoveTo(scene,playerTile,direction){
 
 function endLevel(){
     this.endLevel = false;
-    gameParams.music.stop();
-    gameParams.setMusic(null);
     this.scene.manager.getScenes(false).forEach(function(e){
         e.scene.stop();
     });
@@ -151,7 +149,6 @@ function endLevel(){
         if(levels.default[index].sceneName == this.name){
             console.log(index);
             if(index != levels.default.length-1){
-                console.log(makeTransitionCard(levels.default[index+1].sceneName))
                 this.scene.add("transitionCard",makeTransitionCard(levels.default[index+1].sceneName),true)
                 this.scene.pause();
             } else {
