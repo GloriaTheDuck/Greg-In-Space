@@ -29,7 +29,7 @@ var x = [
             start: ["You there! I need you to get me outta this place NOW.", "Well, what are you waiting for? The rocks aren't going to move themselves"],
             executive: [
                 "Took you long enough to get here!",
-                "What is this. You first level?"
+                "What is this. Your first level?"
             ]
         }
     },
