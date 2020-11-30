@@ -23,15 +23,15 @@ export function textConfig(dialog, returnScene, endLevel){
     this.endLevel = endLevel || false;
     this.preload = makePreload.call(this, dialog, returnScene);
     this.create = function(){
-        this.text = this.add.text(500,100, "", {
+        var textbox = this.physics.add.sprite(400,500,'textbox');
+        this.text = this.add.text(230,480, "", {
             fontSize : '20px',
-            backgroundColor : "#000",
-            wordWrap: {width: 200}
+            
+            wordWrap: {width: 350}
         });
         this.text.setText(this.dialog[0]);
+        this.text.setColor("fff")
         this.dialogIndex = 1;
-        var exec = this.physics.add.sprite(450,130,'executive');
-        exec.setScale(2);
     }
     this.update = function(){
         var cursors = this.input.keyboard.createCursorKeys();
@@ -63,6 +63,7 @@ function makePreload(dialog,returnScene){
     return function(){
         this.load.spritesheet('greg', 'Assets/sprite_right.png', { frameWidth: 32, frameHeight: 32 } );
         this.load.spritesheet('executive', 'Assets/aliensprite_idle.png',{ frameWidth: 32, frameHeight: 32 });
+        this.load.image('textbox','Assets/textbox.png')
         this.dialog = dialog; 
         this.returnScene = returnScene;
     }
