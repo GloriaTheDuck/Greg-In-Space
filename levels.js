@@ -26,7 +26,9 @@ var x = [
         music: "Sound/lab_gameplay_music.mp3",
         json : "Tilemaps/Tutorial.json",
         textScenes : {
-            start: ["You there! I need you to get me outta this place NOW.", "Well, what are you waiting for? The rocks aren't going to move themselves"],
+            start: ["You there!  (Press Space to Continue)", 
+                    "I need you to get me outta this place NOW.",
+                    "Well, what are you waiting for? The rocks aren't going to move themselves"],
             executive: [
                 "Took you long enough to get here!",
                 "What is this. Your first level?"
