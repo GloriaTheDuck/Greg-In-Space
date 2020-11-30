@@ -70,9 +70,13 @@ export function update ()
             playerMoveTo(this,playerObject, this.nextInput);
             this.lastInput = this.nextInput;
             this.nextInput = null;
+            cursors.right.isDown = false;
+            cursors.left.isDown = false;
+            cursors.up.isDown = false;
+            cursors.down.isDown = false;
         
         // If there's no nextInput, find one.
-        } else {
+        } else if(this.nextInput == null) {
             if (cursors.right.isDown){
                 this.nextInput = 'right';
             }
