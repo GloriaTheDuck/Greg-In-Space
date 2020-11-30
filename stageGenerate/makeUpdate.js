@@ -112,7 +112,6 @@ function playerMoveTo(scene,playerTile,direction){
                     } else {
                         scene.invalidmove.play();
                     }
-                    
                 } else {
                     scene.invalidmove.play();
                 }

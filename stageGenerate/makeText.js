@@ -23,12 +23,11 @@ export function textConfig(dialog, returnScene, endLevel){
     this.endLevel = endLevel || false;
     this.preload = makePreload.call(this, dialog, returnScene);
     this.create = function(){
-        this.text = this.add.text(320, 400, "", {
-            fontSize : '16px',
+        this.text = this.add.text(50,50, "", {
+            fontSize : '18px',
             backgroundColor : "#000",
-            wordWrap: {width: 130}
+            wordWrap: {width: 200}
         });
-        this.text.setFont("Roboto");
         this.text.setText(this.dialog[0]);
         this.dialogIndex = 1;
         var exec = this.physics.add.sprite(270,400,'executive');
