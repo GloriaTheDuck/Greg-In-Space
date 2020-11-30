@@ -191,23 +191,27 @@ export function create ()
     });
     
     // Loads music from makeCreate
-    var music = this.sound.add("music" + this.name, musicConfig);
-    gameParams.setMusic(music)
     
-    var musicConfig = {
+    
+    console.log(gameParams.music);
+    if(gameParams.music == null){
+        var music = this.sound.add("music" + this.name, musicConfig);
+        gameParams.setMusic(music)
+    
+        var musicConfig = {
         
-        mute: false,
-        volume: 0.5,
-        rate: 1,
-        detune: 0,
-        seek: 0,
-        loop: true,
-        delay: 0
-
+            mute: false,
+            volume: 0.5,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: true,
+            delay: 0
+        }
+        
+        music.play(musicConfig);
     }
 
-    music.play(musicConfig);
-    
     //sound effects
     this.traversingtiles = this.sound.add("traversing_tiles", sound_effectsConfig);
     this.rockpushing = this.sound.add("rock-pushing", sound_effectsConfig);

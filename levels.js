@@ -37,11 +37,6 @@ var x = [
         json : "Tilemaps/Lvl4.json"
     },
     {
-        sceneName: "level5",
-        music: "Sound/lab_gameplay_music.mp3",
-        json : "Tilemaps/Lvl5.json"
-    },
-    {
         sceneName: "level6",
         music: "Sound/lab_gameplay_music.mp3",
         json : "Tilemaps/Lvl6.json"
@@ -56,12 +51,27 @@ var x = [
                 {text: "Also my alien body will disintigrate in the water"}
             ]
         }
+    }, 
+    {
+        sceneName: "level5",
+        music: "Sound/lab_gameplay_music.mp3",
+        json : "Tilemaps/Lvl5.json"
     },
     {
         sceneName: "level8",
         music: "Sound/CS_329E_Music_2.mp3",
         json : "Tilemaps/Lvl8.json"
     },    
+    {
+        sceneName: "level12",
+        music: "Sound/CS_329E_Music_2.mp3",
+        json : "Tilemaps/Lvl12.json"
+    }, 
+    {
+        sceneName: "level11",
+        music: "Sound/CS_329E_Music_2.mp3",
+        json : "Tilemaps/Lvl11.json"
+    },  
     {
         sceneName: "level10",
         music: "Sound/CS_329E_Music_2.mp3",

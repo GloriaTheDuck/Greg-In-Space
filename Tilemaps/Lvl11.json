@@ -4,45 +4,33 @@
      "export":
         {
          "format":"json",
-         "target":"Lvl5.json"
+         "target":"Lvl11.json"
         }
     },
- "height":9,
+ "height":7,
  "infinite":false,
  "layers":[
         {
-         "data":[68, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 68],
-         "height":9,
-         "id":5,
-         "name":"Color Fill",
-         "opacity":1,
-         "type":"tilelayer",
-         "visible":true,
-         "width":6,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "data":[0, 0, 49, 0, 0, 0, 0, 0, 9, 9, 0, 0, 0, 9, 9, 9, 0, 0, 0, 9, 9, 9, 0, 0, 0, 9, 0, 9, 0, 0, 0, 9, 9, 9, 9, 0, 0, 9, 9, 9, 9, 0, 0, 9, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0],
-         "height":9,
+         "data":[0, 0, 0, 0, 49, 0, 0, 0, 9, 9, 9, 9, 9, 0, 0, 9, 9, 9, 9, 9, 0, 0, 9, 9, 9, 9, 9, 0, 0, 9, 9, 9, 9, 9, 0, 0, 9, 9, 9, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":7,
          "id":1,
          "name":"Background",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
-         "width":6,
+         "width":7,
          "x":0,
          "y":0
         }, 
         {
-         "data":[0, 22, 0, 2, 6, 0, 22, 11, 0, 0, 8, 0, 8, 0, 0, 0, 8, 0, 8, 0, 0, 0, 8, 0, 8, 0, 0, 0, 13, 6, 8, 0, 0, 0, 0, 8, 8, 0, 0, 0, 0, 8, 8, 0, 0, 0, 22, 11, 13, 2, 2, 2, 11, 0],
-         "height":9,
+         "data":[22, 2, 2, 2, 0, 2, 6, 8, 0, 0, 0, 0, 0, 8, 8, 0, 0, 0, 0, 0, 8, 8, 0, 0, 0, 0, 0, 8, 8, 0, 0, 0, 0, 0, 8, 8, 0, 0, 0, 0, 0, 8, 13, 2, 2, 2, 2, 2, 11],
+         "height":7,
          "id":2,
          "name":"Walls",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
-         "width":6,
+         "width":7,
          "x":0,
          "y":0
         }, 
@@ -52,34 +40,10 @@
          "name":"Group",
          "objects":[
                 {
-                 "gid":64,
+                 "gid":66,
                  "height":32,
                  "id":1,
-                 "name":"rock",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":96,
-                 "y":192
-                }, 
-                {
-                 "gid":64,
-                 "height":32,
-                 "id":2,
-                 "name":"rock",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":64,
-                 "y":96
-                }, 
-                {
-                 "gid":64,
-                 "height":32,
-                 "id":3,
-                 "name":"rock",
+                 "name":"puddle",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -88,22 +52,82 @@
                  "y":64
                 }, 
                 {
-                 "gid":65,
+                 "gid":66,
                  "height":32,
-                 "id":5,
-                 "name":"alien",
+                 "id":2,
+                 "name":"puddle",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":32,
+                 "x":64,
+                 "y":96
+                }, 
+                {
+                 "gid":66,
+                 "height":32,
+                 "id":3,
+                 "name":"puddle",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":96,
+                 "y":160
+                }, 
+                {
+                 "gid":66,
+                 "height":32,
+                 "id":4,
+                 "name":"puddle",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":160,
+                 "y":96
+                }, 
+                {
+                 "gid":66,
+                 "height":32,
+                 "id":5,
+                 "name":"puddle",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":160,
                  "y":128
                 }, 
                 {
-                 "gid":65,
+                 "gid":67,
                  "height":32,
                  "id":6,
-                 "name":"alien",
+                 "name":"rock",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":128,
+                 "y":96
+                }, 
+                {
+                 "gid":67,
+                 "height":32,
+                 "id":7,
+                 "name":"rock",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":128,
+                 "y":128
+                }, 
+                {
+                 "gid":67,
+                 "height":32,
+                 "id":8,
+                 "name":"rock",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -112,7 +136,19 @@
                  "y":128
                 }, 
                 {
-                 "gid":65,
+                 "gid":64,
+                 "height":32,
+                 "id":9,
+                 "name":"alien",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":64,
+                 "y":128
+                }, 
+                {
+                 "gid":64,
                  "height":32,
                  "id":10,
                  "name":"alien",
@@ -121,79 +157,7 @@
                  "visible":true,
                  "width":32,
                  "x":128,
-                 "y":192
-                }, 
-                {
-                 "gid":64,
-                 "height":32,
-                 "id":11,
-                 "name":"rock",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":32,
-                 "y":224
-                }, 
-                {
-                 "gid":64,
-                 "height":32,
-                 "id":12,
-                 "name":"rock",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":64,
-                 "y":256
-                }, 
-                {
-                 "gid":67,
-                 "height":32,
-                 "id":13,
-                 "name":"puddle",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":64,
-                 "y":192
-                }, 
-                {
-                 "gid":67,
-                 "height":32,
-                 "id":14,
-                 "name":"puddle",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":32,
                  "y":160
-                }, 
-                {
-                 "gid":67,
-                 "height":32,
-                 "id":15,
-                 "name":"puddle",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":64,
-                 "y":160
-                }, 
-                {
-                 "gid":64,
-                 "height":32,
-                 "id":16,
-                 "name":"rock",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":96,
-                 "y":224
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -208,25 +172,25 @@
          "objects":[
                 {
                  "height":0,
-                 "id":7,
+                 "id":11,
                  "name":"playerSpawn",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":48,
-                 "y":240
+                 "x":144,
+                 "y":48
                 }, 
                 {
                  "height":32,
-                 "id":8,
+                 "id":12,
                  "name":"exit",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":64,
+                 "x":128,
                  "y":0
                 }],
          "opacity":1,
@@ -235,8 +199,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":6,
- "nextobjectid":17,
+ "nextlayerid":5,
+ "nextobjectid":13,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.2",
@@ -256,21 +220,8 @@
          "tilewidth":32
         }, 
         {
-         "columns":1,
-         "firstgid":64,
-         "image":"..\/Assets\/addwork.png",
-         "imageheight":32,
-         "imagewidth":32,
-         "margin":0,
-         "name":"Rocks",
-         "spacing":0,
-         "tilecount":1,
-         "tileheight":32,
-         "tilewidth":32
-        }, 
-        {
          "columns":2,
-         "firstgid":65,
+         "firstgid":64,
          "image":"..\/Assets\/aliensprite_idle.png",
          "imageheight":32,
          "imagewidth":64,
@@ -283,7 +234,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":67,
+         "firstgid":66,
          "image":"..\/Assets\/MasterSimple.png",
          "imageheight":32,
          "imagewidth":32,
@@ -295,20 +246,20 @@
          "tilewidth":32
         }, 
         {
-         "columns":24,
-         "firstgid":68,
-         "image":"..\/Assets\/blacksquare.png",
-         "imageheight":768,
-         "imagewidth":768,
+         "columns":1,
+         "firstgid":67,
+         "image":"..\/Assets\/addwork.png",
+         "imageheight":32,
+         "imagewidth":32,
          "margin":0,
-         "name":"Black Blocks",
+         "name":"Rocks",
          "spacing":0,
-         "tilecount":576,
+         "tilecount":1,
          "tileheight":32,
          "tilewidth":32
         }],
  "tilewidth":32,
  "type":"map",
  "version":1.4,
- "width":6
+ "width":7
 }

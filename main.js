@@ -132,7 +132,7 @@ game.scene.add("tutorialText",{
     preload: function(){},
     create: function(){
         this.text = this.add.text(48, 150, "hello", {
-            fontSize : '16px',
+            fontSize : '32px',
             wordWrap: {width: 200}
         });
         this.text.setText("Press arrow Keys to move around. Collect the pink aliens and then make it to the exit.");

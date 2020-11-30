@@ -16,12 +16,12 @@ export function update ()
     var exitKey = this.input.keyboard.addKey('ESC');
     
     if(restartKey.isDown){
-        gameParams.music.stop();
         this.scene.restart()
     }
     
     if(exitKey.isDown){
         gameParams.music.stop();
+        gameParams.setMusic(null);
         this.scene.manager.getScenes(false).forEach(function(e){
             e.scene.stop();
         });
@@ -141,7 +141,11 @@ function playerMoveTo(scene,playerTile,direction){
 
 function endLevel(){
     this.endLevel = false;
-    // this.scene.pause();
+    gameParams.music.stop();
+    gameParams.setMusic(null);
+    this.scene.manager.getScenes(false).forEach(function(e){
+        e.scene.stop();
+    });
     var index = 0;
     while(index < levels.default.length){
         if(levels.default[index].sceneName == this.name){
