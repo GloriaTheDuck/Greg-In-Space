@@ -37,27 +37,20 @@ export var introScreen = {
         music.play();
         this.index = 0
         
-        
-
-        
-    },
-    update : function(){
-        var cursors = this.input.keyboard.createCursorKeys();
-        
-        if(cursors.space.isDown){
-            if(this.index < 3 && !this.lastFramePressed){
-                this.index += 1;
-                this.images[this.index].setAlpha(1);
-                this.lastFramePressed = true;
-            }else if(this.index == 3 && !this.lastFramePressed){
-                this.scene.manager.getScenes(false).forEach(function(e){
-                    e.scene.stop();
-                });
-                this.music.stop();
-                this.scene.start("level0");
+        this.input.on('pointerup', function(scene){
+            return function(){
+                if(scene.index < 3){
+                    scene.index += 1;
+                    scene.images[scene.index].setAlpha(1);
+                }else if(scene.index == 3){
+                    scene.scene.manager.getScenes(false).forEach(function(e){
+                        e.scene.stop();
+                    });
+                    scene.music.stop();
+                    scene.scene.start("level0");
+                }    
             }
-        }else{
-            this.lastFramePressed = false;
-        }
+        }(this))
+        
     }
 }
