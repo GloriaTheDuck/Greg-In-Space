@@ -87,7 +87,6 @@ export function tileObject(scene,x,y,foreground,map){
     this.inGrid = function(){
         var trueX = map.tileToWorldX(this.x);
         var trueY = map.tileToWorldY(this.y);
-        console.log(map.tileWidth, map.tileHeight)
         
         var tol = 6
         var inX = (trueX-tol <= this.foreground.x - map.tileWidth/2) && (trueX+tol >= this.foreground.x - map.tileWidth/2)

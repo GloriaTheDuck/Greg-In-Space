@@ -23,14 +23,14 @@ export function textConfig(dialog, returnScene, endLevel){
     this.endLevel = endLevel || false;
     this.preload = makePreload.call(this, dialog, returnScene);
     this.create = function(){
-        this.text = this.add.text(50,50, "", {
-            fontSize : '18px',
+        this.text = this.add.text(500,50, "", {
+            fontSize : '20px',
             backgroundColor : "#000",
             wordWrap: {width: 200}
         });
         this.text.setText(this.dialog[0]);
         this.dialogIndex = 1;
-        var exec = this.physics.add.sprite(270,400,'executive');
+        var exec = this.physics.add.sprite(450,80,'executive');
         exec.setScale(2);
     }
     this.update = function(){
