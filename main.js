@@ -54,6 +54,7 @@ function makePointerFunction(i){
 var menuScene = {
     preload: function(){
         this.load.image('levelSel', "Assets/levelselect.png");
+        this.load.image('credits', "Assets/credits.png")
     },
     create: function(){
         this.key = "menu"
@@ -81,7 +82,22 @@ var menuScene = {
             this.scene.scene.start("level0");
         })
         
+        // Creates icon for Credits
+        var creditsIcon = this.physics.add.sprite(400,550,'temp');
+        creditsIcon.scaleX = 8.6
+        creditsIcon.scaleY = 2.8
+        creditsIcon.setInteractive();
+        creditsIcon.setAlpha(0.001)
         
+        var credits = this.physics.add.sprite(400,300, 'credits')
+        credits.setAlpha(0)
+        creditsIcon.on('pointerup', function(){
+            credits.setAlpha(1);
+        })
+        credits.setInteractive();
+        credits.on('pointerup', function(){
+            credits.setAlpha(0);
+        })
         
     },
     update: function(){}
