@@ -30,6 +30,9 @@ var titleScene = {
   },
   create: function(){
     var background = this.add.image(400, 300, "background")
+    
+
+      
     this.key = "title";
     
     // Add next button
@@ -161,9 +164,23 @@ game.scene.add("endScene",endScreen);
 game.scene.add("introScreen",introScreen);
 game.scene.add("endCard",{
     preload: function(){
-        this.load.image("e","Assets/endcard.png");
+        this.load.image("e","Assets/endcard.png");  
+        this.load.audio("IntroMusic", "Sound/cs_track_4.mp3")
     },
     create: function(){
+        this.music = this.sound.add("IntroMusic", musicConfig)
+        var musicConfig = {
+        
+            mute: false,
+            volume: 0.5,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: false,
+            delay: 0
+        }
+        
+        this.music.play(musicConfig);
         this.physics.add.image(400,300,"e");
     }
 })
