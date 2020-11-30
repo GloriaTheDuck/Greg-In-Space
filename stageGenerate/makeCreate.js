@@ -9,7 +9,7 @@ export function create ()
     
     // Places Level Number In Top Left Hand Corner
     if(this.levelNumber != 0){
-        this.add.text(50,50, "Level " + this.levelNumber)
+        this.add.text(50,50, "Level " + this.levelNumber, {fontSize : '24px'})
     }
     
     // Creates this.gameMatrix = var gameMatrix used to store sprites and collision information.
@@ -235,6 +235,11 @@ export function create ()
         seek: 0,
         loop: false,
         delay: 0
+    }
+    
+    // Adds Opening Text Scene
+    if(this.textScenes != null){
+        this.textScene = this.textScenes.start;    
     }
 }
 

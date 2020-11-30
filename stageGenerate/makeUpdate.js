@@ -106,7 +106,16 @@ function playerMoveTo(scene,playerTile,direction){
                 playerTile.moveDirection(direction);
                 player.anims.play(direction);
             } else if(scene.lastInput != direction){
-                scene.invalidmove.play();
+                if(scene.textScenes != null){
+                    if(scene.textScenes.water != null){
+                        scene.textScene = scene.textScenes.water;
+                    } else {
+                        scene.invalidmove.play();
+                    }
+                    
+                } else {
+                    scene.invalidmove.play();
+                }
             }
         } else if(toTile.foreground.name == "rock"){
             //calls rock pushing sound effect

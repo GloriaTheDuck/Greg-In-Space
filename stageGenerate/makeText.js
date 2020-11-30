@@ -29,7 +29,7 @@ export function textConfig(dialog, returnScene, endLevel){
             wordWrap: {width: 130}
         });
         this.text.setFont("Roboto");
-        this.text.setText(this.dialog[0].text);
+        this.text.setText(this.dialog[0]);
         this.dialogIndex = 1;
         var exec = this.physics.add.sprite(270,400,'executive');
         exec.setScale(2);
@@ -40,7 +40,7 @@ export function textConfig(dialog, returnScene, endLevel){
         console.log(cursors.space.isDown,lastFramePressed)
         if(cursors.space.isDown){
             if(this.dialogIndex < dialog.length && !lastFramePressed){
-                this.text.setText(this.dialog[this.dialogIndex].text);
+                this.text.setText(this.dialog[this.dialogIndex]);
                 this.dialogIndex += 1;
                 lastFramePressed = true;
             }else if(this.dialogIndex == this.dialog.length && !lastFramePressed){

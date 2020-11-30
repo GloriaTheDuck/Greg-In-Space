@@ -24,17 +24,34 @@ var x = [
     {
         sceneName: "level0",
         music: "Sound/lab_gameplay_music.mp3",
-        json : "Tilemaps/Tutorial.json"
+        json : "Tilemaps/Tutorial.json",
+        textScenes : {
+            start: ["You there! I need you to get me outta this place NOW.", "Well, what are you waiting for? The rocks aren't going to move themselves"],
+            executive: [
+                "Took you long enough to get here!",
+                "What is this. You first level?"
+            ]
+        }
     },
     {
         sceneName: "level3",
         music: "Sound/lab_gameplay_music.mp3",
-        json : "Tilemaps/Lvl3.json"
+        json : "Tilemaps/Lvl3.json",
+        textScenes : {
+            executive : [
+                "Hmph. A worker ant.",
+                "Normally I wouldn't be caught dead talking to you.",
+                "That being said, I don't want to die. Please save me."
+                ]
+        }
     },
     {
         sceneName: "level4",
         music: "Sound/lab_gameplay_music.mp3",
-        json : "Tilemaps/Lvl4.json"
+        json : "Tilemaps/Lvl4.json",
+        textScenes : {
+            text: "Pick it up slowpoke. I've got a meeting at 5"
+        }
     },
     {
         sceneName: "level6",
@@ -46,10 +63,11 @@ var x = [
         music: "Sound/CS_329E_Music_2.mp3",
         json : "Tilemaps/Lvl7.json",
         textScenes : {
+            start : ["Hey, long mouth. Keep me out of that water, or you'll be getting a 5000 Peso bill for this sweet suit."],
             executive: [
-                {text: "Hey. Long mouth. Don't you dare stick me in that water or I'll get my suit wet"},
-                {text: "Also my alien body will disintigrate in the water"}
-            ]
+                "Oh, you're wet. I don't want a drop of water on my 6000 peso suit."
+            ],
+            water : ["Don't even think about it Greenie"]
         }
     }, 
     {
