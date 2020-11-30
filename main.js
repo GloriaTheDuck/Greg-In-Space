@@ -112,9 +112,11 @@ var config = {
 var game = new Phaser.Game(config);
 
 // Adds scenes to game
-levels.default.forEach(function(lvl){
+for(var i = 0; i<levels.default.length; i++){
+    var lvl = levels.default[i];
+    lvl.levelNumber = i;
     game.scene.add(lvl.sceneName,makeConfig(lvl));
-})
+}
 
 // Adds tutorial and tutorial text
 var tutParams = levels.default[0]

@@ -13,6 +13,7 @@ export function makePreload(levelParams){
         
         //names scene
         this.name = levelParams.sceneName;
+        this.levelNumber = levelParams.levelNumber;
         
         //loading music
         this.load.audio('music'+this.name, levelParams.music);

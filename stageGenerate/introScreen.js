@@ -54,7 +54,7 @@ export var introScreen = {
                     e.scene.stop();
                 });
                 this.music.stop();
-                this.scene.start("menu");
+                this.scene.start("level0");
             }
         }else{
             this.lastFramePressed = false;

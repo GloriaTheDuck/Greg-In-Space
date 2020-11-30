@@ -7,6 +7,11 @@ export function create ()
     this.nextInput;
     this.lastInput;
     
+    // Places Level Number In Top Left Hand Corner
+    if(this.levelNumber != 0){
+        this.add.text(50,50, "Level " + this.levelNumber)
+    }
+    
     // Creates this.gameMatrix = var gameMatrix used to store sprites and collision information.
     var gameMatrix = new Array(gameParams.stageWidth);
 
