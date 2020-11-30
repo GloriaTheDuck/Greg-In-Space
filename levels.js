@@ -39,7 +39,7 @@ var x = [
         json : "Tilemaps/Lvl3.json",
         textScenes : {
             executive : [
-                "Hmph. A worker ant.",
+                "Hmph. A worker.",
                 "Normally I wouldn't be caught dead talking to you.",
                 "That being said, I don't want to die. Please save me."
                 ]
@@ -63,9 +63,9 @@ var x = [
         music: "Sound/CS_329E_Music_2.mp3",
         json : "Tilemaps/Lvl7.json",
         textScenes : {
-            start : ["Hey, long mouth. Keep me out of that water, or you'll be getting a 5000 Peso bill for this sweet suit."],
+            start : ["Hey, long mouth. Keep me out of that water or I'll get my suit wet. Also, I'll probably drown."],
             executive: [
-                "Oh, you're wet. I don't want a drop of water on my 6000 peso suit."
+                "Ugh, you're wet." ,  "If you want to make it up in this company, be dry next time you save my life."
             ],
             water : ["Don't even think about it Greenie"]
         }
